@@ -1,14 +1,16 @@
 Zombie
 ======
 
-Repositorio para el TP
+Repositorio para el TP.
 
 Reglas
 ======
 
-En lo posible usa un fork
+En lo posible usa un fork.
 
-Y nada de archivos compilados
+Las cosas por hacer estan en: https://github.com/keze87/Zombie/issues
+
+Y no subir nada de archivos compilados.
 
 Licencia
 ======
