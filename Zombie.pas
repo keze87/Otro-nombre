@@ -2,11 +2,11 @@ PROGRAM Zombie;
 
 USES 
 
-	crt,Introduccion;
+	crt,Introduccion,MenuPcpal;
 	
-//VAR
+VAR
 
-	//i : integer;
+	SalidaMenu : integer;
 	
 PROCEDURE IntroZ;
 	var
@@ -32,5 +32,16 @@ PROCEDURE IntroZ;
 BEGIN
 
 	IntroZ;
-
+	
+	Menu (SalidaMenu);
+	
+	{case SalidaMenu of
+		1: Terreno;
+		2: Poblaciones;
+		3: Factores;
+		4: Mundo;
+		5: SimulacionR;
+		6: SimulacionN;
+	end;}
+	
 END.

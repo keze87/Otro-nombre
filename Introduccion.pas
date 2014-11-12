@@ -237,6 +237,7 @@ implementation
 	repeat
 	
 	conti := conti +1;
+	ClrScr;
 	
 	if conti = 1 then
 	begin
@@ -382,7 +383,7 @@ implementation
 	writeln('\:\  \        \:\/:/  /        /:/  /     \:\/:/  /    \:\__\       \:\ \/__/');
 	writeln(' \:\__\        \::/  /        /:/  /       \::/__/      \/__/        \:\__\');
 	writeln('  \/__/         \/__/         \/__/         ~~                        \/__/');
-    writeln;
+//    writeln;
 	writeln('                 ___           ___           ___           ___     ');
 	writeln('                /\__\         /\  \         /\  \         /\  \    ');
 	writeln('               /:/ _/_       /::\  \       /::\  \       /::\  \   ');
@@ -396,12 +397,20 @@ implementation
 	writeln('                \/__/         \/__/         \|__|         \/__/    ');
     
     Delay(500);
+    if conti <> 5 then
     ClrScr;
     Delay(500);
     
     until conti = 5;
     
+    TextColor(White);
+    writeln;
+    
+    writeln('Por favor ingrese una tecla para continuar');
     readkey;
+    
+    TextColor(White);
+    
     end;
 
 

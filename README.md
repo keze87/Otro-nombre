@@ -3,14 +3,18 @@ Zombie
 
 Repositorio para el TP.
 
-Reglas
+Mensajes
 ======
 
-// En lo posible usa un fork. (No es necesario).
+X va de 1 a 80.
+
+Y va de 1 a 25. 
+
+Por favor no dudes en corregirme.
 
 Las cosas por hacer estan en: https://github.com/keze87/Zombie/issues
 
-Y no subir nada de archivos compilados.
+Y no subir nada de archivos compilados. :@
 
 Licencia
 ======
