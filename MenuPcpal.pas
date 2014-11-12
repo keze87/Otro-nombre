@@ -33,7 +33,14 @@ implementation
 			
 			repeat
 			
+				{$I-} 
 				readln(SalidaMenu);
+				{$I+}
+				
+				if IOResult<>0 then  
+					begin  
+						Writeln ('Intentalo nuevamente');  
+					end; 
 				
 			until ((SalidaMenu > 0) and (SalidaMenu < 6));
 			
@@ -53,7 +60,14 @@ implementation
 					
 					repeat
 			
+						{$I-} 
 						readln(SalidaMenu);
+						{$I+}
+				
+						if IOResult<>0 then  
+							begin  
+								Writeln ('Intentalo nuevamente');  
+							end; 
 				
 					until ((SalidaMenu > 0) and (SalidaMenu < 3));
 					
