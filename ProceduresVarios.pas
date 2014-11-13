@@ -1,25 +1,43 @@
-Unit ProcVarios;
+Unit ProceduresVarios;
 
 interface
 
-Procedure EscrDelay(cadena:string; tiempo:integer); {Pone un delay entre caracter y caracter al escribir una cadena por pantalla}
+Procedure EscrDelay(tiempo:integer;cadena:string); {Pone un delay entre caracter y caracter al escribir una cadena por pantalla}
+
+Procedure LeerINT (var Variable : integer);
 
 implementation
   Uses
 
 	crt;
 
-Procedure EscrDelay(cadena:string; tiempo:integer);
+Procedure EscrDelay(tiempo:integer;cadena:string);
 var
         longitud:integer;
         I:integer;
 begin
         longitud:=length(cadena);
         for I:=1 to longitud do
-        begin
+			begin
                 write(cadena[I]);
                 delay(tiempo);
-                end;
-                end;
-                begin
-                end.
+            end;
+		
+		writeln;
+
+end;
+
+
+Procedure LeerINT (var Variable : integer);
+	begin
+						{$I-} 
+						readln(Variable);
+						{$I+}
+				
+						if IOResult<>0 then  
+							begin  
+								EscrDelay(100,'Intentalo nuevamente');  
+							end; 
+	end;
+
+end.

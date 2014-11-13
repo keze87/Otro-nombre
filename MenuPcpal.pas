@@ -8,7 +8,7 @@ implementation
 
 	Uses
 	
-		crt;
+		crt,ProceduresVarios;
 		
 	Procedure Menu (var SalidaMenu : integer);
 		begin
@@ -16,32 +16,28 @@ implementation
 			ClrScr;
 		
 			writeln;
-			writeln('**** Menu Principal ****');
+			EscrDelay(50,'**** Menu Principal ****');
 			writeln;
-			writeln('1) Visualizar el terreno.' {(Con su debida descripcion)});
+			EscrDelay(50,'1) Visualizar el terreno.' {(Con su debida descripcion)});
 			writeln;
-			writeln('2) Visualizar las poblaciones.' {(Con su debida descripcion)});
+			EscrDelay(50,'2) Visualizar las poblaciones.' {(Con su debida descripcion)});
 			writeln;
-			writeln('3) Visualizar los factores constantes.');
+			EscrDelay(50,'3) Visualizar los factores constantes.');
 			writeln;
-			writeln('4) Visualizar el mundo.');
+			EscrDelay(50,'4) Visualizar el mundo.');
 			writeln;
-			writeln('5) Simulacion');
+			EscrDelay(50,'5) Simulacion');
 			writeln;
-			writeln('Ingrese la opcion deseada');
+			EscrDelay(50,'Ingrese la opcion deseada');
 			writeln;
 			
 			repeat
 			
-				{$I-} 
-				readln(SalidaMenu);
-				{$I+}
+				LeerINT(SalidaMenu);
 				
-				if IOResult<>0 then  
-					begin  
-						Writeln ('Intentalo nuevamente');  
-					end; 
-				
+				if ((SalidaMenu > 5) or (SalidaMenu < 1)) then
+					EscrDelay(50,'Intentalo nuevamente');
+								
 			until ((SalidaMenu > 0) and (SalidaMenu < 6));
 			
 			if SalidaMenu = 5 then
@@ -49,31 +45,57 @@ implementation
 				
 					ClrScr;
 					writeln;
-					writeln('**** Menu Simulacion ****');
+					EscrDelay(50,'**** Menu Simulacion ****');
 					writeln;
-					writeln('1) Retomar Simulacion.');
+					EscrDelay(50,'1) Retomar Simulacion.');
 					writeln;
-					writeln('2) Empezar Simulacion.');
+					EscrDelay(50,'2) Empezar Simulacion.');
 					writeln;
-					writeln('Ingrese la opcion deseada');
+					EscrDelay(50,'Ingrese la opcion deseada');
 					writeln;
 					
 					repeat
 			
-						{$I-} 
-						readln(SalidaMenu);
-						{$I+}
-				
-						if IOResult<>0 then  
-							begin  
-								Writeln ('Intentalo nuevamente');  
-							end; 
+						LeerINT(SalidaMenu);
+						
+						if ((SalidaMenu > 2) or (SalidaMenu < 1)) then
+							EscrDelay(50,'Intentalo nuevamente');
 				
 					until ((SalidaMenu > 0) and (SalidaMenu < 3));
 					
 					case SalidaMenu of
 						1 : SalidaMenu := 5;
 						2 : SalidaMenu := 6;
+					end;
+				
+				end;
+			
+			if SalidaMenu = 6 then
+				begin
+				
+					ClrScr;
+					writeln;
+					EscrDelay(50,'**** Menu Ajustes ****');
+					writeln;
+					EscrDelay(50,'1) Desactivar Animaciones.');
+					writeln;
+					EscrDelay(50,'2) Activar Animaciones.');
+					writeln;
+					EscrDelay(50,'Ingrese la opcion deseada');
+					writeln;
+					
+					repeat
+			
+						LeerINT(SalidaMenu);
+						
+						if ((SalidaMenu > 2) or (SalidaMenu < 1)) then
+							EscrDelay(50,'Intentalo nuevamente');
+				
+					until ((SalidaMenu > 0) and (SalidaMenu < 3));
+					
+					case SalidaMenu of
+						1 : SalidaMenu := 7;
+						2 : SalidaMenu := 8;
 					end;
 				
 				end;

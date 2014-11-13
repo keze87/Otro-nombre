@@ -3,12 +3,36 @@ unit Introduccion;
 interface
 
   Procedure Intro (i : integer);
+  
+  PROCEDURE IntroZ;
 
 implementation
 
   Uses
 	
 	crt;
+	
+	PROCEDURE IntroZ;
+	var
+	
+		contIntro : Integer;
+
+	begin
+		
+		contIntro := 0;
+		
+		repeat
+	
+			contIntro := contIntro + 1;
+			
+			Intro(1);Intro(2);Intro(3);Intro(4);Intro(5);Intro(6);{Intro(5);Intro(4);Intro(3);Intro(2);Intro(1);}
+	
+		until contIntro = 3;
+	
+		Intro(7)
+		
+	end;
+
   
   Procedure Intro (i : integer);
 	var
@@ -343,26 +367,6 @@ implementation
     
     until conti = 25 ;
     
-{	writeln('  ▒███████▒ ▒█████   ███▄ ▄███▓ ▄▄▄▄    ██▓▓█████ ');
-	writeln('	▒ ▒ ▒ ▄▀░▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ ▓██▒▓█   ▀ ');
-	writeln('	░ ▒ ▄▀▒░ ▒██░  ██▒▓██    ▓██░▒██▒ ▄██▒██▒▒███   ');
-	writeln('	▄▀▒   ░▒██   ██░▒██    ▒██ ▒██░█▀  ░██░▒▓█  ▄ ');
-	writeln('	▒███████▒░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓░██░░▒████▒');
-	writeln('	░▒▒ ▓░▒░▒░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒░▓  ░░ ▒░ ░');
-	writeln('	░░▒ ▒ ░ ▒  ░ ▒ ▒░ ░  ░      ░▒░▒   ░  ▒ ░ ░ ░  ░');
-	writeln('	░ ░ ░ ░ ░░ ░ ░ ▒  ░      ░    ░    ░  ▒ ░   ░   ');
-	writeln('	░ ░        ░ ░         ░    ░       ░     ░  ░');
-	writeln('	░                                  ░            ');
-	writeln('');
-	writeln('	█     █░ ▄▄▄       ██▀███    ██████ ');
-	writeln('	▓█░ █ ░█░▒████▄    ▓██ ▒ ██▒▒██    ▒ ');
-	writeln('	▒█░ █ ░█ ▒██  ▀█▄  ▓██ ░▄█ ▒░ ▓██▄   ');
-	writeln('	░█░ █ ░█ ░██▄▄▄▄██ ▒██▀▀█▄    ▒   ██▒');
-	writeln('	░░██▒██▓  ▓█   ▓██▒░██▓ ▒██▒▒██████▒▒');
-	writeln('	░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░');
-	writeln('	▒ ░ ░    ▒   ▒▒ ░  ░▒ ░ ▒░░ ░▒  ░ ░');
-	writeln('	░   ░    ░   ▒     ░░   ░ ░  ░  ░  ');
-	writeln('		░          ░  ░   ░           ░  ');} {Hubiera estado bueno pero no entra :/}
     
 	TextColor(Red);
     
