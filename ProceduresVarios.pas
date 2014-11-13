@@ -36,7 +36,7 @@ Procedure LeerINT (var Variable : integer);
 				
 						if IOResult<>0 then  
 							begin  
-								EscrDelay(100,'Intentalo nuevamente');  
+								writeln;  
 							end; 
 	end;
 

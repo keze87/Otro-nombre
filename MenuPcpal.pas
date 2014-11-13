@@ -26,7 +26,9 @@ implementation
 			writeln;
 			EscrDelay(50,'4) Visualizar el mundo.');
 			writeln;
-			EscrDelay(50,'5) Simulacion');
+			EscrDelay(50,'5) Simulacion.');
+			writeln;
+			EscrDelay(50,'6) Ajustes.');
 			writeln;
 			EscrDelay(50,'Ingrese la opcion deseada');
 			writeln;
@@ -35,10 +37,10 @@ implementation
 			
 				LeerINT(SalidaMenu);
 				
-				if ((SalidaMenu > 5) or (SalidaMenu < 1)) then
+				if ((SalidaMenu > 6) or (SalidaMenu < 1)) then
 					EscrDelay(50,'Intentalo nuevamente');
 								
-			until ((SalidaMenu > 0) and (SalidaMenu < 6));
+			until ((SalidaMenu > 0) and (SalidaMenu < 7));
 			
 			if SalidaMenu = 5 then
 				begin
