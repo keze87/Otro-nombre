@@ -8,6 +8,8 @@ interface
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
 	Procedure MenuFactores(var SalidaFac : integer);
 	Procedure MenuMundo(var SalidaMundo : integer);
+	Procedure MenuAjustes (var SalidaMenu : integer);
+
 
 
 
@@ -19,7 +21,52 @@ implementation
 		
 	Const
 	
-		Velocidad = 30;
+		Velocidad = 15;
+
+	Procedure Menu (var SalidaMenu : integer);
+	
+	begin
+		textcolor(10);
+		ClrScr;
+
+		writeln;
+		GotoXY(28,1);
+		EscrDelay(Velocidad,'**** Menu Principal ****');
+		GotoXY(1,4);
+		EscrDelay(Velocidad,'1) Visualizar el terreno.' {(Con su debida descripcion)});
+		writeln;
+		EscrDelay(Velocidad,'2) Visualizar las poblaciones.' {(Con su debida descripcion)});
+		writeln;
+		EscrDelay(Velocidad,'3) Visualizar los factores constantes.');
+		writeln;
+		EscrDelay(Velocidad,'4) Visualizar el mundo.');
+		writeln;
+		EscrDelay(Velocidad,'5) Simulacion.');
+		writeln;
+		EscrDelay(Velocidad,'6) Ajustes.');
+		writeln;
+		EscrDelay(Velocidad,'7) Salir del Programa.');
+		writeln;
+		EscrDelay(Velocidad,'Ingrese la opcion deseada:');
+		writeln;
+
+		repeat
+		
+			LeerINT(SalidaMenu);
+
+		until ((SalidaMenu > 0) and (SalidaMenu < 8));
+
+		case SalidaMenu of
+		1 : MenuTerreno(SalidaMenu);
+		2 : MenuPoblaciones(SalidaMenu);
+		3 : MenuFactores(SalidaMenu);
+		4 : MenuMundo(SalidaMenu);
+		5 : MenuSimulacion(SalidaMenu);
+		6 : MenuAjustes(SalidaMenu);
+		7 : begin TextColor(White);halt; end;
+		end;
+		
+	end;
 
 	Procedure MenuMundo(var SalidaMundo : integer);
 
@@ -27,20 +74,23 @@ implementation
 
 		ClrScr;
 		writeln;
+		
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
 		writeln;
 		GotoXY(27,22);
-		EscrDelay(Velocidad,'1) Volver al Menu Principal');
+		EscrDelay(Velocidad,'1) Volver al Menu Principal.');
 		writeln;
 
 		repeat
 			LeerINT(SalidaMundo);
 		until ((SalidaMundo > 0) and (SalidaMundo < 2));
-
-		Menu(SalidaMundo);
+		
+		case SalidaMundo of
+		1 : Menu(SalidaMundo);
+		end;
 		
 	end;
 
@@ -51,6 +101,7 @@ implementation
 
 		ClrScr;
 		writeln;
+		
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Factores De Expansion ****');
 		GotoXY(1,4);
@@ -64,8 +115,10 @@ implementation
 			LeerINT(SalidaFac);
 		until ((SalidaFac > 0) and (SalidaFac < 2));
 
-		Menu(SalidaFac);
-		
+		case SalidaFac of
+		1 : Menu(SalidaFac);
+		end;
+			
 	end;
 
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
@@ -88,8 +141,10 @@ implementation
 			LeerINT(SalidaPobl);
 		until ((SalidaPobl > 0) and (SalidaPobl < 2));
 
-		Menu(SalidaPobl);
-	
+		case SalidaPobl of
+		1 : Menu(SalidaPobl);
+		end;
+		
 	end;
 
 	Procedure MenuTerreno(var SalidaMenuTerr : integer);
@@ -147,46 +202,51 @@ implementation
 		
 	end;
 
-	Procedure Menu (var SalidaMenu : integer);
+	Procedure MenuAjustes (var SalidaMenu : integer);
+	var
+	
+		A : Text;
 	
 	begin
-		textcolor(10);
+	
 		ClrScr;
-
 		writeln;
-		GotoXY(28,1);
-		EscrDelay(Velocidad,'**** Menu Principal ****');
+		GotoXY(27,1);
+		EscrDelay(Velocidad,'**** Menu Ajustes ****');
 		GotoXY(1,4);
-		EscrDelay(Velocidad,'1) Visualizar el terreno.' {(Con su debida descripcion)});
+		EscrDelay(Velocidad,'1) Desactivar Introducccion.');
 		writeln;
-		EscrDelay(Velocidad,'2) Visualizar las poblaciones.' {(Con su debida descripcion)});
-		writeln;
-		EscrDelay(Velocidad,'3) Visualizar los factores constantes.');
-		writeln;
-		EscrDelay(Velocidad,'4) Visualizar el mundo.');
-		writeln;
-		EscrDelay(Velocidad,'5) Simulacion');
-		writeln;
-		EscrDelay(Velocidad,'6) Salir del Programa');
+		EscrDelay(Velocidad,'2) Activar Introduccion.');
 		writeln;
 		EscrDelay(Velocidad,'Ingrese la opcion deseada');
 		writeln;
 
 		repeat
-		
 			LeerINT(SalidaMenu);
-
-		until ((SalidaMenu > 0) and (SalidaMenu < 7));
+		until ((SalidaMenu > 0) and (SalidaMenu < 3));
 
 		case SalidaMenu of
-		1 : MenuTerreno(SalidaMenu);
-                2 : MenuPoblaciones(SalidaMenu);
-                3 : MenuFactores(SalidaMenu);
-                4 : MenuMundo(SalidaMenu);
-		5 : MenuSimulacion(SalidaMenu);
-		6 : halt;
-		end;
+		1 : begin
 		
-	end;
+				Assign(A,'Introduccion');
+				rewrite(A);
+				writeln(A,'Esto Desactiva la Introduccion');
+				close(A);
+				
+			end;
+		
+		2 : begin
+		
+				Assign(A,'Introduccion');
+				rewrite(A);
+				close(A);
+							
+			end;
+		
+		end;
+
+		Menu(SalidaMenu);
+
+end;
 
 end.

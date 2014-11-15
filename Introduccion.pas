@@ -16,20 +16,51 @@ implementation
 	var
 	
 		contIntro : Integer;
+		A : text;
+		aux : string;
 
 	begin
-		
-		contIntro := 0;
-		
-		repeat
 	
-			contIntro := contIntro + 1;
+		aux :='q';
+		
+		//writeln('0');
+		Assign(A,'Introduccion');
+		//writeln('1');
+		
+		{$I-} 
+
+			reset(A);
+			//writeln('2');
+
 			
-			Intro(1);Intro(2);Intro(3);Intro(4);Intro(5);Intro(6);{Intro(5);Intro(4);Intro(3);Intro(2);Intro(1);}
+		{$I+}
+
+		if not(IOResult<>0) then  
+		begin  
+
+			readln(A,aux);
+			//writeln('3');
+			close(A);
+			//writeln('4');
+		end;
+		
+		//readkey;
+		
+		if not(aux = 'Esto Desactiva la Introduccion') then
+		begin 
+		
+			contIntro := 0;
+		
+			repeat
 	
-		until contIntro = 3;
+				contIntro := contIntro + 1;
+			
+				Intro(1);Intro(2);Intro(3);Intro(4);Intro(5);Intro(6);{Intro(5);Intro(4);Intro(3);Intro(2);Intro(1);}
 	
-		Intro(7)
+			until contIntro = 3;
+	
+			Intro(7)
+		end;
 		
 	end;
 
@@ -410,7 +441,9 @@ implementation
     TextColor(White);
     writeln;
     
-    writeln('Por favor ingrese una tecla para continuar');
+	//writeln('Por favor ingrese una tecla para continuar');
+	
+	writeln('                                   PRESS START	                        '); //seguro que hay que cambiarlo
     readkey;
     
     TextColor(White);
