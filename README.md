@@ -8,13 +8,24 @@ Mensajes
 
 X va de 1 a 80.
 
-Y va de 1 a 25. 
+Y va de 1 a 25. (El mapa es mas de 25)
 
 Por favor no dudes en corregirme.
 
 Las cosas por hacer estan en: https://github.com/keze87/Zombie/issues
 
 Y no subir nada de archivos compilados. :@
+
+WWW
+======
+
+http://www.freepascal.org/docs-html/rtl/crt/window.html
+
+http://freepascal.org/docs-html/rtl/video/index.html
+
+http://www.freepascal.org/docs-html/rtl/crt/textmode.html
+
+https://windows.github.com/
 
 Licencia
 ======
