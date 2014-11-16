@@ -2,7 +2,7 @@ unit Simulacion;
 
 interface
 
-	Procedure MostrarMapa(var SalidaMapa:integer);
+	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 
 	Procedure ImprLineasMapa(var lineatexto:string);
 
@@ -47,7 +47,7 @@ implementation
 
 
 
-	Procedure MostrarMapa(var SalidaMapa:integer);
+	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 
 	var texto:string;
                 mundi:text;
@@ -55,7 +55,7 @@ implementation
 
 
 		ClrScr;
-		Assign(mundi, 'c:\users\__\desktop\mapamundi.txt'); {placeholder}
+		Assign(mundi, ruta);
 		Reset(mundi);
 		while not eof(mundi) do
 		begin
@@ -77,3 +77,4 @@ implementation
 	end;
 
 end.
+
