@@ -1,4 +1,4 @@
-unit MenuPcpal; 
+unit MenuPcpal;
 
 interface
 
@@ -9,6 +9,7 @@ interface
 	Procedure MenuFactores(var SalidaFac : integer);
 	Procedure MenuMundo(var SalidaMundo : integer);
 	Procedure MenuAjustes (var SalidaMenu : integer);
+        Procedure MenuNuevaSim(var SalidaNueva : integer);
 
 
 
@@ -17,14 +18,14 @@ implementation
 
 	Uses
 
-		crt,ProceduresVarios;
-		
+		crt,ProceduresVarios,Simulacion;
+
 	Const
-	
+
 		Velocidad = 15;
 
 	Procedure Menu (var SalidaMenu : integer);
-	
+
 	begin
 		textcolor(10);
 		ClrScr;
@@ -51,7 +52,7 @@ implementation
 		writeln;
 
 		repeat
-		
+
 			LeerINT(SalidaMenu);
 
 		until ((SalidaMenu > 0) and (SalidaMenu < 8));
@@ -65,7 +66,7 @@ implementation
 		6 : MenuAjustes(SalidaMenu);
 		7 : begin TextColor(White);halt; end;
 		end;
-		
+
 	end;
 
 	Procedure MenuMundo(var SalidaMundo : integer);
@@ -74,7 +75,7 @@ implementation
 
 		ClrScr;
 		writeln;
-		
+
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
@@ -87,11 +88,11 @@ implementation
 		repeat
 			LeerINT(SalidaMundo);
 		until ((SalidaMundo > 0) and (SalidaMundo < 2));
-		
+
 		case SalidaMundo of
 		1 : Menu(SalidaMundo);
 		end;
-		
+
 	end;
 
 
@@ -101,7 +102,7 @@ implementation
 
 		ClrScr;
 		writeln;
-		
+
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Factores De Expansion ****');
 		GotoXY(1,4);
@@ -118,7 +119,7 @@ implementation
 		case SalidaFac of
 		1 : Menu(SalidaFac);
 		end;
-			
+
 	end;
 
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
@@ -127,7 +128,7 @@ implementation
 
 		ClrScr;
 		writeln;
-		
+
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Poblaciones ****');
 		GotoXY(1,4);
@@ -144,7 +145,7 @@ implementation
 		case SalidaPobl of
 		1 : Menu(SalidaPobl);
 		end;
-		
+
 	end;
 
 	Procedure MenuTerreno(var SalidaMenuTerr : integer);
@@ -153,7 +154,7 @@ implementation
 
 		ClrScr;
 		writeln;
-		
+
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Menu Terreno ****');
 		GotoXY(1,4);
@@ -168,7 +169,7 @@ implementation
 		until ((SalidaMenuTerr > 0) and (SalidaMenuTerr < 2));
 
 		Menu(SalidaMenuTerr);
-	
+
 	end;
 
 
@@ -196,19 +197,19 @@ implementation
 
 		case SalidaMenuSim of
 		1 : SalidaMenuSim := 5;
-		2 : MostrarMapa(SalidaMenuSim);
+		2 : MenuNuevaSim(SalidaMenuSim);
 		3 : Menu(SalidaMenuSim);
 		end;
-		
+
 	end;
 
 	Procedure MenuAjustes (var SalidaMenu : integer);
 	var
-	
+
 		A : Text;
-	
+
 	begin
-	
+
 		ClrScr;
 		writeln;
 		GotoXY(27,1);
@@ -227,26 +228,64 @@ implementation
 
 		case SalidaMenu of
 		1 : begin
-		
+
 				Assign(A,'Introduccion');
 				rewrite(A);
 				writeln(A,'Esto Desactiva la Introduccion');
 				close(A);
-				
+
 			end;
-		
+
 		2 : begin
-		
+
 				Assign(A,'Introduccion');
 				rewrite(A);
 				close(A);
-							
+
 			end;
-		
+
 		end;
 
 		Menu(SalidaMenu);
+                end;
 
-end;
+                	Procedure MenuNuevaSim(var SalidaNueva : integer);
+
+                        var ruta:string;
+
+	begin
+
+		ClrScr;
+		writeln;
+
+		GotoXY(27,1);
+		EscrDelay(Velocidad,'**** Nueva Simulacion ****');
+		GotoXY(1,4);
+		EscrDelay(Velocidad,'Seleccione escenario:');
+                GotoXY(6,6);
+                EscrDelay(Velocidad,'1)Tierra');
+		GotoXY(6,7);
+		EscrDelay(Velocidad,'2)Escenario personalizado...');
+		writeln;
+
+		repeat
+			LeerINT(SalidaNueva);
+		until ((SalidaNueva > 0) and (SalidaNueva < 3));
+
+                case SalidaNueva of
+		1 : begin ruta:='c:\users\__\desktop\mapamundi.txt';MostrarMapa(SalidaNueva, ruta);end;
+		2 : begin
+                        writeln('Ingrese la ruta del archivo de texto');
+                        read(ruta);
+                        MostrarMapa(SalidaNueva,ruta);
+		end;
+
+	end;
+        end;
+
+
+	end.
+
+end.
 
 end.
