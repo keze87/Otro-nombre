@@ -196,7 +196,7 @@ implementation
 
 		case SalidaMenuSim of
 		1 : SalidaMenuSim := 5;
-		2 : SalidaMenuSim := 6;
+		2 : MostrarMapa(SalidaMenuSim);
 		3 : Menu(SalidaMenuSim);
 		end;
 		
