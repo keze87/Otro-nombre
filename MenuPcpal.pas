@@ -9,7 +9,7 @@ interface
 	Procedure MenuFactores(var SalidaFac : integer);
 	Procedure MenuMundo(var SalidaMundo : integer);
 	Procedure MenuAjustes (var SalidaMenu : integer);
-        Procedure MenuNuevaSim(var SalidaNueva : integer);
+	Procedure MenuNuevaSim(var SalidaNueva : integer);
 
 
 
@@ -70,16 +70,20 @@ implementation
 	end;
 
 	Procedure MenuMundo(var SalidaMundo : integer);
+	var
+		ruta : string;
 
 	begin
 
 		ClrScr;
 		writeln;
-
+		ruta := 'mapamundi.txt';
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
+		readln;
+		MostrarMapa(SalidaMundo,ruta);
 		writeln;
 		GotoXY(27,22);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal.');
@@ -247,24 +251,23 @@ implementation
 		end;
 
 		Menu(SalidaMenu);
-                end;
+	end;
 
-                	Procedure MenuNuevaSim(var SalidaNueva : integer);
+	Procedure MenuNuevaSim(var SalidaNueva : integer);
 
-                        var ruta:string;
+	var ruta:string;
 
 	begin
 
 		ClrScr;
-		writeln;
 
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Nueva Simulacion ****');
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Seleccione escenario:');
-                GotoXY(6,6);
-                EscrDelay(Velocidad,'1)Tierra');
-		GotoXY(6,7);
+		GotoXY(6,6);
+		EscrDelay(Velocidad,'1)Tierra');
+		GotoXY(6,8);
 		EscrDelay(Velocidad,'2)Escenario personalizado...');
 		writeln;
 
@@ -272,16 +275,16 @@ implementation
 			LeerINT(SalidaNueva);
 		until ((SalidaNueva > 0) and (SalidaNueva < 3));
 
-                case SalidaNueva of
-		1 : begin ruta:='c:\users\__\desktop\mapamundi.txt';MostrarMapa(SalidaNueva, ruta);end;
+		case SalidaNueva of
+		1 : begin ruta:='mapamundi.txt';MostrarMapa(SalidaNueva, ruta);end;
 		2 : begin
-                        writeln('Ingrese la ruta del archivo de texto');
-                        read(ruta);
-                        MostrarMapa(SalidaNueva,ruta);
+		writeln('Ingrese la ruta del archivo de texto');
+		read(ruta);
+		MostrarMapa(SalidaNueva,ruta);
 		end;
 
 	end;
-        end;
+	end;
 
 
 	end.

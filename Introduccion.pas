@@ -391,7 +391,7 @@ implementation
 	write('           +???????+            ');TextColor(Green);writeln('                            ????????????');TextColor(White);
     end;
     
-    Delay (250);
+    Delay (125);
     
     if conti <> 25 then
     ClrScr;
@@ -431,10 +431,10 @@ implementation
 	writeln('               \::/  /        /:/  /       |:|  |        \::/  /   ');
 	writeln('                \/__/         \/__/         \|__|         \/__/    ');
     
-    Delay(500);
+    Delay(1000);
     if conti <> 5 then
     ClrScr;
-    Delay(500);
+    Delay(900);
     
     until conti = 5;
     
