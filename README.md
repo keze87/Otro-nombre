@@ -19,9 +19,13 @@ Y no subir nada de archivos compilados. :@
 WWW
 ======
 
+http://youtu.be/X5Wkp1gsNik
+
 http://www.freepascal.org/docs-html/rtl/crt/window.html
 
-http://freepascal.org/docs-html/rtl/video/index.html
+http://www.freepascal.org/docs-html/rtl/crt/keypressed.html
+
+http://www.freepascal.org/docs-html/rtl/video/index.html
 
 http://www.freepascal.org/docs-html/rtl/crt/textmode.html
 

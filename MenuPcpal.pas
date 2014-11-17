@@ -266,9 +266,9 @@ implementation
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Seleccione escenario:');
 		GotoXY(6,6);
-		EscrDelay(Velocidad,'1)Tierra');
+		EscrDelay(Velocidad,'1) Por defecto.');
 		GotoXY(6,8);
-		EscrDelay(Velocidad,'2)Escenario personalizado...');
+		EscrDelay(Velocidad,'2) Personalizado.');
 		writeln;
 
 		repeat
