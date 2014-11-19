@@ -24,7 +24,7 @@ implementation
 
         begin
                 repeat
-                        delay(100);
+                   //     delay(100);
                         until readkey='p';
                         end;
 
