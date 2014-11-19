@@ -3,7 +3,7 @@ PROGRAM Zombie;
 USES 
 
 	crt,Introduccion,MenuPcpal,ProceduresVarios;
-	
+
 VAR
 
 	SalidaMenu : integer;
@@ -12,7 +12,7 @@ BEGIN
 
 	IntroZ;
 
-	CrearMapa;
+	CrearArchivos;
 
 	Menu (SalidaMenu);
 

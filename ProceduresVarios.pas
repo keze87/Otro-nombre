@@ -6,13 +6,38 @@ Procedure EscrDelay(tiempo:integer;cadena:string); {Pone un delay entre caracter
 
 Procedure LeerINT (var Variable : integer);
 
-Procedure CrearMapa;
+Procedure CrearArchivos;
 
 implementation
 
 Uses
 
 	crt;
+
+
+TYPE
+
+	TTerrenos = record
+		Codigo{de terreno} : integer; // la guia dice char;
+		Descripcion : string[30];
+		end;
+
+	TPoblaciones = record
+		PuntoX : integer;
+		PuntoY : integer;
+		Descripcion : string[30];
+		CantSuceptibles : longInt;
+		CantInfectados : longInt;
+		CantZombies : longInt;
+		TasaNatalidad : integer;
+		FactorMovilidad : integer;
+		end;
+
+	TFactores = record
+		Codigo{de factor} : string[2];
+		Descripcion : string[30];
+		Valor : real;
+		end;
 
 Procedure EscrDelay(tiempo:integer;cadena:string);
 var
@@ -33,6 +58,7 @@ end;
 
 Procedure LeerINT (var Variable : integer);
 	begin
+	
 		{$I-}
 			readln(Variable);
 		{$I+}
@@ -41,12 +67,23 @@ Procedure LeerINT (var Variable : integer);
 			begin
 				writeln;
 			end;
+
 	end;
 
-Procedure CrearMapa;
+Procedure CrearArchivos;
 var
+
 	Mapa : Text;
+	Terrenos : file of TTerrenos;
+	auxT : TTerrenos;
+	Poblaciones : file of TPoblaciones;
+	auxP : TPoblaciones;
+	Factores : file of TFactores;
+	auxF : TFactores;
+
 begin
+
+	{*** Mapa ***}
 
 	Assign(Mapa,'mapamundi.txt');
 	rewrite(Mapa);
@@ -90,7 +127,118 @@ begin
 	writeln(Mapa,'                                                                         ');
 
 	close(Mapa);
-	
+
+	{*** Factores ***}
+
+	Assign(Factores,'Factores.DAT');
+	rewrite(Factores);
+
+	{alpha}
+
+	auxF.Codigo := 'al' ;
+	auxF.Descripcion := ' Salvación ante ataque ' ;
+	auxF.Valor := 0 ;
+
+	write(Factores,auxF);
+
+	{beta}
+
+	auxF.Codigo := 'be' ;
+	auxF.Descripcion := ' Transmisión ' ;
+	auxF.Valor := 0 ;
+
+	write(Factores,auxF);
+
+	{delta}
+
+	auxF.Codigo := 'de' ;
+	auxF.Descripcion := ' Muerte por causa natural ' ;
+	auxF.Valor := 0 ;
+
+	write(Factores,auxF);
+
+	{epsilon}
+
+	auxF.Codigo := 'ep' ;
+	auxF.Descripcion := ' Resurrección Zombie ' ;
+	auxF.Valor := 0 ;
+
+	write(Factores,auxF);
+
+	{pi}
+
+	auxF.Codigo := 'pi' ;
+	auxF.Descripcion := ' Tasa de natalidad ' ;
+	auxF.Valor := 0 ;
+
+	write(Factores,auxF);
+
+	{rho}
+
+	auxF.Codigo := 'ro' ;
+	auxF.Descripcion := ' Latente de infección ' ;
+	auxF.Valor := 0 ;
+
+	write(Factores,auxF);
+
+	close(Factores);
+
+	{*** Poblaciones ***}
+
+	Assign(Poblaciones,'Poblaciones.DAT');
+	rewrite(Poblaciones);
+
+	auxP.PuntoX := 1; if auxP.PuntoX <> 1 then write('Esto hay que cambiar');//Ni idea
+
+	close(Poblaciones);
+
+	{*** Terrenos ***}
+
+	Assign(Terrenos,'Terrenos.DAT');
+	rewrite(Terrenos);
+
+	auxT.Codigo := 0 ; auxT.Descripcion:= ' desértica ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 1 ; auxT.Descripcion:= ' pueblerina ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 2 ; auxT.Descripcion:= ' selvática ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 3 ; auxT.Descripcion:= ' de montes ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 4 ; auxT.Descripcion:= ' mediamente poblada ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 5 ; auxT.Descripcion:= ' poblada ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 6 ; auxT.Descripcion:= ' de montaña ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 7 ; auxT.Descripcion:= ' rural ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 8 ; auxT.Descripcion:= ' densamente poblada ';
+
+	write(Terrenos,auxT);
+
+	auxT.Codigo := 9 ; auxT.Descripcion:= ' de recepción de migración '; 
+
+	write(Terrenos,auxT);
+
+	close(Terrenos);
+
 end;
 
 

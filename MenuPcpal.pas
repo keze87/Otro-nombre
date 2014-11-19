@@ -85,7 +85,7 @@ implementation
 		readln;
 		MostrarMapa(SalidaMundo,ruta);
 		writeln;
-		GotoXY(27,22);
+		//GotoXY(27,22);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal.');
 		writeln;
 

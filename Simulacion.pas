@@ -74,17 +74,17 @@ implementation
 		begin
 
 			case lineatexto[I] of
-			' ' : begin textbackground(9); write(lineatexto[I]); end;
-			'0' : begin textbackground(brown);textcolor(7); write(lineatexto[I]); end;
-			'1' : begin textbackground(green);textcolor(7); write(lineatexto[I]); end;
-			'2' : begin textbackground(lightgreen);textcolor(7); write(lineatexto[I]); end;
+			' ' : begin textbackground(black); write(lineatexto[I]); end;
+			'0' : begin textbackground(black);textcolor(brown); write(lineatexto[I]); end;
+			'1' : begin textbackground(black);textcolor(green); write(lineatexto[I]); end;
+			'2' : begin textbackground(black);textcolor(lightgreen); write(lineatexto[I]); end;
 			'3' : begin textbackground(black);textcolor(7); write(lineatexto[I]); end;
-			'4' : begin textbackground(lightgray);textcolor(7); write(lineatexto[I]); end;
+			'4' : begin textbackground(black);textcolor(lightgray); write(lineatexto[I]); end;
 			'5' : begin textbackground(black);textcolor(7); write(lineatexto[I]); end;
-			'6' : begin textbackground(brown);textcolor(7); write(lineatexto[I]); end;
-			'7' : begin textbackground(lightgray);textcolor(7); write(lineatexto[I]); end;
-			'8' : begin textbackground(magenta);textcolor(7); write(lineatexto[I]); end;
-			'9' : begin textbackground(red);textcolor(7); write(lineatexto[I]); end;
+			'6' : begin textbackground(black);textcolor(brown); write(lineatexto[I]); end;
+			'7' : begin textbackground(black);textcolor(lightgray); write(lineatexto[I]); end;
+			'8' : begin textbackground(black);textcolor(magenta); write(lineatexto[I]); end;
+			'9' : begin textbackground(black);textcolor(red); write(lineatexto[I]); end;
 		end;
 
 		textbackground(black);
