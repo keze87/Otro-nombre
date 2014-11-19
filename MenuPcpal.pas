@@ -256,6 +256,7 @@ implementation
 	Procedure MenuNuevaSim(var SalidaNueva : integer);
 
 	var ruta:string;
+        dias:integer;
 
 	begin
 
@@ -266,9 +267,9 @@ implementation
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Seleccione escenario:');
 		GotoXY(6,6);
-		EscrDelay(Velocidad,'1) Por defecto.');
+		EscrDelay(Velocidad,'1)Tierra');
 		GotoXY(6,8);
-		EscrDelay(Velocidad,'2) Personalizado.');
+		EscrDelay(Velocidad,'2)Escenario personalizado...');
 		writeln;
 
 		repeat
@@ -276,7 +277,14 @@ implementation
 		until ((SalidaNueva > 0) and (SalidaNueva < 3));
 
 		case SalidaNueva of
-		1 : begin ruta:='mapamundi.txt';MostrarMapa(SalidaNueva, ruta);end;
+		1 : begin
+                        dias:=30;
+                        ruta:='mapamundi.txt';
+                        MostrarMapa(SalidaNueva, ruta);        {estas tres}
+                        delay(3000);                           {lineas van a tener que ir}
+                        ModifSimulacion(SalidaNueva, dias);    {en un procedimiento nuevo}
+
+                        end;
 		2 : begin
 		writeln('Ingrese la ruta del archivo de texto');
 		read(ruta);
