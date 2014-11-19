@@ -405,102 +405,30 @@ Procedure Intro (i : integer);
 
 	ClrScr;
 
-	if conti = 1 then
-	begin
-	write('           ODDDDZ                       ');TextColor(Green);writeln('                                 O');TextColor(White);
-	end;
-	if conti <=2 then
-	begin
-	write('           =::~OD,             ');TextColor(Green);writeln('                                         ');TextColor(White);
-	end;
-	if conti <=3 then
-	begin
-	write('           +:~~8D~             ');TextColor(Green);writeln('                               ZZZOOO   ');TextColor(White);
-	end;
-	if conti <=4 then
-	begin
-	write('           $:Z~~D            ');TextColor(Green);writeln('                                 $=??$ZO  ');TextColor(White);
-	end;
-	if conti <=5 then
-	begin
-	write('           +::~~=             ');TextColor(Green);writeln('                                8=8?$ZO  ');TextColor(White);
-	end;
-	if conti <=6 then
-	begin
-	write('            =7Z~=            ');TextColor(Green);writeln('                                 78O?$ZO  ');TextColor(White);
-	end;
-	if conti <=7 then
-	begin
-	write('             $$$$             ');TextColor(Green);writeln('                     ?O,        I??7OOO  ');TextColor(White);
-	end;
-	if conti <=8 then
-	begin
-	write('           ,7I?IZ$$$7,        ');TextColor(Green);writeln('                      +Z7I$77O:::II$ZO$$ ');TextColor(White);
-	end;
-	if conti <=9 then
-	begin
-	write('           7Z?I8?7ZZIZ        ');TextColor(Green);writeln('                             ??77Z$87II:I');TextColor(White);
-	end;
-	if conti <=10 then
-	begin
-	write('           7Z?I87Z=~ZI        ');TextColor(Green);writeln('                             Z$  =  ?I::I');TextColor(White);
-	end;
-	if conti <=11 then
-	begin
-	write('           7Z?787Z=~~=        ');TextColor(Green);writeln('                                 O:   ::Z');TextColor(White);
-	end;
-	if conti <=12 then
-	begin
-	write('          I7Z?787Z=~+=        ');TextColor(Green);writeln('                                  $=  ::Z');TextColor(White);
-	end;
-	if conti <=13 then
-	begin
-	write('        =  7Z7787Z?+=         ');TextColor(Green);writeln('                                  DI  ::Z');TextColor(White);
-	end;
-	if conti <=14 then
-	begin
-	write('           7Z7787Z,            ');TextColor(Green);writeln('                                OI   ::Z');TextColor(White);
-	end;
-	if conti <=15 then
-	begin
-	write('           $Z$$ZZD,            ');TextColor(Green);writeln('                                88777888');TextColor(White);
-	end;
-	if conti <=16 then
-	begin
-	write('           ZIIIZZD+            ');TextColor(Green);writeln('                               7Z88888Z8');TextColor(White);
-	end;
-	if conti <=17 then
-	begin
-	write('           ZZIIZD=             ');TextColor(Green);writeln('                               7Z8    Z8');TextColor(White);
-	end;
-	if conti <=18 then
-	begin
-	write('            8ZIZZ88O M         ');TextColor(Green);writeln('                             7Z8     Z8');TextColor(White);
-	end;
-	if conti <=19 then
-	begin
-	write('            88ZZ88=   M         ');TextColor(Green);writeln('                            788     Z8');TextColor(White);
-	end;
-	if conti <=20 then
-	begin
-	write('            DD~~~               ');TextColor(Green);writeln('                            ZO      Z');TextColor(White);
-	end;
-	if conti <=21 then
-	begin
-	write('             D                  ');TextColor(Green);writeln('                            88      O');TextColor(White);
-	end;
-	if conti <=22 then
-	begin
-	write('             D                  ');TextColor(Green);writeln('                            $O           ');TextColor(White);
-	end;
-	if conti <=23 then
-	begin
-	write('      +????MMM????????????      ');TextColor(Green);writeln('                        ????8????????????');TextColor(White);
-	end;
-	if conti <=24 then
-	begin
-	write('           +???????+            ');TextColor(Green);writeln('                            ????????????');TextColor(White);
-	end;
+	if conti = 1 then begin write('           ODDDDZ                       ');TextColor(Green);writeln('                                 O');TextColor(White); end;
+	if conti <=2 then begin write('           =::~OD,             ');TextColor(Green);writeln('                                         ');TextColor(White); end;
+	if conti <=3 then begin write('           +:~~8D~             ');TextColor(Green);writeln('                               ZZZOOO   ');TextColor(White); end;
+	if conti <=4 then begin write('           $:Z~~D            ');TextColor(Green);writeln('                                 $=??$ZO  ');TextColor(White); end;
+	if conti <=5 then begin write('           +::~~=             ');TextColor(Green);writeln('                                8=8?$ZO  ');TextColor(White); end;
+	if conti <=6 then begin write('            =7Z~=            ');TextColor(Green);writeln('                                 78O?$ZO  ');TextColor(White); end;
+	if conti <=7 then begin write('             $$$$             ');TextColor(Green);writeln('                     ?O,        I??7OOO  ');TextColor(White); end;
+	if conti <=8 then begin write('           ,7I?IZ$$$7,        ');TextColor(Green);writeln('                      +Z7I$77O:::II$ZO$$ ');TextColor(White); end;
+	if conti <=9 then begin write('           7Z?I8?7ZZIZ        ');TextColor(Green);writeln('                             ??77Z$87II:I');TextColor(White); end;
+	if conti <=10 then begin write('           7Z?I87Z=~ZI        ');TextColor(Green);writeln('                             Z$  =  ?I::I');TextColor(White); end;
+	if conti <=11 then begin write('           7Z?787Z=~~=        ');TextColor(Green);writeln('                                 O:   ::Z');TextColor(White); end;
+	if conti <=12 then begin write('          I7Z?787Z=~+=        ');TextColor(Green);writeln('                                  $=  ::Z');TextColor(White); end;
+	if conti <=13 then begin write('        =  7Z7787Z?+=         ');TextColor(Green);writeln('                                  DI  ::Z');TextColor(White); end;
+	if conti <=14 then begin write('           7Z7787Z,            ');TextColor(Green);writeln('                                OI   ::Z');TextColor(White); end;
+	if conti <=15 then begin write('           $Z$$ZZD,            ');TextColor(Green);writeln('                                88777888');TextColor(White); end;
+	if conti <=16 then begin write('           ZIIIZZD+            ');TextColor(Green);writeln('                               7Z88888Z8');TextColor(White); end;
+	if conti <=17 then begin write('           ZZIIZD=             ');TextColor(Green);writeln('                               7Z8    Z8');TextColor(White); end;
+	if conti <=18 then begin write('            8ZIZZ88O M         ');TextColor(Green);writeln('                             7Z8     Z8');TextColor(White); end;
+	if conti <=19 then begin write('            88ZZ88=   M         ');TextColor(Green);writeln('                            788     Z8');TextColor(White); end;
+	if conti <=20 then begin write('            DD~~~               ');TextColor(Green);writeln('                            ZO      Z');TextColor(White); end;
+	if conti <=21 then begin write('             D                  ');TextColor(Green);writeln('                            88      O');TextColor(White); end;
+	if conti <=22 then begin write('             D                  ');TextColor(Green);writeln('                            $O           ');TextColor(White); end;
+	if conti <=23 then begin write('      +????MMM????????????      ');TextColor(Green);writeln('                        ????8????????????');TextColor(White); end;
+	if conti <=24 then begin write('           +???????+            ');TextColor(Green);writeln('                            ????????????');TextColor(White); end;
 
 //	Delay (125);
 
@@ -546,6 +474,7 @@ Procedure Intro (i : integer);
 	if conti <> 5 then
 	ClrScr;
 	Delay(900);
+
 
 	until conti = 5;
 
