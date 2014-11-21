@@ -84,26 +84,43 @@ implementation
 		until EOF(Mapa);
 
 		topey := m;
+		writeln;
 
 
 //		writeln('Esto simboliza las cosas que ocurren dia a dia');
-		writeln('Dia : ');
-		writeln; writeln;
 //		writeln('Presionar P para pausar');
 //		writeln('Presionar S para salir al menu');
 
 		repeat
 		begin
 
-			gotoxy(12,2);
-			write(i);
-			//delay(2000);
+			textcolor(10);
+			writeln('Dia : ',i);
+			writeln;
 
 			for j := 1 to topey do
 				begin
 
 					for k := 1 to topex do
-						write(Mapatriz[k,j].Codigo);
+						//write(Mapatriz[k,j].Codigo);
+					begin
+
+						case Mapatriz[k,j].Codigo of
+
+							' ' : begin textbackground(black); write(Mapatriz[k,j].Codigo); end;
+							'0' : begin textbackground(black);textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'1' : begin textbackground(black);textcolor(green); write(Mapatriz[k,j].Codigo); end;
+							'2' : begin textbackground(black);textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
+							'3' : begin textbackground(black);textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'4' : begin textbackground(black);textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'5' : begin textbackground(black);textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'6' : begin textbackground(black);textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'7' : begin textbackground(black);textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'8' : begin textbackground(black);textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
+							'9' : begin textbackground(black);textcolor(red); write(Mapatriz[k,j].Codigo); end;
+						end;
+
+					end;
 
 				writeln;
 
@@ -123,6 +140,9 @@ implementation
 
 			end;
 		end;
+
+		Delay(1000);
+		i := i + 1;
 
 		until 5<4;
 
