@@ -6,13 +6,9 @@ interface
 
 	Procedure ImprLineasMapa(var lineatexto:string);
 
-        Procedure ModifSimulacion(var SalidaMod:integer; var dias:integer);
+	Procedure ModifSimulacion;
 
-        Procedure Pausa(var caracter:char);
-
-
-
-
+	//Procedure Pausa(var caracter:char);
 
 implementation
 
@@ -20,48 +16,111 @@ implementation
 
 		crt,ProceduresVarios,MenuPcpal;
 
-        Procedure Pausa(var caracter:char);
+	type
 
-        begin
-                repeat
-                   //     delay(100);
-                        until readkey='p';
-                        end;
+		TMatriz = record
+				Codigo : char;
+				end;
 
-        Procedure ModifSimulacion(var SalidaMod:integer; var dias:integer);
+{	Procedure Pausa(var caracter:char);
 
-        var I:integer;
-                clchar:char;
-                Salida:integer;
-                begin
+	begin
+		repeat
 
-                clrscr;
-                Salida:=1;
-                writeln('Esto simboliza las cosas que ocurren dia a dia');
-                writeln('Es el dia :');
-                writeln;
-                writeln;
-                writeln('Presionar P para pausar');
-                writeln('Presionar S para salir al menu');
-                for I:=1 to dias do
-                begin
-                        gotoxy(12,2);
-                        write(I);
-                        delay(2000);
-                        if keypressed then
-                        begin
-                                clchar:=readkey;
-                                        if clchar='p' then
-                                        Pausa(clchar);
-                                        if clchar='s' then
-                                        Menu(Salida);
-                                        end;
-                                        end;
-                                        Menu(Salida);
-                                        end;
+			//delay(100);
+			until readkey='p';
+
+		end;}
+
+	Procedure ModifSimulacion;
+	var
+
+		i : integer;
+		j : integer;
+		k : integer;
+		l : integer;
+		m : integer;
+		clchar : char;
+		Salida : integer;
+		Mapatriz : array [1..3000,1..3000] of TMatriz;
+		topex : integer;
+		topey : integer;
+		aux : string;
+		Mapa : text;
+
+	begin
+readkey;
+		clrscr;
+readkey;
+		Salida := 1;
+		i := 1;
+//		CrearMatriz(Mapatriz,topex,topey);
+
+		Assign(Mapa,'mapamundi.txt');
+		reset(Mapa);
+
+		topex := -213;
+
+		m := 0;
+
+		repeat
+
+			readln(Mapa,aux);
+
+			l := 0;
+
+			m := m + 1;
+
+			repeat
+
+				l := l + 1;
+
+				Mapatriz [l,m].Codigo := aux[l];
+
+			until l = length(aux);
+
+		until EOF(Mapa);
+
+		topey := m;
 
 
+//		writeln('Esto simboliza las cosas que ocurren dia a dia');
+		writeln('Dia : ');
+		writeln; writeln;
+//		writeln('Presionar P para pausar');
+//		writeln('Presionar S para salir al menu');
 
+		repeat
+		begin
+
+			gotoxy(12,2);
+			write(i);
+			delay(2000);
+
+			for j := 1 to topey do
+				for k := 1 to topex do
+					write(Mapatriz[k,j].Codigo);
+
+			if keypressed then
+			begin
+
+				clchar:=readkey;
+
+				if clchar='p' then
+				//Pausa(clchar);
+				readkey;
+
+				if clchar='s' then
+				Menu(Salida);
+
+			end;
+		end;
+
+		until 5<4;
+
+		Menu(Salida);
+
+	end;
 
 	Procedure ImprLineasMapa(var lineatexto:string);
 
@@ -89,11 +148,8 @@ implementation
 
 		textbackground(black);
 
-
 	end;
 	end;
-
-
 
 	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 
@@ -103,7 +159,6 @@ implementation
 		mundi:text;
 
 	begin
-
 
 		ClrScr;
 		Assign(mundi, ruta);
@@ -115,16 +170,13 @@ implementation
 			writeln;
 		end;
 
-
-
-     //repeat
-       //	LeerINT(SalidaMapa);
-   //until ((SalidaMapa > 0) and (SalidaMapa < 3));
- //             case SalidaMapa of
- //        1 : Menu(SalidaMapa);   {guardar y volver al menu}
-              //  end;
+	//repeat
+	//LeerINT(SalidaMapa);
+	//until ((SalidaMapa > 0) and (SalidaMapa < 3));
+	//case SalidaMapa of
+	//1 : Menu(SalidaMapa);   {guardar y volver al menu}
+	//end;
 
 	end;
 
 end.
-

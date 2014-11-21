@@ -1,13 +1,13 @@
 PROGRAM Zombie;
 
-USES 
+USES
 
 	crt,Introduccion,MenuPcpal,ProceduresVarios;
 
 VAR
 
 	SalidaMenu : integer;
-	
+
 BEGIN
 
 	IntroZ;

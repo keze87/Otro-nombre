@@ -41,6 +41,10 @@ TYPE
 		Valor : real;
 		end;
 
+	TMatriz = record
+			Codigo : char;
+			end;
+
 	Const
 
 		Velocidad = 15;
@@ -79,13 +83,15 @@ TYPE
 		until ((SalidaMenu > 0) and (SalidaMenu < 8));
 
 		case SalidaMenu of
-		1 : MenuTerreno(SalidaMenu);
-		2 : MenuPoblaciones(SalidaMenu);
-		3 : MenuFactores(SalidaMenu);
-		4 : MenuMundo(SalidaMenu);
-		5 : MenuSimulacion(SalidaMenu);
-		6 : MenuAjustes(SalidaMenu);
-		7 : begin TextColor(White);halt; end;
+
+			1 : MenuTerreno(SalidaMenu);
+			2 : MenuPoblaciones(SalidaMenu);
+			3 : MenuFactores(SalidaMenu);
+			4 : MenuMundo(SalidaMenu);
+			5 : MenuSimulacion(SalidaMenu);
+			6 : MenuAjustes(SalidaMenu);
+			7 : begin TextColor(lightgray);halt; end;
+
 		end;
 
 	end;
@@ -115,7 +121,9 @@ TYPE
 		until ((SalidaMundo > 0) and (SalidaMundo < 2));
 
 		case SalidaMundo of
-		1 : Menu(SalidaMundo);
+
+			1 : Menu(SalidaMundo);
+
 		end;
 
 	end;
@@ -141,27 +149,27 @@ TYPE
 
 		read(Factores,auxF);
 
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
 
 		read(Factores,auxF);
 
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
 
 		read(Factores,auxF);
 
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
 
 		read(Factores,auxF);
 
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
 
 		read(Factores,auxF);
 
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
 
 		read(Factores,auxF);
 
-		write (' ');EscrDelay(-Velocidad,'Factor'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+		write (' ');EscrDelay(-Velocidad,'Factor'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
 
 		GotoXY(3,18);
 		EscrDelay(Velocidad,'1) Editar Factores');
@@ -176,9 +184,10 @@ TYPE
 		until ((SalidaFac > 0) and (SalidaFac < 3));
 
 		case SalidaFac of
-		1 : EditarFactores(SalidaFac);
 
-		2 : Menu(SalidaFac);
+			1 : EditarFactores(SalidaFac);
+			2 : Menu(SalidaFac);
+
 		end;
 
 	end;
@@ -200,11 +209,15 @@ TYPE
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaPobl);
+
 		until ((SalidaPobl > 0) and (SalidaPobl < 2));
 
 		case SalidaPobl of
-		1 : Menu(SalidaPobl);
+
+			1 : Menu(SalidaPobl);
+
 		end;
 
 	end;
@@ -226,7 +239,9 @@ TYPE
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaMenuTerr);
+
 		until ((SalidaMenuTerr > 0) and (SalidaMenuTerr < 2));
 
 		Menu(SalidaMenuTerr);
@@ -253,13 +268,17 @@ TYPE
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaMenuSim);
+
 		until ((SalidaMenuSim > 0) and (SalidaMenuSim < 4));
 
 		case SalidaMenuSim of
-		1 : SalidaMenuSim := 5;
-		2 : MenuNuevaSim(SalidaMenuSim);
-		3 : Menu(SalidaMenuSim);
+
+			1 : SalidaMenuSim := 5;
+			2 : MenuNuevaSim(SalidaMenuSim);
+			3 : Menu(SalidaMenuSim);
+
 		end;
 
 	end;
@@ -284,7 +303,9 @@ TYPE
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaMenu);
+
 		until ((SalidaMenu > 0) and (SalidaMenu < 3));
 
 		case SalidaMenu of
@@ -308,12 +329,15 @@ TYPE
 		end;
 
 		Menu(SalidaMenu);
+
 	end;
 
 	Procedure MenuNuevaSim(var SalidaNueva : integer);
 
-	var ruta:string;
-        dias:integer;
+	var
+
+		ruta:string;
+		//dias:integer;
 
 	begin
 
@@ -330,16 +354,21 @@ TYPE
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaNueva);
+
 		until ((SalidaNueva > 0) and (SalidaNueva < 3));
 
 		case SalidaNueva of
+
 		1 : begin
-			dias:=30;
-			ruta:='mapamundi.txt';
-			MostrarMapa(SalidaNueva, ruta);        {estas tres}
-			delay(3000);                           {lineas van a tener que ir}
-			ModifSimulacion(SalidaNueva, dias);    {en un procedimiento nuevo}
+//			dias:=30;
+//			ruta:='mapamundi.txt';
+//			MostrarMapa(SalidaNueva, ruta);        {estas tres}
+//			delay(3000);                           {lineas van a tener que ir}
+readln;
+			ModifSimulacion;    {en un procedimiento nuevo}
+
 			end;
 
 		2 : begin
