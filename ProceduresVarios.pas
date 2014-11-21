@@ -6,13 +6,17 @@ Procedure EscrDelay(tiempo:integer;cadena:string); {Pone un delay entre caracter
 
 Procedure LeerINT (var Variable : integer);
 
+Procedure LeerReal (var Variable : Real);
+
 Procedure CrearArchivos;
+
+Procedure EditarFactores(var Salida : integer);
 
 implementation
 
 Uses
 
-	crt;
+	crt,MenuPcpal;
 
 
 TYPE
@@ -48,9 +52,10 @@ begin
 	for I:=1 to longitud do
 		begin
 			write(cadena[I]);
-			delay(tiempo);
+			delay(abs(tiempo));
 		end;
 
+	if tiempo > 0 then
 		writeln;
 
 end;
@@ -58,15 +63,25 @@ end;
 
 Procedure LeerINT (var Variable : integer);
 	begin
-	
+
+	repeat
 		{$I-}
 			readln(Variable);
 		{$I+}
 
-		if IOResult<>0 then
-			begin
-				writeln;
-			end;
+	until not(IOResult<>0);
+
+	end;
+
+Procedure LeerReal (var Variable : Real);
+	begin
+
+	repeat
+		{$I-}
+			readln(Variable);
+		{$I+}
+
+	until not(IOResult<>0);
 
 	end;
 
@@ -241,6 +256,70 @@ begin
 
 end;
 
+Procedure EditarFactores(var Salida : integer);
+	const
+		velocidad = 15;
+	var
+		FactoresViejos : file of TFactores;
+		Factores : file of TFactores;
+		auxF : TFactores;
+		auxFV : TFactores;
 
+	begin
+
+		Assign(FactoresViejos,'Factores.DAT');
+		Rename(FactoresViejos,'Factores.TMP');
+		reset(FactoresViejos);
+
+		Assign(Factores,'Factores.DAT');
+		rewrite(Factores);
+
+		clrscr;
+		writeln;
+
+		read(FactoresViejos,auxFV);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'= '); LeerReal(auxF.Valor);
+
+		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+
+		read(FactoresViejos,auxFV);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'= '); LeerReal(auxF.Valor);
+
+		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+
+		read(FactoresViejos,auxFV);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'= '); LeerReal(auxF.Valor);
+
+		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+
+		read(FactoresViejos,auxFV);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'= '); LeerReal(auxF.Valor);
+
+		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+
+		read(FactoresViejos,auxFV);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'= '); LeerReal(auxF.Valor);
+
+		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+
+		read(FactoresViejos,auxFV);
+
+		write (' ');EscrDelay(-Velocidad,'Factor'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'= '); LeerReal(auxF.Valor);
+
+		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+
+		close(Factores);
+		erase(FactoresViejos);
+		close(FactoresViejos);
+		erase(FactoresViejos);
+
+		MenuFactores(Salida);
+
+end;
 
 end.

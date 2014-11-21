@@ -11,14 +11,35 @@ interface
 	Procedure MenuAjustes (var SalidaMenu : integer);
 	Procedure MenuNuevaSim(var SalidaNueva : integer);
 
-
-
-
 implementation
 
 	Uses
 
 		crt,ProceduresVarios,Simulacion;
+
+TYPE
+
+	TTerrenos = record
+		Codigo{de terreno} : integer; // la guia dice char;
+		Descripcion : string[30];
+		end;
+
+	TPoblaciones = record
+		PuntoX : integer;
+		PuntoY : integer;
+		Descripcion : string[30];
+		CantSuceptibles : longInt;
+		CantInfectados : longInt;
+		CantZombies : longInt;
+		TasaNatalidad : integer;
+		FactorMovilidad : integer;
+		end;
+
+	TFactores = record
+		Codigo{de factor} : string[2];
+		Descripcion : string[30];
+		Valor : real;
+		end;
 
 	Const
 
@@ -101,27 +122,63 @@ implementation
 
 
 	Procedure MenuFactores(var SalidaFac : integer);
+	var
+		Factores : file of TFactores;
+		auxF : TFactores;
 
 	begin
+
+		Assign(Factores,'Factores.DAT');
+		reset(Factores);
 
 		ClrScr;
 		writeln;
 
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Factores De Expansion ****');
-		GotoXY(1,4);
-		EscrDelay(Velocidad,'Inserte descripcion de factores aqui.');
+
+		writeln;writeln;
+
+		read(Factores,auxF);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+
+		read(Factores,auxF);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+
+		read(Factores,auxF);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+
+		read(Factores,auxF);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+
+		read(Factores,auxF);
+
+		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+
+		read(Factores,auxF);
+
+		write (' ');EscrDelay(-Velocidad,'Factor'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:0);
+
+		GotoXY(3,18);
+		EscrDelay(Velocidad,'1) Editar Factores');
+		GotoXY(3,19);
+		EscrDelay(Velocidad,'2) Volver al Menu Principal');
 		writeln;
-		GotoXY(27,22);
-		EscrDelay(Velocidad,'1) Volver al Menu Principal');
-		writeln;
+
+		close(Factores);
 
 		repeat
 			LeerINT(SalidaFac);
-		until ((SalidaFac > 0) and (SalidaFac < 2));
+		until ((SalidaFac > 0) and (SalidaFac < 3));
 
 		case SalidaFac of
-		1 : Menu(SalidaFac);
+		1 : EditarFactores(SalidaFac);
+
+		2 : Menu(SalidaFac);
 		end;
 
 	end;
@@ -278,25 +335,20 @@ implementation
 
 		case SalidaNueva of
 		1 : begin
-                        dias:=30;
-                        ruta:='mapamundi.txt';
-                        MostrarMapa(SalidaNueva, ruta);        {estas tres}
-                        delay(3000);                           {lineas van a tener que ir}
-                        ModifSimulacion(SalidaNueva, dias);    {en un procedimiento nuevo}
+			dias:=30;
+			ruta:='mapamundi.txt';
+			MostrarMapa(SalidaNueva, ruta);        {estas tres}
+			delay(3000);                           {lineas van a tener que ir}
+			ModifSimulacion(SalidaNueva, dias);    {en un procedimiento nuevo}
+			end;
 
-                        end;
 		2 : begin
-		writeln('Ingrese la ruta del archivo de texto');
-		read(ruta);
-		MostrarMapa(SalidaNueva,ruta);
-		end;
+			writeln('Ingrese la ruta del archivo de texto');
+			read(ruta);
+			MostrarMapa(SalidaNueva,ruta);
+			end;
 
 	end;
 	end;
-
-
-	end.
-
-end.
 
 end.
