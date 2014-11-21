@@ -16,7 +16,7 @@ implementation
 
 		crt,ProceduresVarios,MenuPcpal;
 
-	type
+	Type
 
 		TMatriz = record
 				Codigo : char;
@@ -42,7 +42,7 @@ implementation
 		m : integer;
 		clchar : char;
 		Salida : integer;
-		Mapatriz : array [1..3000,1..3000] of TMatriz;
+		Mapatriz : array [1..100,1..100] of TMatriz;
 		topex : integer;
 		topey : integer;
 		aux : string;
@@ -76,6 +76,9 @@ readkey;
 				l := l + 1;
 
 				Mapatriz [l,m].Codigo := aux[l];
+
+				if l > topex then
+					topex := l;
 
 			until l = length(aux);
 

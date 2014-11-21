@@ -17,33 +17,33 @@ implementation
 
 		crt,ProceduresVarios,Simulacion;
 
-TYPE
+	Type
 
-	TTerrenos = record
-		Codigo{de terreno} : integer; // la guia dice char;
-		Descripcion : string[30];
-		end;
-
-	TPoblaciones = record
-		PuntoX : integer;
-		PuntoY : integer;
-		Descripcion : string[30];
-		CantSuceptibles : longInt;
-		CantInfectados : longInt;
-		CantZombies : longInt;
-		TasaNatalidad : integer;
-		FactorMovilidad : integer;
-		end;
-
-	TFactores = record
-		Codigo{de factor} : string[2];
-		Descripcion : string[30];
-		Valor : real;
-		end;
-
-	TMatriz = record
-			Codigo : char;
+		TTerrenos = record
+			Codigo{de terreno} : integer; // la guia dice char;
+			Descripcion : string[30];
 			end;
+
+		TPoblaciones = record
+			PuntoX : integer;
+			PuntoY : integer;
+			Descripcion : string[30];
+			CantSuceptibles : longInt;
+			CantInfectados : longInt;
+			CantZombies : longInt;
+			TasaNatalidad : integer;
+			FactorMovilidad : integer;
+			end;
+
+		TFactores = record
+			Codigo{de factor} : string[2];
+			Descripcion : string[30];
+			Valor : real;
+			end;
+
+		TMatriz = record
+				Codigo : char;
+				end;
 
 	Const
 
@@ -52,6 +52,7 @@ TYPE
 	Procedure Menu (var SalidaMenu : integer);
 
 	begin
+
 		textcolor(10);
 		ClrScr;
 
@@ -106,10 +107,10 @@ TYPE
 		writeln;
 		ruta := 'mapamundi.txt';
 		GotoXY(20,1);
-		EscrDelay(Velocidad,'**** Mundo ****');
+{		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
-		readln;
+		readln;}
 		MostrarMapa(SalidaMundo,ruta);
 		writeln;
 		//GotoXY(27,22);
@@ -337,7 +338,6 @@ TYPE
 	var
 
 		ruta:string;
-		//dias:integer;
 
 	begin
 
@@ -362,19 +362,18 @@ TYPE
 		case SalidaNueva of
 
 		1 : begin
-//			dias:=30;
-//			ruta:='mapamundi.txt';
-//			MostrarMapa(SalidaNueva, ruta);        {estas tres}
-//			delay(3000);                           {lineas van a tener que ir}
-readln;
-			ModifSimulacion;    {en un procedimiento nuevo}
+
+			readln;
+			ModifSimulacion;
 
 			end;
 
 		2 : begin
+
 			writeln('Ingrese la ruta del archivo de texto');
 			read(ruta);
 			MostrarMapa(SalidaNueva,ruta);
+
 			end;
 
 	end;
