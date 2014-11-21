@@ -49,9 +49,8 @@ implementation
 		Mapa : text;
 
 	begin
-readkey;
+
 		clrscr;
-readkey;
 		Salida := 1;
 		i := 1;
 //		CrearMatriz(Mapatriz,topex,topey);
@@ -98,11 +97,17 @@ readkey;
 
 			gotoxy(12,2);
 			write(i);
-			delay(2000);
+			//delay(2000);
 
 			for j := 1 to topey do
-				for k := 1 to topex do
-					write(Mapatriz[k,j].Codigo);
+				begin
+
+					for k := 1 to topex do
+						write(Mapatriz[k,j].Codigo);
+
+				writeln;
+
+				end;
 
 			if keypressed then
 			begin
@@ -122,6 +127,8 @@ readkey;
 		until 5<4;
 
 		Menu(Salida);
+
+		close(Mapa);
 
 	end;
 

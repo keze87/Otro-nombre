@@ -114,6 +114,7 @@ implementation
 		MostrarMapa(SalidaMundo,ruta);
 		writeln;
 		//GotoXY(27,22);
+		textcolor(10);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal.');
 		writeln;
 
