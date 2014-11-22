@@ -35,8 +35,8 @@ Type
 		CantSuceptibles : longInt;
 		CantInfectados : longInt;
 		CantZombies : longInt;
-		TasaNatalidad : integer;
-		FactorMovilidad : integer;
+		TasaNatalidad : real;
+		FactorMovilidad : real;
 		end;
 
 	TFactores = record
@@ -103,6 +103,12 @@ Type
 		var
 
 			Mapa : Text;
+                        MapaB: text;
+                        texto:string;
+                        i:integer;
+                        j:integer;
+                        longitud:integer;
+
 			Terrenos : file of TTerrenos;
 			auxT : TTerrenos;
 			Poblaciones : file of TPoblaciones;
@@ -165,8 +171,8 @@ Type
 			{alpha}
 
 			auxF.Codigo := 'al' ;
-			auxF.Descripcion := ' Salvación ante ataque ' ;
-			auxF.Valor := 0 ;
+			auxF.Descripcion := ' Salvacion ante ataque ' ;
+			auxF.Valor := 0.5 ;
 
 			write(Factores,auxF);
 
@@ -174,7 +180,7 @@ Type
 
 			auxF.Codigo := 'be' ;
 			auxF.Descripcion := ' Transmisión ' ;
-			auxF.Valor := 0 ;
+			auxF.Valor := 1 ;
 
 			write(Factores,auxF);
 
@@ -182,15 +188,15 @@ Type
 
 			auxF.Codigo := 'de' ;
 			auxF.Descripcion := ' Muerte por causa natural ' ;
-			auxF.Valor := 0 ;
+			auxF.Valor := 0.5 ;
 
 			write(Factores,auxF);
 
 			{epsilon}
 
 			auxF.Codigo := 'ep' ;
-			auxF.Descripcion := ' Resurrección Zombie ' ;
-			auxF.Valor := 0 ;
+			auxF.Descripcion := ' Resurreccion Zombie ' ;
+			auxF.Valor := 0.7 ;
 
 			write(Factores,auxF);
 
@@ -198,7 +204,7 @@ Type
 
 			auxF.Codigo := 'pi' ;
 			auxF.Descripcion := ' Tasa de natalidad ' ;
-			auxF.Valor := 0 ;
+			auxF.Valor := 1 ;
 
 			write(Factores,auxF);
 
@@ -206,7 +212,7 @@ Type
 
 			auxF.Codigo := 'ro' ;
 			auxF.Descripcion := ' Latente de infección ' ;
-			auxF.Valor := 0 ;
+			auxF.Valor := 0.8 ;
 
 			write(Factores,auxF);
 
@@ -215,18 +221,125 @@ Type
 			{*** Poblaciones ***}
 
 			Assign(Poblaciones,'Poblaciones.DAT');
+                        Assign(MapaB,'mapamundi.txt');
+                        reset(MapaB);
 			rewrite(Poblaciones);
+                        j:=1;
 
-			auxP.PuntoX := 1; if auxP.PuntoX <> 1 then write('Esto hay que cambiar');//Ni idea
+                        while not eof(MapaB) do
+                                begin
+                                        readln(MapaB,texto);
+                                        longitud:=length(texto);
+                                        for i:=1 to longitud do
+                                                begin
+                                                        case texto[i] of
+                                                        '0': begin
+                                                                    auxP.PuntoX:=i;
+                                                                    auxP.PuntoY:=j;
+                                                                    auxP.Descripcion:='descripcion';
+                                                                    auxP.CantSuceptibles:=300;
+                                                                    auxP.CantInfectados:=0;
+                                                                    auxP.CantZombies:=0;
+                                                                    auxP.TasaNatalidad:=0.1;
+                                                                    auxP.FactorMovilidad:=0.3; end;
+                                                         '1': begin
+                                                                    auxP.PuntoX:=i;
+                                                                    auxP.PuntoY:=j;
+                                                                    auxP.Descripcion:='descripcion';
+                                                                    auxP.CantSuceptibles:=1000;
+                                                                    auxP.CantInfectados:=0;
+                                                                    auxP.CantZombies:=0;
+                                                                    auxP.TasaNatalidad:=0.1;
+                                                                    auxP.FactorMovilidad:=0.3; end;
+                                                         '2': begin
+                                                                      auxP.PuntoX:=i;
+                                                                      auxP.PuntoY:=j;
+                                                                      auxP.Descripcion:='descripcion';
+                                                                      auxP.CantSuceptibles:=600;
+                                                                      auxP.CantInfectados:=0;
+                                                                      auxP.CantZombies:=0;
+                                                                      auxP.TasaNatalidad:=0.4;
+                                                                      auxP.FactorMovilidad:=0.2; end;
+                                                          '3': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=2000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.4;
+                                                auxP.FactorMovilidad:=0.7; end;
+                                        '4': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=4000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.1;
+                                                auxP.FactorMovilidad:=0.3; end;
+                                        '5': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=2000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.1;
+                                                auxP.FactorMovilidad:=0.3; end;
+                                        '6': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=1000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.1;
+                                                auxP.FactorMovilidad:=0.3; end;
+                                        '7': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=7000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.1;
+                                                auxP.FactorMovilidad:=0.7; end;
+                                        '8': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=10000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.9;
+                                                auxP.FactorMovilidad:=0.3; end;
+                                        '9': begin
+                                                auxP.PuntoX:=i;
+                                                auxP.PuntoY:=j;
+                                                auxP.Descripcion:='descripcion';
+                                                auxP.CantSuceptibles:=5000;
+                                                auxP.CantInfectados:=0;
+                                                auxP.CantZombies:=0;
+                                                auxP.TasaNatalidad:=0.3;
+                                                auxP.FactorMovilidad:=0.8; end;
+                                                end;
+                                                end;
+                                        j:=j+1;
+                                        write(Poblaciones,auxP);
+                               {} end;
 
-			close(Poblaciones);
+                        close(Poblaciones);
+                        close(MapaB);
+
+
 
 			{*** Terrenos ***}
 
 			Assign(Terrenos,'Terrenos.DAT');
 			rewrite(Terrenos);
 
-			auxT.Codigo := 0 ; auxT.Descripcion:= ' desértica ';
+			auxT.Codigo := 0 ; auxT.Descripcion:= ' desertica ';
 
 			write(Terrenos,auxT);
 
@@ -234,7 +347,7 @@ Type
 
 			write(Terrenos,auxT);
 
-			auxT.Codigo := 2 ; auxT.Descripcion:= ' selvática ';
+			auxT.Codigo := 2 ; auxT.Descripcion:= ' selvatica ';
 
 			write(Terrenos,auxT);
 
@@ -250,7 +363,7 @@ Type
 
 			write(Terrenos,auxT);
 
-			auxT.Codigo := 6 ; auxT.Descripcion:= ' de montaña ';
+			auxT.Codigo := 6 ; auxT.Descripcion:= ' de montana ';
 
 			write(Terrenos,auxT);
 
@@ -262,7 +375,7 @@ Type
 
 			write(Terrenos,auxT);
 
-			auxT.Codigo := 9 ; auxT.Descripcion:= ' de recepción de migración ';
+			auxT.Codigo := 9 ; auxT.Descripcion:= ' de recepcion de migracion ';
 
 			write(Terrenos,auxT);
 
@@ -341,41 +454,26 @@ Type
 
 	{Procedure CrearMatriz(var Matriz : array [1..3000,1..3000] of TMatriz ; var X : integer ; var Y : integer);
 		var
-
 			Mapa : text;
 			aux : string;
 			i : integer;
 			k : integer;
-
 		begin
-
 			Assign(Mapa,'mapamundi.txt');
 			reset(Mapa);
-
 			X := -213;
-
 			k := 0;
-
 			repeat
-
 				readln(Mapa,aux);
-
 				i := 0;
-
 				k := k + 1;
-
 				repeat
-
 					i := i + 1;
-
 					Matriz [i,k].Codigo := aux[i];
-
 				until EOL(aux);
-
 			until EOF(Mapa);
-
 			X := k;
-
 		end;}
 
 end.
+
