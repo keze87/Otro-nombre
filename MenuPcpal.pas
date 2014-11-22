@@ -150,30 +150,13 @@ implementation
 		EscrDelay(Velocidad,'**** Factores De Expansion ****');
 
 		writeln;writeln;
+		while not eof(Factores) do
+		begin
 
 		read(Factores,auxF);
 
 		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
-
-		read(Factores,auxF);
-
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
-
-		read(Factores,auxF);
-
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
-
-		read(Factores,auxF);
-
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
-
-		read(Factores,auxF);
-
-		write (' ');EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
-
-		read(Factores,auxF);
-
-		write (' ');EscrDelay(-Velocidad,'Factor'); EscrDelay(-Velocidad,auxF.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxF.Valor:0:2);
+		end;
 
 		GotoXY(3,18);
 		EscrDelay(Velocidad,'1) Editar Factores');
@@ -230,17 +213,34 @@ implementation
 
 	Procedure MenuTerreno(var SalidaMenuTerr : integer);
 
+        var
+		Terrenos : file of TTerrenos;
+		auxT : TTerrenos;
+
 	begin
+
+		Assign(Terrenos,'Terrenos.DAT');
+		reset(Terrenos);
 
 		ClrScr;
 		writeln;
 
-		GotoXY(27,1);
-		EscrDelay(Velocidad,'**** Menu Terreno ****');
-		GotoXY(1,4);
-		EscrDelay(Velocidad,'Inserte descripcion de terreno aqui.');
+		GotoXY(31,1);
+		EscrDelay(Velocidad,'**** Terrenos ****');
+
+		writeln;writeln;
+
+                while not eof(Terrenos) do
+                begin
+
+		read(Terrenos,auxT);
+
+		write (' ');EscrDelay(-Velocidad,'Area'); EscrDelay(-Velocidad,auxT.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxT.Codigo);
+
 		writeln;
-		GotoXY(27,22);
+                end;
+                close(Terrenos);
+		GotoXY(27,24);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal');
 		writeln;
 
