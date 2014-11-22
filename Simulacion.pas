@@ -33,76 +33,74 @@ implementation
 		end;}
 
 	Procedure ModifSimulacion;
-	var
+		var
 
-		i : integer;
-		j : integer;
-		k : integer;
-		l : integer;
-		m : integer;
-		clchar : char;
-		Salida : integer;
-		Mapatriz : array [1..100,1..100] of TMatriz;
-		topex : integer;
-		topey : integer;
-		aux : string;
-		Mapa : text;
+			i : integer;
+			j : integer;
+			k : integer;
+			l : integer;
+			m : integer;
+			clchar : char;
+			Salida : integer;
+			Mapatriz : array [1..100,1..100] of TMatriz;
+			topex : integer;
+			topey : integer;
+			aux : string;
+			Mapa : text;
 
-	begin
+		begin
 
-		clrscr;
-		Salida := 1;
-		i := 1;
-//		CrearMatriz(Mapatriz,topex,topey);
+			clrscr;
+			Salida := 1;
+			i := 1;
+			//CrearMatriz(Mapatriz,topex,topey);
 
-		Assign(Mapa,'mapamundi.txt');
-		reset(Mapa);
+			Assign(Mapa,'mapamundi.txt');
+			reset(Mapa);
 
-		topex := -213;
+			topex := -213;
 
-		m := 0;
-
-		repeat
-
-			readln(Mapa,aux);
-
-			l := 0;
-
-			m := m + 1;
+			m := 0;
 
 			repeat
 
-				l := l + 1;
+				readln(Mapa,aux);
 
-				Mapatriz [l,m].Codigo := aux[l];
+				l := 0;
 
-				if l > topex then
-					topex := l;
+				m := m + 1;
 
-			until l = length(aux);
+				repeat
 
-		until EOF(Mapa);
+					l := l + 1;
 
-		topey := m;
-		writeln;
+					Mapatriz [l,m].Codigo := aux[l];
 
+					if l > topex then
+						topex := l;
 
-//		writeln('Esto simboliza las cosas que ocurren dia a dia');
-//		writeln('Presionar P para pausar');
-//		writeln('Presionar S para salir al menu');
+				until l = length(aux);
 
-		repeat
-		begin
+			until EOF(Mapa);
 
-			textcolor(10);
-			writeln('Dia : ',i);
+			topey := m;
 			writeln;
 
-			for j := 1 to topey do
+
+			//writeln('Esto simboliza las cosas que ocurren dia a dia');
+			//writeln('Presionar P para pausar');
+			//writeln('Presionar S para salir al menu');
+
+			repeat
+
+				textcolor(10);
+				writeln('Dia : ',i,' (Pausa (P), Salir (S))');
+				//writeln;
+
+				for j := 1 to topey-1 do //Experimental
 				begin
 
 					for k := 1 to topex do
-						//write(Mapatriz[k,j].Codigo);
 					begin
 
 						case Mapatriz[k,j].Codigo of
@@ -118,39 +116,46 @@ implementation
 							'7' : begin textbackground(black);textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
 							'8' : begin textbackground(black);textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
 							'9' : begin textbackground(black);textcolor(red); write(Mapatriz[k,j].Codigo); end;
+
 						end;
 
 					end;
 
-				writeln;
+					//if j <> topey then
+						writeln;
 
 				end;
 
-			if keypressed then
-			begin
+				if keypressed then
+				begin
 
-				clchar:=readkey;
+					clchar:=readkey;
 
-				if clchar='p' then
-				//Pausa(clchar);
-				readkey;
+					if clchar='p' then
+					begin
 
-				if clchar='s' then
-				Menu(Salida);
+						//Pausa(clchar);
+						write('Presione Enter para continuar. ');
+						readkey;
+						clrscr;
+					end;
 
-			end;
+					if clchar='s' then
+					Menu(Salida);
+
+				end;
+
+
+			Delay(1000);
+			i := i + 1;
+
+			until 5<4;
+
+			Menu(Salida);
+
+			close(Mapa);
+
 		end;
-
-		Delay(1000);
-		i := i + 1;
-
-		until 5<4;
-
-		Menu(Salida);
-
-		close(Mapa);
-
-	end;
 
 	Procedure ImprLineasMapa(var lineatexto:string);
 

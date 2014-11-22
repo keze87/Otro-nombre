@@ -1,4 +1,4 @@
-unit Introduccion; 
+unit Introduccion;
 
 interface
 
@@ -26,14 +26,14 @@ implementation
 		aux :='q';
 		Assign(A,'Introduccion');
 
-		{$I-} 
+		{$I-}
 
 			reset(A);
 
 		{$I+}
 
-		if not(IOResult<>0) then  
-		begin  
+		if not(IOResult<>0) then
+		begin
 
 			readln(A,aux);
 
@@ -42,7 +42,7 @@ implementation
 		end;
 
 		if not(aux = 'Esto Desactiva la Introduccion') then
-		begin 
+		begin
 
 			contIntro := 0;
 
@@ -66,6 +66,7 @@ Procedure Intro (i : integer);
 	var
 
 	conti : integer;
+	k : integer;
 
 	begin
 
@@ -74,6 +75,7 @@ Procedure Intro (i : integer);
 	Delay (300);
 	ClrScr;
 
+	TextColor(White);
 	writeln('            O888DO');
 	write('            +::~OD~');TextColor(Green);writeln('                                         ZOZO8');TextColor(White);
 	write('            $:O~DD');TextColor(Green);writeln('                                          Z?8$O8');TextColor(White);
@@ -240,13 +242,15 @@ Procedure Intro (i : integer);
 	begin
 
 	conti := 0;
+	k := 0;
 
 	repeat
 
 	conti := conti +1;
 
-	Delay (300);
+	Delay (300 - k);
 	ClrScr;
+	k := k + 20;
 
 	if conti <= 1 then begin writeln('            O888DO');TextColor(White); end;
 	if conti <= 2 then begin write('            +::~OD~');TextColor(Green);writeln('                                         ZOZO8');TextColor(White); end;
@@ -272,7 +276,7 @@ Procedure Intro (i : integer);
 	if conti <= 22 then begin write('      8~   ????????????                    ');TextColor(Green);writeln('            O   ?????????????Z');TextColor(White); end;
 	if conti <= 23 then begin write('          ???????????                        ');TextColor(Green);writeln('              ??????????????');TextColor(White); end;
 
-	Delay (300);
+	Delay (300 - k);
 	ClrScr;
 
 	if conti <= 1 then begin writeln('          8DDDN8');TextColor(White); end;
@@ -299,9 +303,9 @@ Procedure Intro (i : integer);
 	if conti <= 22 then begin write('    88   +??????????+       ');TextColor(Green);writeln('                                   ?????????Z?');TextColor(White); end;
 	if conti <= 23 then begin write('  MMMN??+??????????????          ');TextColor(Green);writeln('                        ??????+????????8??');TextColor(White); end;
 
-	Delay (300);
+	Delay (300 - k);
 	ClrScr;
-	conti := conti +1;
+	//conti := conti +1;
 
 	if conti <= 1 then begin write('           ODDDDO      ');TextColor(Green);writeln('                                                  O');TextColor(White); end;
 	if conti <= 2 then begin writeln('           +::~OD');TextColor(White); end;
@@ -328,7 +332,7 @@ Procedure Intro (i : integer);
 	if conti <= 23 then begin write('      ?????MMM????????????         ');TextColor(Green);writeln('                     ????8????????????');TextColor(White); end;
 	if conti <= 24 then begin write('           ?????????               ');TextColor(Green);writeln('                         ????????????');TextColor(White); end;
 
-	Delay (300);
+	Delay (300 - k);
 	ClrScr;
 
 	if conti <= 1 then begin write('          ZOOOO      ');TextColor(Green);writeln('                                                     8');TextColor(White); end;
@@ -356,9 +360,9 @@ Procedure Intro (i : integer);
 	if conti <= 23 then begin write('    ??????????????MM?+,     ');TextColor(Green);writeln('                          +???????????????I?O??');TextColor(White); end;
 	if conti <= 24 then begin write('         +??????????         ');TextColor(Green);writeln('                               ??????????????');TextColor(White); end;
 
-	Delay (300);
+	Delay (300 - k);
 	ClrScr;
-	conti := conti +1;
+	conti := conti + 1;
 
 	if conti <= 1 then begin write('             OOO8                                                          8    ');TextColor(White); end;
 	if conti <= 2 then begin write('            O888D8         ');TextColor(Green);writeln('                                            ');TextColor(White); end;
@@ -385,7 +389,7 @@ Procedure Intro (i : integer);
 	if conti <= 23 then begin write('      OZ   ????????????        ');TextColor(Green);writeln('                        OI  ?????????????$');TextColor(White); end;
 	if conti <= 24 then begin write('          ??????????+          ');TextColor(Green);writeln('                            ??????????????');TextColor(White); end;
 
-	Delay (300);
+	Delay (300 - k);
 
 	ClrScr;
 

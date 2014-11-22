@@ -119,7 +119,9 @@ implementation
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaMundo);
+
 		until ((SalidaMundo > 0) and (SalidaMundo < 2));
 
 		case SalidaMundo of
@@ -175,14 +177,16 @@ implementation
 
 		GotoXY(3,18);
 		EscrDelay(Velocidad,'1) Editar Factores');
-		GotoXY(3,19);
+		GotoXY(3,20);
 		EscrDelay(Velocidad,'2) Volver al Menu Principal');
 		writeln;
 
 		close(Factores);
 
 		repeat
+
 			LeerINT(SalidaFac);
+
 		until ((SalidaFac > 0) and (SalidaFac < 3));
 
 		case SalidaFac of
@@ -311,22 +315,23 @@ implementation
 		until ((SalidaMenu > 0) and (SalidaMenu < 3));
 
 		case SalidaMenu of
-		1 : begin
+
+			1 : begin
 
 				Assign(A,'Introduccion');
 				rewrite(A);
 				writeln(A,'Esto Desactiva la Introduccion');
 				close(A);
 
-			end;
+				end;
 
-		2 : begin
+			2 : begin
 
 				Assign(A,'Introduccion');
 				rewrite(A);
 				close(A);
 
-			end;
+				end;
 
 		end;
 
@@ -362,22 +367,22 @@ implementation
 
 		case SalidaNueva of
 
-		1 : begin
+			1 : begin
 
-			readln;
-			ModifSimulacion;
+				ModifSimulacion;
 
-			end;
+				end;
 
-		2 : begin
+			2 : begin
 
-			writeln('Ingrese la ruta del archivo de texto');
-			read(ruta);
-			MostrarMapa(SalidaNueva,ruta);
+				writeln('Ingrese la ruta del archivo de texto');
+				read(ruta);
+				MostrarMapa(SalidaNueva,ruta);
 
-			end;
+				end;
 
-	end;
+		end;
+
 	end;
 
 end.
