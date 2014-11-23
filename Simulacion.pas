@@ -53,6 +53,8 @@ implementation
 			y : integer;
 			l : integer;
 			m : integer;
+			j : integer;
+			k : integer;
 			Mapatriz : array [1..100,1..100] of TMatriz;
 			topex : integer;
 			topey : integer;
@@ -110,6 +112,32 @@ implementation
 			topey := m;
 			writeln;
 
+			for j := 1 to topey-1 do //Experimental
+				begin
+
+					for k := 1 to topex do
+					begin
+
+						case Mapatriz[k,j].Codigo of
+
+							' ' : begin write(Mapatriz[k,j].Codigo); end;
+							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
+							'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
+							'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
+							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
+
+						end;
+
+					end;
+				writeln;
+				end;
+
 			x := 1;
 			y := 1;
 
@@ -147,13 +175,14 @@ implementation
 						x := x - 1;
 
 					end;
+
+
 				end;
 
-				Window(30,10,50,20);
-				writeln(x,' ',y);
+				Window(30,20,50,25);
+				//writeln(x,' ',y);
 				readKey;
-				//writeln(Mapatriz [x,y].Descripcion);
-
+				writeln(x,' ',y,' ',Mapatriz [x,y].Descripcion);
 
 			until clchar = 's';
 
