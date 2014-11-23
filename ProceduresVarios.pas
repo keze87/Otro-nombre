@@ -369,12 +369,27 @@ Type
 
 						end;
 
+					else begin
+
+						auxP.PuntoX:=i;
+						auxP.PuntoY:=j;
+						auxP.Descripcion:='descripcion';
+						auxP.CantSuceptibles:=5000;
+						auxP.CantInfectados:=0;
+						auxP.CantZombies:=0;
+						auxP.TasaNatalidad:=0.3;
+						auxP.FactorMovilidad:=0.8;
+
+						end;
+
 					end;
+
+					write(Poblaciones,auxP);
 
 				end;
 
 				j:=j+1;
-				write(Poblaciones,auxP);
+				//write(Poblaciones,auxP);
 
 			end;
 

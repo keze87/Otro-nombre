@@ -64,7 +64,7 @@ implementation
 
 		begin
 
-			clrscr;
+			//clrscr;
 
 			Assign(Mapa,'mapamundi.txt');
 			reset(Mapa);
