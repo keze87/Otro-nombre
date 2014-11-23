@@ -190,9 +190,9 @@ implementation
 
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Poblaciones ****');
-		GotoXY(1,4);
-		EscrDelay(Velocidad,'Inserte descripcion de poblaciones aqui.');
-		writeln;
+
+		MostrarPoblaciones;
+
 		GotoXY(27,22);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal');
 		writeln;

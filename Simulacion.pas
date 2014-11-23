@@ -8,6 +8,8 @@ interface
 
 	Procedure ModifSimulacion;
 
+	Procedure MostrarPoblaciones;
+
 	//Procedure Pausa(var caracter:char);
 
 implementation
@@ -20,7 +22,19 @@ implementation
 
 		TMatriz = record
 				Codigo : char;
+				Descripcion : string;
 				end;
+
+		TPoblaciones = record
+		PuntoX : integer;
+		PuntoY : integer;
+		Descripcion : string[30];
+		CantSuceptibles : longInt;
+		CantInfectados : longInt;
+		CantZombies : longInt;
+		TasaNatalidad : real;
+		FactorMovilidad : real;
+		end;
 
 {	Procedure Pausa(var caracter:char);
 
@@ -31,6 +45,122 @@ implementation
 			until readkey='p';
 
 		end;}
+
+	Procedure MostrarPoblaciones;
+		var
+
+			x : integer;
+			y : integer;
+			l : integer;
+			m : integer;
+			Mapatriz : array [1..100,1..100] of TMatriz;
+			topex : integer;
+			topey : integer;
+			aux : string;
+			Mapa : text;
+			Poblaciones : file of TPoblaciones;
+			auxP : TPoblaciones;
+			clchar : char;
+
+		begin
+
+			clrscr;
+
+			Assign(Mapa,'mapamundi.txt');
+			reset(Mapa);
+
+			Assign(Poblaciones,'Poblaciones.DAT');
+
+			topex := -213;
+
+			m := 0;
+
+			repeat
+
+				readln(Mapa,aux);
+
+				l := 0;
+
+				m := m + 1;
+
+				repeat
+
+					l := l + 1;
+
+					reset(Poblaciones);
+
+					repeat
+
+						read(Poblaciones,auxP);
+
+					until ((auxP.PuntoX = l) and (auxP.PuntoY = m));
+
+					Mapatriz [l,m].Codigo := aux[l];
+					Mapatriz [l,m].Descripcion := auxP.Descripcion;
+
+					close(Poblaciones);
+
+					if l > topex then
+						topex := l;
+
+				until l = length(aux);
+
+			until EOF(Mapa);
+
+			topey := m;
+			writeln;
+
+			x := 1;
+			y := 1;
+
+			repeat
+
+				if keypressed then
+					begin
+
+					clchar:=readkey;
+
+					if ((clchar = Char(77)) and (x < topex-1)) then
+					begin
+
+						x := x + 1;
+
+					end;
+
+					if ((clchar = Char(80)) and (y < topey-1)) then
+					begin
+
+						y := y + 1;
+
+					end;
+
+					if ((clchar = Char(72)) and (y > 1)) then
+					begin
+
+						y := y - 1;
+
+					end;
+
+					if ((clchar = Char(75)) and (x > 1)) then
+					begin
+
+						x := x - 1;
+
+					end;
+				end;
+
+				Window(30,10,50,20);
+				writeln(x,' ',y);
+				readKey;
+				//writeln(Mapatriz [x,y].Descripcion);
+
+
+			until clchar = 's';
+
+		window(1,1,80,25);
+
+	end;
+
 
 	Procedure ModifSimulacion;
 		var
@@ -105,17 +235,17 @@ implementation
 
 						case Mapatriz[k,j].Codigo of
 
-							' ' : begin textbackground(black); write(Mapatriz[k,j].Codigo); end;
-							'0' : begin textbackground(black);textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-							'1' : begin textbackground(black);textcolor(green); write(Mapatriz[k,j].Codigo); end;
-							'2' : begin textbackground(black);textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
-							'3' : begin textbackground(black);textcolor(7); write(Mapatriz[k,j].Codigo); end;
-							'4' : begin textbackground(black);textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-							'5' : begin textbackground(black);textcolor(7); write(Mapatriz[k,j].Codigo); end;
-							'6' : begin textbackground(black);textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-							'7' : begin textbackground(black);textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-							'8' : begin textbackground(black);textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
-							'9' : begin textbackground(black);textcolor(red); write(Mapatriz[k,j].Codigo); end;
+							' ' : begin write(Mapatriz[k,j].Codigo); end;
+							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
+							'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
+							'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
+							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
 
 						end;
 
@@ -135,9 +265,10 @@ implementation
 					begin
 
 						//Pausa(clchar);
-						write('Presione Enter para continuar. ');
+						write('Presione una tecla para continuar. ');
 						readkey;
 						clrscr;
+
 					end;
 
 					if clchar='s' then
@@ -160,30 +291,37 @@ implementation
 	Procedure ImprLineasMapa(var lineatexto:string);
 
 	var
+
 		I:integer;
 		longitud:integer;
+
 	begin
+
 		longitud:=length(lineatexto);
-		For I:=1 to longitud do
+
+		for I:=1 to longitud do
 		begin
 
 			case lineatexto[I] of
-			' ' : begin textbackground(black); write(lineatexto[I]); end;
-			'0' : begin textbackground(black);textcolor(brown); write(lineatexto[I]); end;
-			'1' : begin textbackground(black);textcolor(green); write(lineatexto[I]); end;
-			'2' : begin textbackground(black);textcolor(lightgreen); write(lineatexto[I]); end;
-			'3' : begin textbackground(black);textcolor(7); write(lineatexto[I]); end;
-			'4' : begin textbackground(black);textcolor(lightgray); write(lineatexto[I]); end;
-			'5' : begin textbackground(black);textcolor(7); write(lineatexto[I]); end;
-			'6' : begin textbackground(black);textcolor(brown); write(lineatexto[I]); end;
-			'7' : begin textbackground(black);textcolor(lightgray); write(lineatexto[I]); end;
-			'8' : begin textbackground(black);textcolor(magenta); write(lineatexto[I]); end;
-			'9' : begin textbackground(black);textcolor(red); write(lineatexto[I]); end;
-		end;
+
+			' ' : begin  write(lineatexto[I]); end;
+			'0' : begin textcolor(brown); write(lineatexto[I]); end;
+			'1' : begin textcolor(green); write(lineatexto[I]); end;
+			'2' : begin textcolor(lightgreen); write(lineatexto[I]); end;
+			'3' : begin textcolor(7); write(lineatexto[I]); end;
+			'4' : begin textcolor(lightgray); write(lineatexto[I]); end;
+			'5' : begin textcolor(7); write(lineatexto[I]); end;
+			'6' : begin textcolor(brown); write(lineatexto[I]); end;
+			'7' : begin textcolor(lightgray); write(lineatexto[I]); end;
+			'8' : begin textcolor(magenta); write(lineatexto[I]); end;
+			'9' : begin textcolor(red); write(lineatexto[I]); end;
+
+			end;
 
 		textbackground(black);
 
-	end;
+		end;
+
 	end;
 
 	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
@@ -198,11 +336,14 @@ implementation
 		ClrScr;
 		Assign(mundi, ruta);
 		Reset(mundi);
+
 		while not eof(mundi) do
 		begin
+
 			readln(mundi, texto);
 			ImprLineasMapa(texto);
 			writeln;
+
 		end;
 
 	//repeat

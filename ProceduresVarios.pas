@@ -103,11 +103,11 @@ Type
 		var
 
 			Mapa : Text;
-                        MapaB: text;
-                        texto:string;
-                        i:integer;
-                        j:integer;
-                        longitud:integer;
+			MapaB: text;
+			texto:string;
+			i:integer;
+			j:integer;
+			longitud:integer;
 
 			Terrenos : file of TTerrenos;
 			auxT : TTerrenos;
@@ -221,9 +221,11 @@ Type
 			{*** Poblaciones ***}
 
 			Assign(Poblaciones,'Poblaciones.DAT');
+			rewrite(Poblaciones);
+
 			Assign(MapaB,'mapamundi.txt');
 			reset(MapaB);
-			rewrite(Poblaciones);
+
 			j:=1;
 
 			while not eof(MapaB) do
