@@ -2,6 +2,18 @@ unit Simulacion;
 
 interface
 
+type
+        TRegMatriz = record
+		Caracter : char;
+                CantSuceptibles : real;
+		CantInfectados : real;
+		CantZombies : real;
+		TasaNatalidad : real;
+		FactorMovilidad : real;
+		end;
+
+        TMatriz = array[1..500,1..500] of TRegMatriz;
+
 	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 
 	Procedure ImprLineasMapa(var lineatexto:string);
@@ -9,6 +21,8 @@ interface
 	Procedure ModifSimulacion;
 
 	Procedure MostrarPoblaciones;
+	
+	Procedure CrearMatriz(var MatrizMapa:TMatriz);
 
 	//Procedure Pausa(var caracter:char);
 
@@ -35,6 +49,13 @@ implementation
 		TasaNatalidad : real;
 		FactorMovilidad : real;
 		end;
+		
+
+	TFactores = record
+		Codigo{de factor} : string[2];
+		Descripcion : string[30];
+		Valor : real;
+		end;
 
 {	Procedure Pausa(var caracter:char);
 
@@ -45,6 +66,49 @@ implementation
 			until readkey='p';
 
 		end;}
+		
+		
+	Procedure CrearMatriz(Var MatrizMapa:TMatriz);
+
+
+		var
+			Mapa : text;
+			aux : string;
+			i : integer;
+			j : integer;
+                        regPoblacion : TPoblaciones;
+                        Poblaciones: file of TPoblaciones;
+		begin
+                        j:=1;
+
+			Assign(Mapa,'mapamundi.txt');
+                        Assign(Poblaciones,'poblaciones.DAT');
+			reset(Mapa);
+		              while not eof(Mapa) do
+                                begin
+                                      readln(Mapa,aux);
+                                      for i:=1 to length(aux) do
+                                        MatrizMapa[i,j].caracter:=aux[i];
+                                      j:=j+1;
+                                end;
+
+			close(Mapa);
+                        reset(Poblaciones);
+                        while not eof(Poblaciones) do
+                        begin
+                                read(Poblaciones,regPoblacion);
+                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantSuceptibles:=regPoblacion.CantSuceptibles;
+                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantInfectados:=regPoblacion.CantInfectados;
+                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantZombies:=regPoblacion.CantZombies;
+                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].TasaNatalidad:=regPoblacion.TasaNatalidad;
+                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].FactorMovilidad:=regPoblacion.FactorMovilidad;
+                        end;
+                        close(Poblaciones);
+
+clrscr;
+writeln('la matriz se creo en forma correcta');
+readkey;
+end;
 
 	Procedure MostrarPoblaciones;
 		var
