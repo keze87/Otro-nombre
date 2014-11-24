@@ -133,7 +133,7 @@ end;
 			m : integer;
 			j : integer;
 			k : integer;
-			Mapatriz : array [1..500,1..500] of TRegMatriz;
+			Mapatriz : array [1..100,1..100] of TRegMatriz;
 			topex : integer;
 			topey : integer;
 			aux : string;
