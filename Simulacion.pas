@@ -21,7 +21,7 @@ type
 
 	Procedure ImprLineasMapa(var lineatexto:string);
 
-	Procedure ModifSimulacion;
+	Procedure ModifSimulacion(ruta:string);
 
 	Procedure MostrarPoblaciones;
 
@@ -335,7 +335,7 @@ end;
 	end;
 
 
-	Procedure ModifSimulacion;
+	Procedure ModifSimulacion(ruta:string);
 		var
 
 			i : integer;
