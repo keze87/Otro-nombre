@@ -281,7 +281,7 @@ end;
 						x := x + 1;
 						clrscr;
 						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,25);
+						window(1,1,80,250);
 
 					end;
 
@@ -291,7 +291,7 @@ end;
 						y := y + 1;
 						clrscr;
 						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,25);
+						window(1,1,80,250);
 
 					end;
 
@@ -301,7 +301,7 @@ end;
 						y := y - 1;
 						clrscr;
 						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,25);
+						window(1,1,80,250);
 
 					end;
 
@@ -311,7 +311,7 @@ end;
 						x := x - 1;
 						clrscr;
 						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,25);
+						window(1,1,80,250);
 
 					end;
 
@@ -320,11 +320,11 @@ end;
 
 				clrscr;
 				DibujarMatriz(Mapatriz,topex,topey,x,y);
-				Window(30,20,50,25);
+				Window(30,20,50,250);
 				//writeln(x,' ',y);
 				writeln(x,' ',y,' ',Mapatriz [x,y].Descripcion);
 				readKey;
-				window(1,1,80,25);
+				window(1,1,80,250);
 
 			until clchar = 's';
 
