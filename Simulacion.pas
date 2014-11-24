@@ -29,7 +29,7 @@ type
 
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 
-	//Procedure Pausa(var caracter:char);
+	Procedure Pausa(var caracter:char);
 
 implementation
 
@@ -62,15 +62,39 @@ implementation
 		Valor : real;
 		end;
 
-{	Procedure Pausa(var caracter:char);
+	Procedure Pausa(var caracter:char);
+        var
+                key:char;
+                i:integer;
+                j:integer;
 
 	begin
+                j:=1;
+                i:=1;
 		repeat
-
 			//delay(100);
-			until readkey='p';
+                     {   if keypressed then
+				begin     }
+                                repeat
 
-		end;}
+                                until keypressed;
+					    key:=readkey;
+          					if  (key = #0) then
+          					begin
+              						key:=readkey;
+              							case key of
+                   						#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
+                   						#80 : begin j:=j+1; gotoxy(i,j); end;
+                   						#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
+                   						#77 : begin i:=i+1; gotoxy(i,j); end;
+								end;
+                                                         {       end;   }
+
+
+				end;
+
+			until key='p';
+		end;
 
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 		var
@@ -239,17 +263,13 @@ end;
 
 {			for j := 1 to topey-1 do //Experimental
 				begin
-
 					for k := 1 to topex do
 					begin
-
 						if ((k = x) and (j = y)) then
 							textbackground(green);
 						if ((k <> x) or (j <> y)) then
 							textbackground(black);
-
 						case Mapatriz[k,j].Codigo of
-
 							' ' : begin write(Mapatriz[k,j].Codigo); end;
 							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
 							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
@@ -261,9 +281,7 @@ end;
 							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
 							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
 							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
-
 						end;
-
 					end;
 				writeln;
 				end;}
@@ -435,17 +453,12 @@ end;
 					clchar:=readkey;
 
 					if clchar='p' then
-					begin
 
-						//Pausa(clchar);
-						write('Presione una tecla para continuar. ');
-						readkey;
-						clrscr;
-
-					end;
+						Pausa(clchar);
 
 					if clchar='s' then
-					Menu(Salida);
+
+				               Menu(Salida);
 
 				end;
 
