@@ -374,7 +374,7 @@ implementation
 
 			1 : begin
 
-				ModifSimulacion;
+				ModifSimulacion('mapamundi.txt');
 
 				end;
 
@@ -382,7 +382,7 @@ implementation
 
 				writeln('Ingrese la ruta del archivo de texto');
 				read(ruta);
-				MostrarMapa(SalidaNueva,ruta);
+				ModifSimulacion(ruta);
 
 				end;
 
