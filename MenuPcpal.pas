@@ -191,6 +191,11 @@ implementation
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Poblaciones ****');
 
+		gotoXY(1,4);
+		writeln('Usa las teclas de direccion para controlar el cursor.');
+		writeln ('Presiona una tecla para continuar');
+		readkey;
+
 		MostrarPoblaciones;
 
 		GotoXY(27,22);

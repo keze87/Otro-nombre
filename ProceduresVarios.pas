@@ -243,7 +243,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona desertica';
 						auxP.CantSuceptibles:=300;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -256,7 +256,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona pueblerina';
 						auxP.CantSuceptibles:=1000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -269,7 +269,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona selvatica';
 						auxP.CantSuceptibles:=600;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -282,7 +282,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona de montes';
 						auxP.CantSuceptibles:=2000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -295,7 +295,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona mediamente poblada';
 						auxP.CantSuceptibles:=4000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -308,7 +308,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona poblada';
 						auxP.CantSuceptibles:=2000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -321,7 +321,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona de montana';
 						auxP.CantSuceptibles:=1000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -334,7 +334,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona rural';
 						auxP.CantSuceptibles:=7000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -347,7 +347,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona densamente poblada';
 						auxP.CantSuceptibles:=10000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -360,7 +360,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Zona de recepcion de migracion';
 						auxP.CantSuceptibles:=5000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
@@ -373,7 +373,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='descripcion';
+						auxP.Descripcion:='Agua?';
 						auxP.CantSuceptibles:=5000;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
