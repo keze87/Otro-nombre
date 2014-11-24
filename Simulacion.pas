@@ -169,7 +169,8 @@ implementation
 				for i:=1 to length(aux) do
 				begin
 
-					MatrizMapa[i,j].caracter := aux[i];
+				//	MatrizMapa[i,j].caracter := aux[i];
+					MatrizMapa[i,j].codigo := aux[i];
 					j:=j+1;
 
 				end;
