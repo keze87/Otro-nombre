@@ -3,16 +3,19 @@ unit Simulacion;
 interface
 
 type
-        TRegMatriz = record
-		Caracter : char;
-                CantSuceptibles : real;
-		CantInfectados : real;
-		CantZombies : real;
-		TasaNatalidad : real;
-		FactorMovilidad : real;
-		end;
 
-        TMatriz = array[1..500,1..500] of TRegMatriz;
+	TRegMatriz = record
+			Codigo : char;
+			Descripcion : string;
+			caracter : char;
+			CantSuceptibles : real;
+			CantInfectados : real;
+			CantZombies : real;
+			TasaNatalidad : real;
+			FactorMovilidad : real;
+			end;
+
+	TMatriz = array[1..100,1..100] of TRegMatriz;
 
 	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 
@@ -21,7 +24,7 @@ type
 	Procedure ModifSimulacion;
 
 	Procedure MostrarPoblaciones;
-	
+
 	Procedure CrearMatriz(var MatrizMapa:TMatriz);
 
 	//Procedure Pausa(var caracter:char);
@@ -34,10 +37,10 @@ implementation
 
 	Type
 
-		TMatriz = record
+{		TMatriz = record
 				Codigo : char;
 				Descripcion : string;
-				end;
+				end;}
 
 		TPoblaciones = record
 		PuntoX : integer;
@@ -49,7 +52,7 @@ implementation
 		TasaNatalidad : real;
 		FactorMovilidad : real;
 		end;
-		
+
 
 	TFactores = record
 		Codigo{de factor} : string[2];
@@ -66,48 +69,59 @@ implementation
 			until readkey='p';
 
 		end;}
-		
-		
-	Procedure CrearMatriz(Var MatrizMapa:TMatriz);
 
 
+	Procedure CrearMatriz(Var MatrizMapa : TMatriz);
 		var
+
 			Mapa : text;
 			aux : string;
 			i : integer;
 			j : integer;
-                        regPoblacion : TPoblaciones;
-                        Poblaciones: file of TPoblaciones;
+			regPoblacion : TPoblaciones;
+			Poblaciones: file of TPoblaciones;
+
 		begin
-                        j:=1;
+
+			j:=1;
 
 			Assign(Mapa,'mapamundi.txt');
-                        Assign(Poblaciones,'poblaciones.DAT');
+			Assign(Poblaciones,'poblaciones.DAT');
 			reset(Mapa);
-		              while not eof(Mapa) do
-                                begin
-                                      readln(Mapa,aux);
-                                      for i:=1 to length(aux) do
-                                        MatrizMapa[i,j].caracter:=aux[i];
-                                      j:=j+1;
-                                end;
+
+			while not eof(Mapa) do
+			begin
+
+				readln(Mapa,aux);
+
+				for i:=1 to length(aux) do
+				begin
+
+					MatrizMapa[i,j].caracter := aux[i];
+					j:=j+1;
+
+				end;
+
+			end;
 
 			close(Mapa);
-                        reset(Poblaciones);
-                        while not eof(Poblaciones) do
-                        begin
-                                read(Poblaciones,regPoblacion);
-                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantSuceptibles:=regPoblacion.CantSuceptibles;
-                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantInfectados:=regPoblacion.CantInfectados;
-                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantZombies:=regPoblacion.CantZombies;
-                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].TasaNatalidad:=regPoblacion.TasaNatalidad;
-                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].FactorMovilidad:=regPoblacion.FactorMovilidad;
-                        end;
-                        close(Poblaciones);
 
-clrscr;
-writeln('la matriz se creo en forma correcta');
-readkey;
+			reset(Poblaciones);
+
+			while not eof(Poblaciones) do
+			begin
+
+				read(Poblaciones,regPoblacion);
+				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantSuceptibles:=regPoblacion.CantSuceptibles;
+				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantInfectados:=regPoblacion.CantInfectados;
+				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantZombies:=regPoblacion.CantZombies;
+				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].TasaNatalidad:=regPoblacion.TasaNatalidad;
+				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].FactorMovilidad:=regPoblacion.FactorMovilidad;
+
+			end;
+
+			close(Poblaciones);
+
 end;
 
 	Procedure MostrarPoblaciones;
@@ -119,7 +133,7 @@ end;
 			m : integer;
 			j : integer;
 			k : integer;
-			Mapatriz : array [1..100,1..100] of TMatriz;
+			Mapatriz : array [1..500,1..500] of TRegMatriz;
 			topex : integer;
 			topey : integer;
 			aux : string;
@@ -265,7 +279,7 @@ end;
 			m : integer;
 			clchar : char;
 			Salida : integer;
-			Mapatriz : array [1..100,1..100] of TMatriz;
+			Mapatriz : array [1..100,1..100] of TRegMatriz;
 			topex : integer;
 			topey : integer;
 			aux : string;
