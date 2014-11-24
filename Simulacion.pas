@@ -27,6 +27,8 @@ type
 
 	Procedure CrearMatriz(var MatrizMapa:TMatriz);
 
+	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
+
 	//Procedure Pausa(var caracter:char);
 
 implementation
@@ -70,6 +72,46 @@ implementation
 
 		end;}
 
+	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
+		var
+
+			k : integer;
+			j : integer;
+
+		begin
+
+			clrscr;
+			for j := 1 to topey-1 do //Experimental
+				begin
+
+					for k := 1 to topex do
+					begin
+
+						if ((k = x) and (j = y)) then
+							textbackground(green);
+						if ((k <> x) or (j <> y)) then
+							textbackground(black);
+
+						case Mapatriz[k,j].Codigo of
+
+							' ' : begin write(Mapatriz[k,j].Codigo); end;
+							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
+							'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
+							'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+							'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
+							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
+
+						end;
+
+					end;
+				writeln;
+				end;
+	end;
 
 	Procedure CrearMatriz(Var MatrizMapa : TMatriz);
 		var
@@ -131,8 +173,6 @@ end;
 			y : integer;
 			l : integer;
 			m : integer;
-			j : integer;
-			k : integer;
 			Mapatriz : array [1..100,1..100] of TRegMatriz;
 			topex : integer;
 			topey : integer;
@@ -190,11 +230,23 @@ end;
 			topey := m;
 			writeln;
 
-			for j := 1 to topey-1 do //Experimental
+			x := 1;
+			y := 1;
+
+			DibujarMatriz(Mapatriz,topex,topey,x,y);
+
+			repeat
+
+{			for j := 1 to topey-1 do //Experimental
 				begin
 
 					for k := 1 to topex do
 					begin
+
+						if ((k = x) and (j = y)) then
+							textbackground(green);
+						if ((k <> x) or (j <> y)) then
+							textbackground(black);
 
 						case Mapatriz[k,j].Codigo of
 
@@ -214,10 +266,7 @@ end;
 
 					end;
 				writeln;
-				end;
-
-			x := 1;
-			y := 1;
+				end;}
 
 			repeat
 
@@ -230,6 +279,9 @@ end;
 					begin
 
 						x := x + 1;
+						clrscr;
+						DibujarMatriz(Mapatriz,topex,topey,x,y);
+						window(1,1,80,25);
 
 					end;
 
@@ -237,6 +289,9 @@ end;
 					begin
 
 						y := y + 1;
+						clrscr;
+						DibujarMatriz(Mapatriz,topex,topey,x,y);
+						window(1,1,80,25);
 
 					end;
 
@@ -244,6 +299,9 @@ end;
 					begin
 
 						y := y - 1;
+						clrscr;
+						DibujarMatriz(Mapatriz,topex,topey,x,y);
+						window(1,1,80,25);
 
 					end;
 
@@ -251,18 +309,26 @@ end;
 					begin
 
 						x := x - 1;
+						clrscr;
+						DibujarMatriz(Mapatriz,topex,topey,x,y);
+						window(1,1,80,25);
 
 					end;
 
 
 				end;
 
+				clrscr;
+				DibujarMatriz(Mapatriz,topex,topey,x,y);
 				Window(30,20,50,25);
 				//writeln(x,' ',y);
-				readKey;
 				writeln(x,' ',y,' ',Mapatriz [x,y].Descripcion);
+				readKey;
+				window(1,1,80,25);
 
 			until clchar = 's';
+
+		until 5 < 4;
 
 		window(1,1,80,25);
 
