@@ -79,6 +79,12 @@ implementation
 
                                 until keypressed;
 					    key:=readkey;
+					    
+					    	{if key = 'i' then
+					    	begin
+					    	mostrarpoblaciones;
+					    	end}
+					    
           					if  (key = #0) then
           					begin
               						key:=readkey;
