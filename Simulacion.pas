@@ -63,39 +63,45 @@ implementation
 		end;
 
 	Procedure Pausa(var caracter:char);
-        var
-                key:char;
-                i:integer;
-                j:integer;
+		var
+
+			key:char;
+			i:integer;
+			j:integer;
 
 	begin
-                j:=1;
-                i:=1;
+
+		j:=1;
+		i:=1;
+
 		repeat
-			//delay(100);
-                     {   if keypressed then
+			delay(33);
+			{   if keypressed then
 				begin     }
-                                repeat
 
-                                until keypressed;
-					    key:=readkey;
-					    
-					    	{if key = 'i' then
-					    	begin
-					    	mostrarpoblaciones;
-					    	end}
-					    
-          					if  (key = #0) then
-          					begin
-              						key:=readkey;
-              							case key of
-                   						#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
-                   						#80 : begin j:=j+1; gotoxy(i,j); end;
-                   						#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
-                   						#77 : begin i:=i+1; gotoxy(i,j); end;
-								end;
-                                                         {       end;   }
+{				repeat
 
+				until keypressed;}
+
+				key:=readkey;
+
+				{if key = 'i' then
+				begin
+					mostrarpoblaciones;
+				end}
+
+					if  (key = #0) then
+					begin
+
+						key:=readkey;
+
+							case key of
+							#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
+							#80 : begin j:=j+1; gotoxy(i,j); end;
+							#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
+							#77 : begin i:=i+1; gotoxy(i,j); end;
+							end;
+{       end;   }
 
 				end;
 
