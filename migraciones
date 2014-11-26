@@ -1,0 +1,112 @@
+function calcularCantidadDeInfectadosEnElViaje(poblacionTotal: longint; poblacionInfectada: longint; cantidadDePasajeros: integer): integer;
+
+var i, infectadosEnViaje: integer;
+
+begin
+
+infectadosEnViaje:=0;
+
+for i:=1 to cantidadDePasajeros do
+
+begin
+
+if(random(poblacionTotal) <= poblacionInfectada) then
+
+begin
+
+infectadosEnViaje := infectadosEnViaje + 1;
+
+end;
+
+
+
+
+
+Procedure MigracionAire(var mapatriz:TMatriz;topex:integer;topey:integer);
+
+
+
+type
+
+	Tregpos = record
+
+		puntox:integer;
+
+		puntoy:integer;
+
+		end;
+
+
+
+Var
+
+poblacionTotal:longint;
+
+poblacionInfectada:longint;
+
+I:integer;
+
+J:integer;
+
+k:integer;
+
+viajantes:real;
+
+VectorRecepcion: array [1..6] of Tregpos;
+
+Begin
+
+	poblacionTotal:=0;
+
+	poblacionInfectada:=0;
+
+	viajantes:=0;
+
+	k:=1;
+
+	for J:=1 to topey do
+
+		for I:=1 to topex do
+
+			if mapatriz[i,j].codigo = '9' then
+
+				begin
+
+					VectorRecepcion[k].puntox := i;
+
+					VectorRecepcion[k].puntoy := j;
+
+			
+
+	for J:=1 to topey do
+
+		begin
+
+		for I:=1 to topex do
+
+			if mapatriz[i,j].codigo = '8' then
+
+			begin
+
+				poblacionTotal := Mapatriz[i,j].CantSuceptibles + Mapatriz[i,j].cantInfectados;
+
+				poblacionInfectada:=Mapatriz[i,j].cantInfectados;
+
+				viajantes:= (mapatriz[i,j].CantSuceptibles*0,00250)/100;
+
+					for h:=1  to 6 do
+
+					begin
+
+						mapatriz[vectorRecepcion[h].puntox,vectorRecepcion[h].puntoy].cantSuceptibles := mapatriz[vectorRecepcion[h].puntox,vectorRecepcion[h].puntoy].cantSuceptibles + viajantes/6;
+
+						mapatriz[vectorRecepcion[h].puntox,vectorRecepcion[h].puntoy].cantInfectados := mapatriz[vectorRecepcion[h].puntox,vectorRecepcion[h].puntoy].cantInfectados + calcularCantidadDeInfectadosEnElViaje(poblacionTotal,poblacionInfectada,viajantes)/6;
+
+					end;
+
+			end;
+
+		end;			
+
+				
+
