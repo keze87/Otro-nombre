@@ -5,7 +5,7 @@ interface
 type
 
 	TRegMatriz = record
-			Codigo : char;
+			codigo : char;
 			Descripcion : string;
 			caracter : char;
 			CantSuceptibles : real;
@@ -177,10 +177,10 @@ implementation
 
 				//	MatrizMapa[i,j].caracter := aux[i];
 					MatrizMapa[i,j].codigo := aux[i];
-					j:=j+1;
+					
 
 				end;
-
+			j:=j+1;
 			end;
 
 			close(Mapa);
@@ -376,7 +376,7 @@ end;
 			m : integer;
 			clchar : char;
 			Salida : integer;
-			Mapatriz : array [1..100,1..100] of TRegMatriz;
+			Mapatriz : TMatriz;
 			topex : integer;
 			topey : integer;
 			aux : string;
@@ -387,7 +387,7 @@ end;
 			clrscr;
 			Salida := 1;
 			i := 1;
-			//CrearMatriz(Mapatriz,topex,topey);
+			CrearMatriz(Mapatriz);
 
 			Assign(Mapa,'mapamundi.txt');
 			reset(Mapa);
