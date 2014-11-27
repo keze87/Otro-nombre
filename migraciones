@@ -75,6 +75,8 @@ Begin
 					VectorRecepcion[k].puntox := i;
 
 					VectorRecepcion[k].puntoy := j;
+					
+				end;
 
 			
 
@@ -109,4 +111,4 @@ Begin
 		end;			
 
 				
-
+end;
