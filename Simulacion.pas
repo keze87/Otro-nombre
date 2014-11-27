@@ -330,13 +330,13 @@ implementation
 
 			Assign(Mapa,'mapamundi.txt');
 
-			Assign(Poblaciones,'poblaciones.DAT');
+			Assign(Poblaciones,'Poblaciones.DAT');
 
 			reset(Mapa);
 
 
 
-		        while not eof(Mapa) do
+			while not eof(Mapa) do
 
 			begin
 
@@ -362,7 +362,7 @@ implementation
 
 				end;
 
-                                j:=j+1;
+			j:=j+1;
 
 			end;
 
@@ -394,7 +394,7 @@ implementation
 
 				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].FactorMovilidad:=regPoblacion.FactorMovilidad;
 
-                                MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].Descripcion:=regPoblacion.Descripcion;
+				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].Descripcion:=regPoblacion.Descripcion;
 
 			end;
 

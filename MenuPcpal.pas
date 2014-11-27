@@ -196,7 +196,7 @@ implementation
 		writeln ('Presiona una tecla para continuar');
 		readkey;
 
-		MostrarPoblaciones;
+		//MostrarPoblaciones;
 
 		GotoXY(27,22);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal');
