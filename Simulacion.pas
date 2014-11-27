@@ -61,6 +61,10 @@ type
 
 
 	Procedure Pausa(var caracter:char;var Mapatriz:TMatriz);
+	
+	
+	
+	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
 
 
 
@@ -123,6 +127,31 @@ implementation
 		Valor : real;
 
 		end;
+		
+		
+	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
+
+
+        Var
+
+           foco:integer;
+
+        Begin
+
+
+                GotoXY(1,25);
+
+                write('Ingrese cantidad de infectados: ');
+
+                LeerINT(foco);
+
+                mapatriz[i,j].CantInfectados:=mapatriz[i,j].CantInfectados+foco;
+
+                GotoXY(i,j);
+
+
+
+        end;
 
 
 
@@ -169,6 +198,12 @@ implementation
 
 
 				key:=readkey;
+
+				if key = 'f' then
+
+
+
+                                        NuevoFoco(i,j,mapatriz);
 
 
 
