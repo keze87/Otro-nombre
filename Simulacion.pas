@@ -44,7 +44,7 @@ type
 
 
 
-	Procedure ModifSimulacion(ruta:string);
+	Procedure ModifSimulacion(dias:integer; periodo:integer; ruta:string);
 
 
 
@@ -495,7 +495,7 @@ end;
 
 
 
-	Procedure ModifSimulacion(ruta:string);
+	Procedure ModifSimulacion(dias:integer; periodo:integer; ruta:string);
 
 		var
 
