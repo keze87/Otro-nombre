@@ -235,16 +235,17 @@ implementation
 
 		writeln;writeln;
 
-                while not eof(Terrenos) do
-                begin
+		while not eof(Terrenos) do
+		begin
 
 		read(Terrenos,auxT);
 
 		write (' ');EscrDelay(-Velocidad,'Area'); EscrDelay(-Velocidad,auxT.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxT.Codigo);
 
 		writeln;
-                end;
-                close(Terrenos);
+		end;
+		close(Terrenos);
+
 		GotoXY(27,24);
 		EscrDelay(Velocidad,'1) Volver al Menu Principal');
 		writeln;

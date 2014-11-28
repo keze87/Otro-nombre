@@ -503,6 +503,20 @@ end;
 			Assign(Mapa,'mapamundi.txt');
 			reset(Mapa);
 
+			Assign(Poblaciones, 'Poblaciones.DAT');
+
+	{for i := 1 to FileSize(Poblacion) do
+	begin
+	Read(Poblacion, DatoTemporal);
+	Write(' PuntoX : ', DatoTemporal.PuntoX);
+	Write(', PuntoY : ', DatoTemporal.PuntoY);
+	Write(', Descripcion : ', DatoTemporal.Descripcion);
+	Write(', Habitantes : ', DatoTemporal.CantSuceptibles);
+	Writeln;
+	end;
+	Close(Poblacion);
+	end;}
+
 			Assign(Poblaciones,'Poblaciones.DAT');
 
 			topex := -213;
@@ -521,7 +535,7 @@ end;
 
 					l := l + 1;
 
-					reset(Poblaciones);
+					reset(Poblaciones); //seguro que esto es lo que dijo la profe en el parcial
 
 					repeat
 
@@ -531,6 +545,7 @@ end;
 
 					Mapatriz [l,m].Codigo := aux[l];
 					Mapatriz [l,m].Descripcion := auxP.Descripcion;
+					Mapatriz [l,m].CantSuceptibles := auxP.CantSuceptibles;
 
 					close(Poblaciones);
 
@@ -551,94 +566,64 @@ end;
 
 			repeat
 
-{			for j := 1 to topey-1 do //Experimental
-				begin
+				repeat
 
-					for k := 1 to topex do
-					begin
+					if keypressed then
+						begin
 
-						if ((k = x) and (j = y)) then
-							textbackground(green);
-						if ((k <> x) or (j <> y)) then
-							textbackground(black);
+						clchar:=readkey;
 
-						case Mapatriz[k,j].Codigo of
+						if ((clchar = Char(77)) and (x < topex-1)) then
+						begin
 
-							' ' : begin write(Mapatriz[k,j].Codigo); end;
-							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
-							'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
-							'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
-							'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-							'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
-							'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
-							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
+							x := x + 1;
+							clrscr;
+							DibujarMatriz(Mapatriz,topex,topey,x,y);
+							window(1,1,80,250);
+
+						end;
+
+						if ((clchar = Char(80)) and (y < topey-1)) then
+						begin
+
+							y := y + 1;
+							clrscr;
+							DibujarMatriz(Mapatriz,topex,topey,x,y);
+							window(1,1,80,250);
+
+						end;
+
+						if ((clchar = Char(72)) and (y > 1)) then
+						begin
+
+							y := y - 1;
+							clrscr;
+							DibujarMatriz(Mapatriz,topex,topey,x,y);
+							window(1,1,80,250);
+
+						end;
+
+						if ((clchar = Char(75)) and (x > 1)) then
+						begin
+
+							x := x - 1;
+							clrscr;
+							DibujarMatriz(Mapatriz,topex,topey,x,y);
+							window(1,1,80,250);
 
 						end;
 
 					end;
-				writeln;
-				end;}
 
-			repeat
+					clrscr;
+					DibujarMatriz(Mapatriz,topex,topey,x,y);
+					Window(30,20,50,250);
 
-				if keypressed then
-					begin
+					writeln(' PuntoX : ',x,', PuntoY : ',y);
+					write(' Descripcion : ',Mapatriz [x,y].Descripcion,', Habitantes : ',Mapatriz [l,m].CantSuceptibles:0:2);
 
-					clchar:=readkey;
-
-					if ((clchar = Char(77)) and (x < topex-1)) then
-					begin
-
-						x := x + 1;
-						clrscr;
-						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,250);
-
-					end;
-
-					if ((clchar = Char(80)) and (y < topey-1)) then
-					begin
-
-						y := y + 1;
-						clrscr;
-						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,250);
-
-					end;
-
-					if ((clchar = Char(72)) and (y > 1)) then
-					begin
-
-						y := y - 1;
-						clrscr;
-						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,250);
-
-					end;
-
-					if ((clchar = Char(75)) and (x > 1)) then
-					begin
-
-						x := x - 1;
-						clrscr;
-						DibujarMatriz(Mapatriz,topex,topey,x,y);
-						window(1,1,80,250);
-
-					end;
-
-
-				end;
-
-				clrscr;
-				DibujarMatriz(Mapatriz,topex,topey,x,y);
-				Window(30,20,50,250);
-				//writeln(x,' ',y);
-				writeln(x,' ',y,' ',Mapatriz [x,y].Descripcion);
-				readKey;
-				window(1,1,80,250);
+					readKey;
+					window(1,1,80,250);
 
 			until clchar = 's';
 
@@ -647,6 +632,5 @@ end;
 		window(1,1,80,25);
 
 	end;
-
 
 end.

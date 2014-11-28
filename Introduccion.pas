@@ -18,6 +18,7 @@ implementation
 		contIntro : Integer;
 		A : text;
 		aux : string;
+		mundocruel : boolean;
 
 	begin
 
@@ -45,16 +46,22 @@ implementation
 		begin
 
 			contIntro := 0;
+			mundocruel := false;
 
 			repeat
 
 				contIntro := contIntro + 1;
 
-				Intro(1);
+				if keypressed then
+				mundocruel := true;
+
+				if not(mundocruel) then
+					Intro(1);
 
 			until contIntro = 2;
 
-			Intro(7)
+			if not(mundocruel) then
+				Intro(7)
 
 		end;
 
