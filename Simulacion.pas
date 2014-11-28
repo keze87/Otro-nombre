@@ -566,12 +566,20 @@ end;
 
 			repeat
 
-				repeat
+				//repeat
 
 					if keypressed then
+					begin
+
+						clchar := readkey;
+
+						//if ((clchar <> Char(75)) and (clchar <> Char(72)) and (clchar <> Char(80)) and (clchar <> Char(77))) then
+						if (clchar = 's') then
 						begin
 
-						clchar:=readkey;
+							Menu(topex);
+
+						end;
 
 						if ((clchar = Char(77)) and (x < topex-1)) then
 						begin
@@ -613,13 +621,6 @@ end;
 
 						end;
 
-						if clchar = Char(115) then
-						begin
-
-							Menu(topex);
-
-						end;
-
 					end;
 
 					clrscr;
@@ -629,10 +630,11 @@ end;
 					writeln(' PuntoX : ',x,', PuntoY : ',y);
 					write(' Descripcion : ',Mapatriz [x,y].Descripcion,', Habitantes : ',Mapatriz [l,m].CantSuceptibles:0:2);
 
-					readKey;
+					//readKey;
+					Delay(10);
 					window(1,1,80,250);
 
-			until clchar = 's';
+			//until clchar = 's';
 
 		until 5 < 4;
 

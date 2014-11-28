@@ -193,14 +193,15 @@ implementation
 
 		gotoXY(1,4);
 		writeln('Usa las teclas de direccion para controlar el cursor.');
+		writeln('"s" para Salir');
 		writeln ('Presiona una tecla para continuar');
 		readkey;
 
 		MostrarPoblacionesViejo;
 
-		GotoXY(27,22);
-		EscrDelay(Velocidad,'1) Volver al Menu Principal');
-		writeln;
+		//GotoXY(27,22);
+		//EscrDelay(Velocidad,'1) Volver al Menu Principal');
+		//writeln;
 
 		repeat
 
