@@ -402,11 +402,13 @@ end;
 
 			i := i + 1;
 
-			until 5<4;
-
-			Menu(Salida);
+			until i = dias + 1;
 
 			close(Mapa);
+
+			readkey;
+
+			Menu(Salida);
 
 		end;
 
