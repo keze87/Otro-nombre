@@ -378,11 +378,11 @@ implementation
 
 			1 : begin
 
-				 write('Ingrese cantidad de dias: ');
-                                LeerINT(dias);
-                                writeln;
-                                write('Ingrese periodo de actualizacion: ');
-                                read(periodo);
+				write('Ingrese cantidad de dias: ');
+				LeerINT(dias);
+				writeln;
+				write('Ingrese periodo de actualizacion: ');
+				read(periodo);
 
 				ModifSimulacion(dias,periodo,'mapamundi.txt');
 
@@ -392,11 +392,11 @@ implementation
 
 				writeln('Ingrese la ruta del archivo de texto');
 				read(ruta);
-                                write('Ingrese cantidad de dias: ');
-                                LeerINT(dias);
-                                writeln;
-                                write('Ingrese periodo de actualizacion: ');
-                                read(periodo);
+				write('Ingrese cantidad de dias: ');
+				LeerINT(dias);
+				writeln;
+				write('Ingrese periodo de actualizacion: ');
+				read(periodo);
 				ModifSimulacion(dias,periodo,ruta);
 
 				end;

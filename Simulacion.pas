@@ -335,7 +335,7 @@ end;
 					for k := 1 to topex do
 					begin
 
-						case Mapatriz[k,j].Codigo of
+						{case Mapatriz[k,j].Codigo of
 
 							' ' : begin write(Mapatriz[k,j].Codigo); end;
 
@@ -359,7 +359,21 @@ end;
 
 							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
 
-						end;
+						end;}
+
+						if Mapatriz[k,j].CantZombies < 100 then
+							textcolor(lightgray);
+
+						if Mapatriz[k,j].CantZombies > 100 then
+							textcolor(yellow);
+
+						if Mapatriz[k,j].CantZombies > 1000 then
+							textcolor(magenta);
+
+						if Mapatriz[k,j].CantZombies > 10000 then
+							textcolor(red);
+
+						write(Mapatriz[k,j].Codigo);
 
 					end;
 
