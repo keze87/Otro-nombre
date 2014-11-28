@@ -14,6 +14,8 @@ interface
 
 	//Procedure CrearMatriz(var Matriz : array of TMatriz; var X : integer ; var Y : integer);
 
+	function Aleatorio(limit:longint):longint;
+
 implementation
 
 Uses
@@ -131,10 +133,10 @@ Type
 			writeln(Mapa,'22 4544422444228268  48  448    2      764882424482232444788141212122887 ');
 			writeln(Mapa,'  345663348344488         48         768 554344282444244438882346823541  ');
 			writeln(Mapa,'    4    4828248886  828            4 4  42886658248343448112112    8    ');
-			writeln(Mapa,'          461888118 44282         483332476816448203232224827688A  4     ');
-			writeln(Mapa,'          8468182482388S8           4373986766640200330482816881         ');
+			writeln(Mapa,'          461888118 44282         4833324768164482032322248276888  4     ');
+			writeln(Mapa,'          846818248238888           4373986766640200330482816881         ');
 			writeln(Mapa,'          8448876686816            4487888D647604400030310008814         ');
-			writeln(Mapa,'           42088764816            488 6 16  88V242440000070762  4        ');
+			writeln(Mapa,'           42088764816            488 6 16  888242440000070762  4        ');
 			writeln(Mapa,'           4064878549             64    4 2778 424410000026834 2         ');
 			writeln(Mapa,'            05788667               100    807600656400871618  8          ');
 			writeln(Mapa,'            86577888              40000000260760085660676888             ');
@@ -144,10 +146,10 @@ Type
 			writeln(Mapa,'                  8  5           416740450230      88  576  2            ');
 			writeln(Mapa,'                   8 228O        4276653482468     8   4                 ');
 			writeln(Mapa,'                    18121         66 656422060          6                ');
-			writeln(Mapa,'                    476622A           4644209           8 41             ');
+			writeln(Mapa,'                    4766222           4644209           8 41             ');
 			writeln(Mapa,'                    8888812           454328            8  22  2         ');
 			writeln(Mapa,'                    882122222         443248             1      68       ');
-			writeln(Mapa,'                    221222288S         42248                6            ');
+			writeln(Mapa,'                    2212222888         42248                6            ');
 			writeln(Mapa,'                     2232222           66878 4                4 4        ');
 			writeln(Mapa,'                      026658          408178 3              24323        ');
 			writeln(Mapa,'                      476648           4078  4             2000008       ');
@@ -244,11 +246,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona desertica';
-						auxP.CantSuceptibles:=300;
-						auxP.CantInfectados:=0;
-						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.1;
-						auxP.FactorMovilidad:=0.3;
+						auxP.CantSuceptibles:= Aleatorio(300);
+						auxP.CantInfectados:= 0;
+						auxP.CantZombies:= 0;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -257,11 +259,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona pueblerina';
-						auxP.CantSuceptibles:=1000;
+						auxP.CantSuceptibles:= Aleatorio(1000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.1;
-						auxP.FactorMovilidad:=0.3;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -270,11 +272,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona selvatica';
-						auxP.CantSuceptibles:=600;
+						auxP.CantSuceptibles:= Aleatorio(600);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.4;
-						auxP.FactorMovilidad:=0.2;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -283,11 +285,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona de montes';
-						auxP.CantSuceptibles:=2000;
+						auxP.CantSuceptibles:= Aleatorio(2000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.4;
-						auxP.FactorMovilidad:=0.7;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -296,11 +298,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona mediamente poblada';
-						auxP.CantSuceptibles:=4000;
+						auxP.CantSuceptibles:= Aleatorio(4000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.1;
-						auxP.FactorMovilidad:=0.3;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -309,11 +311,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona poblada';
-						auxP.CantSuceptibles:=2000;
+						auxP.CantSuceptibles:= Aleatorio(6000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.1;
-						auxP.FactorMovilidad:=0.3;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -322,11 +324,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona de montana';
-						auxP.CantSuceptibles:=1000;
+						auxP.CantSuceptibles:= Aleatorio(1000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.1;
-						auxP.FactorMovilidad:=0.3;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -335,11 +337,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona rural';
-						auxP.CantSuceptibles:=7000;
+						auxP.CantSuceptibles:= Aleatorio(1000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.1;
-						auxP.FactorMovilidad:=0.7;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -348,11 +350,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona densamente poblada';
-						auxP.CantSuceptibles:=10000;
+						auxP.CantSuceptibles:= Aleatorio(10000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.9;
-						auxP.FactorMovilidad:=0.3;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -361,11 +363,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona de recepcion de migracion';
-						auxP.CantSuceptibles:=5000;
+						auxP.CantSuceptibles:= Aleatorio(50000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.3;
-						auxP.FactorMovilidad:=0.8;
+						auxP.TasaNatalidad:= random;
+						auxP.FactorMovilidad:= random;
 
 						end;
 
@@ -374,11 +376,11 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Agua?';
-						auxP.CantSuceptibles:=5000;
+						auxP.CantSuceptibles:=0;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.TasaNatalidad:=0.3;
-						auxP.FactorMovilidad:=0.8;
+						auxP.TasaNatalidad:=0;
+						auxP.FactorMovilidad:=0;
 
 						end;
 
@@ -444,6 +446,15 @@ Type
 			close(Terrenos);
 
 		end;
+
+	function Aleatorio(limit:longint):longint;
+	begin
+
+		Randomize;
+
+		Aleatorio := abs(random(limit));//abs(temp mod limit);
+
+end;
 
 	Procedure EditarFactores(var Salida : integer);
 		const

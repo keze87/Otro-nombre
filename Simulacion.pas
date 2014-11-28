@@ -613,6 +613,13 @@ end;
 
 						end;
 
+						if clchar = Char(115) then
+						begin
+
+							Menu(topex);
+
+						end;
+
 					end;
 
 					clrscr;
