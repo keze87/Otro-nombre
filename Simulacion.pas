@@ -504,20 +504,7 @@ end;
 			reset(Mapa);
 
 			Assign(Poblaciones, 'Poblaciones.DAT');
-
-	{for i := 1 to FileSize(Poblacion) do
-	begin
-	Read(Poblacion, DatoTemporal);
-	Write(' PuntoX : ', DatoTemporal.PuntoX);
-	Write(', PuntoY : ', DatoTemporal.PuntoY);
-	Write(', Descripcion : ', DatoTemporal.Descripcion);
-	Write(', Habitantes : ', DatoTemporal.CantSuceptibles);
-	Writeln;
-	end;
-	Close(Poblacion);
-	end;}
-
-			Assign(Poblaciones,'Poblaciones.DAT');
+			reset(Poblaciones);
 
 			topex := -213;
 
@@ -535,7 +522,7 @@ end;
 
 					l := l + 1;
 
-					reset(Poblaciones); //seguro que esto es lo que dijo la profe en el parcial
+					//reset(Poblaciones); //seguro que esto es lo que dijo la profe en el parcial
 
 					repeat
 
@@ -546,8 +533,9 @@ end;
 					Mapatriz [l,m].Codigo := aux[l];
 					Mapatriz [l,m].Descripcion := auxP.Descripcion;
 					Mapatriz [l,m].CantSuceptibles := auxP.CantSuceptibles;
+					//writeln(Mapatriz [l,m].CantSuceptibles:0:0);
 
-					close(Poblaciones);
+					//close(Poblaciones);
 
 					if l > topex then
 						topex := l;
@@ -559,9 +547,10 @@ end;
 			topey := m;
 			writeln;
 
+			close(Poblaciones);
+
 			x := 1;
 			y := 1;
-
 			DibujarMatriz(Mapatriz,topex,topey,x,y);
 
 			repeat
@@ -628,10 +617,12 @@ end;
 					Window(30,20,50,250);
 
 					writeln(' PuntoX : ',x,', PuntoY : ',y);
-					write(' Descripcion : ',Mapatriz [x,y].Descripcion,', Habitantes : ',Mapatriz [l,m].CantSuceptibles:0:2);
+					write(' Descripcion : ',Mapatriz [x,y].Descripcion);
+					if Mapatriz [x,y].Codigo <> ' ' then
+					write(', Habitantes : ',Mapatriz [x,y].CantSuceptibles:0:0);
 
 					//readKey;
-					Delay(10);
+					Delay(20);
 					window(1,1,80,250);
 
 			//until clchar = 's';
