@@ -29,6 +29,7 @@ type
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
 	Procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
 	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
+
 implementation
 
 	Uses
@@ -54,176 +55,121 @@ implementation
 		Descripcion : string[30];
 		Valor : real;
 		end;
-		
+
 	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
+		var
 
+			i:integer;
+			j:integer;
+			rutaP:string;
+			rutaF:string;
+			ArchPoblaciones:file of TPoblaciones;
+			ArchFactores:file of TFactores;
+			Factores:file of TFactores;
+			RegP:TPoblaciones;
+			RegF:TFactores;
+			rta:char;
 
+		begin
 
-        var
+				gotoxy(1,25);
 
-                i:integer;
+				{writeln('Guardar factores como: ');
+				readkey;
+				rutaF:='newfactores.dat';
+				read(rutaF);
+				while fileexists(rutaF) do
+				begin
 
-                j:integer;
+					writeln('Archivo existente. Sobreescribir?(s/n)');
+					read(rta);
+					case rta of
+						's': Assign(ArchFactores,rutaF);
+						'n': begin
 
-                rutaP:string;
+							writeln('Guardar factores como: ');
+							read(rutaF);
 
-                rutaF:string;
+							end;
+					end;
+				end;
+				if (not fileexists(rutaF)) then
+					Assign(ArchFactores,rutaF);
 
-                ArchPoblaciones:file of TPoblaciones;
+				 writeln('Guardar poblaciones como: ');
+				read(rutaP);
+				while fileexists(rutaP) do
+				begin
 
-                ArchFactores:file of TFactores;
+					writeln('Archivo existente. Sobreescribir?(s/n)');
+					read(rta);
+					case rta of
+						's': Assign(ArchPoblaciones,rutaP);
+						'n': begin
 
-                Factores:file of TFactores;
+								writeln('Guardar poblaciones como: ');
+								read(rutaP);
 
-                RegP:TPoblaciones;
+							end;
 
-                RegF:TFactores;
+					end;
 
-                rta:char;
+				end;
 
+				if not fileexists(rutaP) then}
 
+				Assign(ArchPoblaciones,'newpoblaciones.DAT');
 
+				Assign(ArchFactores,'newfactores.DAT');
 
+				Assign(Factores,'factores.DAT');
 
+				Reset(Factores);
 
+				Rewrite(ArchFactores);
 
-        Begin
+				while not eof(Factores) do
+				begin
 
+					read(Factores,RegF);
 
+					write(ArchFactores,RegF);
 
-                gotoxy(1,25);
+				end;
 
-                {writeln('Guardar factores como: ');
+				close(Factores);
 
-                readkey;
+				close(ArchFactores);
 
-                rutaF:='newfactores.dat';
+				rewrite(ArchPoblaciones);
 
-                read(rutaF);
+				for j:=1 to topey do
+					for i:=1 to topex do
+					begin
 
+						RegP.PuntoX := i;
 
+						RegP.PuntoY := j;
 
-                while fileexists(rutaF) do
+						RegP.Descripcion := mapatriz[i,j].Descripcion;
 
-                begin
+						RegP.CantSuceptibles := mapatriz[i,j].CantSuceptibles;
 
-                        writeln('Archivo existente. Sobreescribir?(s/n)');
+						RegP.CantInfectados := mapatriz[i,j].CantInfectados;
 
-                        read(rta);
+						RegP.CantZombies := mapatriz[i,j].CantZombies;
 
-                        case rta of
+						RegP.TasaNatalidad := mapatriz[i,j].TasaNatalidad;
 
-                        's': Assign(ArchFactores,rutaF);
+						RegP.FactorMovilidad := mapatriz[i,j].FactorMovilidad;
 
-                        'n': begin
+						write(ArchPoblaciones,RegP);
 
-                                writeln('Guardar factores como: ');
+					end;
 
-                                read(rutaF);
+				close(ArchPoblaciones);
 
-                                end;
-
-                        end;
-
-                end;
-
-                if (not fileexists(rutaF)) then
-
-                Assign(ArchFactores,rutaF);}
-
-
-
-             {   writeln('Guardar poblaciones como: ');
-
-                read(rutaP);
-
-
-
-                while fileexists(rutaP) do
-
-                begin
-
-                        writeln('Archivo existente. Sobreescribir?(s/n)');
-
-                        read(rta);
-
-                        case rta of
-
-                        's': Assign(ArchPoblaciones,rutaP);
-
-                        'n': begin
-
-                                writeln('Guardar poblaciones como: ');
-
-                                read(rutaP);
-
-                                end;
-
-                        end;
-
-                end;
-
-
-
-                if not fileexists(rutaP) then}
-
-                Assign(ArchPoblaciones,'newpoblaciones.DAT');
-
-                Assign(ArchFactores,'newfactores.DAT');
-
-                Assign(Factores,'factores.DAT');
-
-                Reset(Factores);
-
-                Rewrite(ArchFactores);
-
-                while not eof(Factores) do
-
-                begin
-
-                        read(Factores,RegF);
-
-                        write(ArchFactores,RegF);
-
-                end;
-
-                close(Factores);
-
-                Close(ArchFactores);
-
-                Rewrite(ArchPoblaciones);
-
-
-
-                for j:=1 to topey do
-
-                        for i:=1 to topex do
-
-                                begin
-
-                                        RegP.PuntoX := i;
-
-                                        RegP.PuntoY := j;
-
-                                        RegP.Descripcion := mapatriz[i,j].Descripcion;
-
-			                RegP.CantSuceptibles := mapatriz[i,j].CantSuceptibles;
-
-                                        RegP.CantInfectados := mapatriz[i,j].CantInfectados;
-
-                                        RegP.CantZombies := mapatriz[i,j].CantZombies;
-
-                                        RegP.TasaNatalidad := mapatriz[i,j].TasaNatalidad;
-
-                                        RegP.FactorMovilidad := mapatriz[i,j].FactorMovilidad;
-
-                                        write(ArchPoblaciones,RegP);
-
-                                        end;
-
-                close(ArchPoblaciones);
-
-                end;
+		end;
 
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
 		Var
@@ -598,7 +544,7 @@ end;
 						Pausa(clchar,mapatriz);
 
 						 if clchar='g' then
-							Guardar(mapatriz,topex,topey); 
+							Guardar(mapatriz,topex,topey);
 
 					if clchar='s' then
 						Menu(Salida);
