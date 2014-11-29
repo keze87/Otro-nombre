@@ -47,10 +47,6 @@ Type
 		Valor : real;
 		end;
 
-	TMatriz = record
-		Codigo : char;
-		end;
-
 	Procedure EscrDelay(tiempo:integer;cadena:string);
 		var
 
@@ -524,29 +520,6 @@ end;
 			MenuFactores(Salida);
 
 		end;
-
-	{Procedure CrearMatriz(var Matriz : array [1..3000,1..3000] of TMatriz ; var X : integer ; var Y : integer);
-		var
-			Mapa : text;
-			aux : string;
-			i : integer;
-			k : integer;
-		begin
-			Assign(Mapa,'mapamundi.txt');
-			reset(Mapa);
-			X := -213;
-			k := 0;
-			repeat
-				readln(Mapa,aux);
-				i := 0;
-				k := k + 1;
-				repeat
-					i := i + 1;
-					Matriz [i,k].Codigo := aux[i];
-				until EOL(aux);
-			until EOF(Mapa);
-			X := k;
-		end;}
 
 end.
 

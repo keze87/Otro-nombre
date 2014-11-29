@@ -317,12 +317,6 @@ end;
 
 			writeln;
 
-			//writeln('Esto simboliza las cosas que ocurren dia a dia');
-
-			//writeln('Presionar P para pausar');
-
-			//writeln('Presionar S para salir al menu');
-
 			repeat
 
 				textcolor(10);
