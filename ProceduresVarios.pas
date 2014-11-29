@@ -37,6 +37,7 @@ Type
 		CantSuceptibles : longInt;
 		CantInfectados : longInt;
 		CantZombies : longInt;
+		CantRemovidos : longInt;
 		TasaNatalidad : real;
 		FactorMovilidad : real;
 		end;
@@ -245,6 +246,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(300);
 						auxP.CantInfectados:= 0;
 						auxP.CantZombies:= 0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -258,6 +260,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(1000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -271,6 +274,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(600);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -284,6 +288,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(2000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -297,6 +302,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(4000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -310,6 +316,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(6000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -323,6 +330,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(1000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -336,6 +344,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(1000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -349,6 +358,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(10000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -362,6 +372,7 @@ Type
 						auxP.CantSuceptibles:= Aleatorio(50000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
+						auxP.CantRemovidos:= Aleatorio(300);
 						auxP.TasaNatalidad:= random;
 						auxP.FactorMovilidad:= random;
 
@@ -371,7 +382,7 @@ Type
 
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
-						auxP.Descripcion:='Agua?';
+						auxP.Descripcion:='Agua';
 						auxP.CantSuceptibles:=0;
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;

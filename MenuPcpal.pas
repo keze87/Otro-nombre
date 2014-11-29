@@ -31,6 +31,7 @@ implementation
 			CantSuceptibles : longInt;
 			CantInfectados : longInt;
 			CantZombies : longInt;
+			CantRemovidos : longInt;
 			TasaNatalidad : integer;
 			FactorMovilidad : integer;
 			end;

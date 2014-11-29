@@ -44,6 +44,7 @@ implementation
 		CantSuceptibles : longInt;
 		CantInfectados : longInt;
 		CantZombies : longInt;
+		CantRemovidos : longInt;
 		TasaNatalidad : real;
 		FactorMovilidad : real;
 		end;
@@ -326,6 +327,8 @@ end;
 				if (peri = periodo) or (i = 1) then
 				begin
 
+				clrscr;
+
 				write('Dia : ',i,' ((P)ausa,(S)alir,Dentro de Pausa((I)nfo,(F)oco Infeccion))');
 
 				//writeln;
@@ -383,7 +386,7 @@ end;
 
 				end;
 
-				ActualizarMatriz(Mapatriz,topex,topey);
+				Delay(1000);
 
 				peri := 0;
 
@@ -405,10 +408,10 @@ end;
 
 				end;
 
-			Delay(1000);
-
 			i := i + 1;
 			peri := peri + 1;
+
+			ActualizarMatriz(Mapatriz,topex,topey);
 
 			until i >= dias + 1;
 
