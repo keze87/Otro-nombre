@@ -10,6 +10,7 @@ interface
 	Procedure MenuMundo(var SalidaMundo : integer);
 	Procedure MenuAjustes (var SalidaMenu : integer);
 	Procedure MenuNuevaSim(var SalidaNueva : integer);
+	Procedure CargarSimulacion;
 
 implementation
 
@@ -45,6 +46,112 @@ implementation
 	Const
 
 		Velocidad = 15;
+		
+	Procedure CargarSimulacion;
+
+
+
+        var
+
+                rutaP:string;
+
+                rutaF:string;
+
+                rutaM:string;
+
+                dias:integer;
+
+                periodo:integer;
+
+        Begin
+
+                ClrScr;
+
+		writeln;
+
+
+
+		GotoXY(25,1);
+
+		EscrDelay(Velocidad,'**** Cargar Simulacion ****');
+
+                GotoXY(1,4);
+
+
+
+		EscrDelay(Velocidad,'Ingrese ruta de archivo de poblaciones'); {poblaciones.DAT o .dat}
+
+                read(rutaP);
+
+                    {    while (not fileexists(rutaP)) do
+
+                                begin
+
+                                        writeln('Archivo inexistente');
+
+                                        read(rutaP);
+
+                                end;   }
+
+                writeln;
+
+
+
+                write('Ingrese cantidad de dias: ');
+
+                LeerINT(dias);
+
+                writeln;
+
+                EscrDelay(Velocidad,'Ingrese ruta de archivo de escenario');
+
+
+
+                read(rutaM);
+
+                      {  while (not fileexists(rutaM)) do
+
+                                begin
+
+                                        writeln('Archivo inexistente');
+
+                                        read(rutaM);
+
+                                end; }
+
+                writeln;
+
+
+
+                write('Ingrese periodo de actualizacion: ');
+
+                LeerINT(periodo);
+
+
+
+                writeln;
+
+                EscrDelay(Velocidad,'Ingrese ruta de archivo de factores');
+
+                read(rutaF);
+
+                      {  while (not fileexists(rutaF)) do
+
+                                begin
+
+                                        writeln('Archivo inexistente');
+
+                                        read(rutaF);
+
+                                end;    }
+
+
+
+		ModifSimulacion(dias,periodo,rutaM,rutaF,rutaP);
+
+
+
+        end;
 
 	Procedure Menu (var SalidaMenu : integer);
 
@@ -382,7 +489,7 @@ implementation
 				write('Ingrese periodo de actualizacion: ');
 				LeerINT(periodo);
 
-				ModifSimulacion(dias,periodo,'mapamundi.txt');
+				ModifSimulacion(dias,periodo,'mapamundi.txt','factores.DAT','poblaciones.DAT');
 
 				end;
 
@@ -396,7 +503,7 @@ implementation
 				writeln;
 				write('Ingrese periodo de actualizacion: ');
 				LeerINT(periodo);
-				ModifSimulacion(dias,periodo,ruta);
+				ModifSimulacion(dias,periodo,ruta,'factores.DAT','poblaciones.DAT');
 
 				end;
 
