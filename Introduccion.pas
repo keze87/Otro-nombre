@@ -70,6 +70,10 @@ implementation
 	end;
 
 Procedure Intro (i : integer);
+	const
+
+		Velocidad = 300;
+
 	var
 
 	conti : integer;
@@ -79,7 +83,7 @@ Procedure Intro (i : integer);
 
 	cursoroff;
 
-	Delay (300);
+	Delay (Velocidad);
 	ClrScr;
 
 	TextColor(White);
@@ -107,7 +111,7 @@ Procedure Intro (i : integer);
 	write('      8~   ????????????                    ');TextColor(Green);writeln('            O   ?????????????Z');TextColor(White);
 	write('          ???????????                        ');TextColor(Green);writeln('              ??????????????');TextColor(White);
 
-	Delay (300);
+	Delay (Velocidad);
 	ClrScr;
 
 	writeln('          8DDDN8');TextColor(White);
@@ -134,7 +138,7 @@ Procedure Intro (i : integer);
 	write('    88   +??????????+       ');TextColor(Green);writeln('                                   ?????????Z?');TextColor(White);
 	write('  MMMN??+??????????????          ');TextColor(Green);writeln('                        ??????+????????8??');TextColor(White);
 
-	Delay (300);
+	Delay (Velocidad);
 	ClrScr;
 
 	write('           ODDDDO      ');TextColor(Green);writeln('                                                  O');TextColor(White);
@@ -162,7 +166,7 @@ Procedure Intro (i : integer);
 	write('      ?????MMM????????????         ');TextColor(Green);writeln('                     ????8????????????');TextColor(White);
 	write('           ?????????               ');TextColor(Green);writeln('                         ????????????');TextColor(White);
 
-	Delay (300);
+	Delay (Velocidad);
 	ClrScr;
 
 	write('          ZOOOO      ');TextColor(Green);writeln('                                                     8');TextColor(White);
@@ -190,7 +194,7 @@ Procedure Intro (i : integer);
 	write('    ??????????????MM?+,     ');TextColor(Green);writeln('                          +???????????????I?O??');TextColor(White);
 	write('         +??????????         ');TextColor(Green);writeln('                               ??????????????');TextColor(White);
 
-	Delay (300);
+	Delay (Velocidad);
 	ClrScr;
 
 	write('            O888D8         ');TextColor(Green);writeln('                                            ');TextColor(White);
@@ -217,7 +221,7 @@ Procedure Intro (i : integer);
 	write('      OZ   ????????????        ');TextColor(Green);writeln('                        OI  ?????????????$');TextColor(White);
 	write('          ??????????+          ');TextColor(Green);writeln('                            ??????????????');TextColor(White);
 
-	Delay (300);
+	Delay (Velocidad);
 	ClrScr;
 
 	write('           ODDDDZ                       ');TextColor(Green);writeln('                                 O');TextColor(White);
@@ -255,7 +259,7 @@ Procedure Intro (i : integer);
 
 	conti := conti +1;
 
-	Delay (300 - k);
+	Delay (Velocidad - k);
 	ClrScr;
 	k := k + 20;
 
@@ -283,7 +287,7 @@ Procedure Intro (i : integer);
 	if conti <= 22 then begin write('      8~   ????????????                    ');TextColor(Green);writeln('            O   ?????????????Z');TextColor(White); end;
 	if conti <= 23 then begin write('          ???????????                        ');TextColor(Green);writeln('              ??????????????');TextColor(White); end;
 
-	Delay (300 - k);
+	Delay (Velocidad - k);
 	ClrScr;
 
 	if conti <= 1 then begin writeln('          8DDDN8');TextColor(White); end;
@@ -310,7 +314,7 @@ Procedure Intro (i : integer);
 	if conti <= 22 then begin write('    88   +??????????+       ');TextColor(Green);writeln('                                   ?????????Z?');TextColor(White); end;
 	if conti <= 23 then begin write('  MMMN??+??????????????          ');TextColor(Green);writeln('                        ??????+????????8??');TextColor(White); end;
 
-	Delay (300 - k);
+	Delay (Velocidad - k);
 	ClrScr;
 	//conti := conti +1;
 
@@ -339,7 +343,7 @@ Procedure Intro (i : integer);
 	if conti <= 23 then begin write('      ?????MMM????????????         ');TextColor(Green);writeln('                     ????8????????????');TextColor(White); end;
 	if conti <= 24 then begin write('           ?????????               ');TextColor(Green);writeln('                         ????????????');TextColor(White); end;
 
-	Delay (300 - k);
+	Delay (Velocidad - k);
 	ClrScr;
 
 	if conti <= 1 then begin write('          ZOOOO      ');TextColor(Green);writeln('                                                     8');TextColor(White); end;
@@ -367,7 +371,7 @@ Procedure Intro (i : integer);
 	if conti <= 23 then begin write('    ??????????????MM?+,     ');TextColor(Green);writeln('                          +???????????????I?O??');TextColor(White); end;
 	if conti <= 24 then begin write('         +??????????         ');TextColor(Green);writeln('                               ??????????????');TextColor(White); end;
 
-	Delay (300 - k);
+	Delay (Velocidad - k);
 	ClrScr;
 	conti := conti + 1;
 
@@ -396,7 +400,7 @@ Procedure Intro (i : integer);
 	if conti <= 23 then begin write('      OZ   ????????????        ');TextColor(Green);writeln('                        OI  ?????????????$');TextColor(White); end;
 	if conti <= 24 then begin write('          ??????????+          ');TextColor(Green);writeln('                            ??????????????');TextColor(White); end;
 
-	Delay (300 - k);
+	Delay (Velocidad - k);
 
 	ClrScr;
 

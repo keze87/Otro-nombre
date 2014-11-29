@@ -15,15 +15,15 @@ interface
 	//Procedure CrearMatriz(var Matriz : array of TMatriz; var X : integer ; var Y : integer);
 
 	function Aleatorio(limit:longint):longint;
-	
+
 	Procedure RecorrerMapa(x:integer;y:integer);
-		
+
 	Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
 implementation
 
 Uses
 
-	crt,MenuPcpal;
+	crt,MenuPcpal,SysUtils;
 
 
 Type
@@ -534,7 +534,7 @@ Type
 			MenuFactores(Salida);
 
 		end;
-		
+
 	Procedure RecorrerMapa(x:integer;y:integer); // Inicia en x=1, y=5
 	var
 		tecla:char;
@@ -544,23 +544,23 @@ Type
 		Yinicial:=y;
 		Xfinal:=73;				// EL mapa consta de un maximo de 73 en x (ancho)
 		Yfinal:=(y-1)+37;		// EL mapa consta de un maximo de 37 en y (alto)
-		
+
 		repeat
-			repeat     		
+			repeat
 				tecla:=readkey;
 			until (tecla='H') or (tecla='P') or (tecla='M') or (tecla='K')or (tecla=chr(27)) ;		// Verif8ica que solo sean las FLECHAS o ESC
-			
-			case tecla of   		 			
+
+			case tecla of
 			'H': begin	// ARRIBA
 					if (y > Yinicial) then
 					begin
 						y:=y-1;
 						gotoxy(x,y);
-						MostraPoblacionPuntoXY(x,y-5);	
-						gotoxy(x,y);				
+						MostraPoblacionPuntoXY(x,y-5);
+						gotoxy(x,y);
 					end
-					else sound (820); 
-				 end;					 
+					else sound (820);
+				 end;
 			'P': begin	// ABAJO
 					if (y < Yfinal) then
 					begin
@@ -569,7 +569,7 @@ Type
 						MostraPoblacionPuntoXY(x,y-5);
 						gotoxy(x,y);
 					end
-					else sound (820); 
+					else sound (820);
 				 end;
 			'M': begin	// DERECHA
 					if (x < Xfinal) then
@@ -579,7 +579,7 @@ Type
 						MostraPoblacionPuntoXY(x,y-5);
 						gotoxy(x,y);
 					end
-					else sound (820); 
+					else sound (820);
 				 end;
 			'K': begin	// IZQUIERDA
 					if (x > Xinicial) then
@@ -589,28 +589,28 @@ Type
 						MostraPoblacionPuntoXY(x,y-5);
 						gotoxy(x,y);
 					end
-					else sound (820); 
+					else sound (820);
 				 end;
 			end;
 		until tecla=chr(27);				// chr(27) = ESC
-		
+
 	end;
-	
+
 	Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
 	var
 		Poblacion : file of TPoblaciones;
 		DatoTemporal : TPoblaciones;
 		i ,k: Integer;
 	begin
-		Assign(Poblacion, 'Poblaciones.dat'); 					
-		if not FileExists('Poblaciones.dat') then
+		Assign(Poblacion, 'Poblaciones.DAT');
+		if not FileExists('Poblaciones.DAT') then
 		begin
-			Writeln('El archivo Poblaciones.dat no existe.');
+			Writeln('El archivo Poblaciones.DAT no existe.');
 		end
 		else
 		begin
-			Reset(Poblacion); 	
-			Writeln;						
+			Reset(Poblacion);
+			Writeln;
 			for i := 1 to FileSize(Poblacion) do
 			begin
 				Read(Poblacion, DatoTemporal);
@@ -622,7 +622,7 @@ Type
 						gotoxy(k,52);
 						write(' ');
 					end;
-					gotoxy(2,52);								
+					gotoxy(2,52);
 					Write(' X = ', DatoTemporal.PuntoX);
 					Write(', Y = ', DatoTemporal.PuntoY);
 					Write(', DESCRIPCION = ', DatoTemporal.Descripcion);

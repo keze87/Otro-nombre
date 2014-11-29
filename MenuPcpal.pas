@@ -187,11 +187,11 @@ implementation
 		EscrDelay(Velocidad,'**** Poblaciones ****');
 		writeln;
 		gotoXY(1,6);
-		LeerArchivo('mapamundi.txt');										
+		//LeerArchivo('mapamundi.txt');
 		writeln;
-		EscrDelay(Velocidad,'1) Posicionar el cursor en el mapa');					
+		EscrDelay(Velocidad,'1) Posicionar el cursor en el mapa');
 		writeln;
-		EscrDelay(Velocidad,'2) Volver al Menu Principal');					
+		EscrDelay(Velocidad,'2) Volver al Menu Principal');
 		writeln;
 
 		repeat
@@ -202,12 +202,12 @@ implementation
 			1 : begin
 					gotoXY(1,3);
 					writeln('Teclas de direccion para ver la descripcion y la cantidad de habitantes');
-					writeln('Para salir de mapa presione ESC');	
-					writeln;			
-					RecorrerMapa(wherex,wherey);	
+					writeln('Para salir de mapa presione ESC');
+					writeln;
+					RecorrerMapa(wherex,wherey);
 					gotoxy(1,50);
-					Menu(SalidaPobl);	
-					readkey;	
+					Menu(SalidaPobl);
+					readkey;
 				end;
 			2 : Menu(SalidaPobl);
 		end;
