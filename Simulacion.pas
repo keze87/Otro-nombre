@@ -20,7 +20,7 @@ type
 
 	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 	Procedure ImprLineasMapa(var lineatexto:string);
-	Procedure ModifSimulacion(dias:integer; periodo:integer; ruta:string);
+	Procedure ModifSimulacion(dias:integer; periodo:integer; rutaM:string; rutaF:string; rutaP:string);
 	Procedure MostrarPoblaciones(x:integer;y:integer; var Mapatriz:TMatriz);
 	Procedure MostrarPoblacionesViejo;
 	Procedure CrearMatriz(var MatrizMapa:TMatriz);
@@ -260,7 +260,7 @@ end;
 
 	end;
 
-	Procedure ModifSimulacion(dias:integer; periodo:integer; ruta:string);
+	Procedure ModifSimulacion(dias:integer; periodo:integer; rutaM:string; rutaF:string; rutaP:string);
 		var
 
 			i : integer;
