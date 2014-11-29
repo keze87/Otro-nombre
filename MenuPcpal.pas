@@ -5,6 +5,7 @@ interface
 	Procedure Menu (var SalidaMenu : integer);
 	Procedure MenuSimulacion(var SalidaMenuSim : integer);
 	Procedure MenuTerreno(var SalidaMenuTerr : integer);
+	Procedure MenuTerreno2(var SalidaMenuTerr : integer);		// AGREGADO
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
 	Procedure MenuFactores(var SalidaFac : integer);
 	Procedure MenuMundo(var SalidaMundo : integer);
@@ -189,7 +190,7 @@ implementation
 
 		case SalidaMenu of
 
-			1 : MenuTerreno(SalidaMenu);
+			1 : MenuTerreno2(SalidaMenu);		//ANTES: MenuTerreno(SalidaMenu);
 			2 : MenuPoblaciones(SalidaMenu);
 			3 : MenuFactores(SalidaMenu);
 			4 : MenuMundo(SalidaMenu);
@@ -365,7 +366,27 @@ implementation
 
 	end;
 
+	Procedure MenuTerreno2(var SalidaMenuTerr : integer);	
+	begin
 
+		ClrScr;
+		writeln;
+
+		GotoXY(27,1);
+		EscrDelay(Velocidad,'**** Menu Terreno ****');
+		LeerArchivo('mapamundi.txt');										
+		MostrarTerrenosDAT;													
+		Writeln;															
+		EscrDelay(Velocidad,'1) Volver al Menu Principal');					
+
+		repeat
+			LeerINT(SalidaMenuTerr);
+		until ((SalidaMenuTerr > 0) and (SalidaMenuTerr < 2));
+
+		Menu(SalidaMenuTerr);
+
+	end;
+	
 	Procedure MenuSimulacion(var SalidaMenuSim : integer);
 
 	begin
