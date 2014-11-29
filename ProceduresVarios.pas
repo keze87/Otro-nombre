@@ -12,11 +12,7 @@ interface
 
 	Procedure EditarFactores(var Salida : integer);
 
-	//Procedure CrearMatriz(var Matriz : array of TMatriz; var X : integer ; var Y : integer);
-
-	function Aleatorio(limit:longint):longint;
-
-// AGREGADO:
+	Function Aleatorio(limit:longint):longint;
 
 	Procedure MostrarTerrenosDAT;
 
@@ -561,115 +557,147 @@ Type
 		end;
 
 // AGREGADO!!! Muestra los datos de los terrenos que estan almacenadas por defecto
-Procedure MostrarTerrenosDAT;
-var
-	Terreno : file of TTerrenos;
-	DatoTemporal : TTerrenos;
-	i : Integer;
-begin
-	Assign(Terreno, 'Terrenos.DAT');
-	if not FileExists('Terrenos.DAT') then
+	Procedure MostrarTerrenosDAT;
+	var
+
+		Terreno : file of TTerrenos;
+		DatoTemporal : TTerrenos;
+		i : Integer;
+
 	begin
-		Writeln('El archivo Terrenos.DAT no existe.');
-	end
-	else
-	begin
-		Reset(Terreno);
-		Writeln('                              LEYENDA ');
-		Writeln;
-		for i := 1 to FileSize(Terreno) do
+
+		Assign(Terreno, 'Terrenos.DAT');
+		if not FileExists('Terrenos.DAT') then
 		begin
-			Read(Terreno, DatoTemporal);
-			Write('              Codigo : ', DatoTemporal.Codigo);
-			Write('  Descripcion : ', DatoTemporal.Descripcion);
+
+			Writeln('El archivo Terrenos.DAT no existe.');
+
+		end
+		else
+		begin
+
+			Reset(Terreno);
+			Writeln('                              LEYENDA ');
 			Writeln;
-		end;
+			for i := 1 to FileSize(Terreno) do
+			begin
+
+				Read(Terreno, DatoTemporal);
+				Write('              Codigo : ', DatoTemporal.Codigo);
+				Write('  Descripcion : ', DatoTemporal.Descripcion);
+				Writeln;
+
+			end;
+
 		Close(Terreno);
 		Writeln('               Otro       Descripcion : Otros terrenos');
+
 	end;
 
 end;
 
 // AGREGADO!!!. Leemos el archivo 'mapamundi.txt' con algunos colores basicos
-Procedure LeerArchivo(nombre:string);
-var
-	archivoTexto: text;
-	caracter:char;
-begin
-	assign(archivoTexto,nombre);
-	{$I-}
-	reset(archivoTexto);
-	{$I+}
-	if ioresult<>0 then
-		Writeln('El archivo ', nombre, ' no existe.')
-	else
+	Procedure LeerArchivo(nombre:string);
+	var
+
+		archivoTexto: text;
+		caracter:char;
+
 	begin
-		while not eof(archivoTexto) do
+
+		assign(archivoTexto,nombre);
+
+		{$I-}
+		reset(archivoTexto);
+		{$I+}
+
+		if ioresult<>0 then
+			Writeln('El archivo ', nombre, ' no existe.')
+		else
 		begin
-			read(archivoTexto,caracter);
-			write(VisualizarMapaConColores(caracter));
+			while not eof(archivoTexto) do
+			begin
+
+				read(archivoTexto,caracter);
+				write(VisualizarMapaConColores(caracter));
+
+			end;
+
+			writeln;
+			close(archivoTexto);
+			TextColor(LightGreen);				// Volvemos a colocar el Texto en color Verde claro
+			TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro
 		end;
-		writeln;
-		close(archivoTexto);
-		TextColor(LightGreen);				// Volvemos a colocar el Texto en color Verde claro
-		TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro
 	end;
-end;
 
 // AGREGADO!!!. Funcion que devuelve un caracter con el color de texto y color de fondo
-Function VisualizarMapaConColores(caracter:char):char;
-begin;
-	textbackground(LightCyan);
-	case caracter of
-		'0' : textcolor(Yellow);
-		'1' : textcolor(LightRed);
-		'2' : textcolor(LightGreen);
-		'3' : textcolor(Green);
-		'4' : textcolor(LightMagenta);
-		'5' : textcolor(Blue);
-		'6' : textcolor(Magenta);
-		'7' : textcolor(LightRed);
-		'8' : textcolor(LightBlue);
-		'9' : textcolor(white);
-		else  textcolor(black);
+	Function VisualizarMapaConColores(caracter:char):char;
+	begin;
+
+		textbackground(LightCyan);
+
+		case caracter of
+			'0' : textcolor(Yellow);
+			'1' : textcolor(LightRed);
+			'2' : textcolor(LightGreen);
+			'3' : textcolor(Green);
+			'4' : textcolor(LightMagenta);
+			'5' : textcolor(Blue);
+			'6' : textcolor(Magenta);
+			'7' : textcolor(LightRed);
+			'8' : textcolor(LightBlue);
+			'9' : textcolor(white);
+			else  textcolor(black);
+		end;
+
+		VisualizarMapaConColores:=caracter;	// Devolvemos el caracter con ciertos colores
 	end;
-	VisualizarMapaConColores:=caracter;	// Devolvemos el caracter con ciertos colores
-end;
 
 // AGREGADO!!!. Leemos el archivo 'mapamundi.txt' segun en enunciado del Trabajo Practico
-Procedure LeerArchivoSegunPoblacion(nombre:string);
-var
-	archivoTexto: text;
-	lineaTexto:string;
-	i,j:integer;
-	PoblacionVivosYZombies:string;
-begin
-	assign(archivoTexto,nombre);
-	{$I-}
-	reset(archivoTexto);
-	{$I+}
-	if ioresult<>0 then
-		Writeln('El archivo ', nombre, ' no existe.')
-	else
+	Procedure LeerArchivoSegunPoblacion(nombre:string);
+	var
+
+		archivoTexto: text;
+		lineaTexto:string;
+		i,j:integer;
+		PoblacionVivosYZombies:string;
+
 	begin
-		i:=1;
-		while not eof(archivoTexto) do
+
+		assign(archivoTexto,nombre);
+
+		{$I-}
+		reset(archivoTexto);
+		{$I+}
+
+		if ioresult<>0 then
+			Writeln('El archivo ', nombre, ' no existe.')
+		else
 		begin
 
-			readln(archivoTexto,lineaTexto);
-			for j := 1 to Length(lineaTexto) do
+			i:=1;
+			while not eof(archivoTexto) do
 			begin
-				PoblacionVivosYZombies:=ObtenerPoblacionVivosYZombies(j,i);
-				write(VisualizarMapaSegunPoblacion(lineaTexto[j],PoblacionVivosYZombies));
+
+				readln(archivoTexto,lineaTexto);
+
+				for j := 1 to Length(lineaTexto) do
+				begin
+
+					PoblacionVivosYZombies:=ObtenerPoblacionVivosYZombies(j,i);
+					write(VisualizarMapaSegunPoblacion(lineaTexto[j],PoblacionVivosYZombies));
+
+				end;
+				i:=i+1;
+				writeln;
+
 			end;
-			i:=i+1;
+
 			writeln;
+			close(archivoTexto);
+			VisualizarDescripcionPoblacion();
 		end;
-		writeln;
-		close(archivoTexto);
-		VisualizarDescripcionPoblacion();
 	end;
-end;
 
 // Funcion que devuelve una cadena con la cantidad personas vivas y personas zombies
 	Function ObtenerPoblacionVivosYZombies(x,y:integer):string;
@@ -1028,6 +1056,7 @@ end;
 			end;
 
 			Close(Poblacion);
+
 		end;
 	end;
 end.

@@ -526,9 +526,10 @@ end;
 
 				end;
 
+				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
+
 				Delay(3000);
 
-				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
 				//readkey;
 
 				peri := 0;
