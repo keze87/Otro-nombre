@@ -182,7 +182,7 @@ Type
 
 			auxF.Codigo := 'be' ;
 			auxF.Descripcion := ' Transmisión ' ;
-			auxF.Valor := 1 ;
+			auxF.Valor := 0.1 ;
 
 			write(Factores,auxF);
 
@@ -198,7 +198,7 @@ Type
 
 			auxF.Codigo := 'xi' ;
 			auxF.Descripcion := ' Resurreccion Zombie ' ;
-			auxF.Valor := 0.7 ;
+			auxF.Valor := 0.1 ;
 
 			write(Factores,auxF);
 
@@ -206,7 +206,7 @@ Type
 
 			auxF.Codigo := 'pi' ;
 			auxF.Descripcion := ' Tasa de natalidad ' ;
-			auxF.Valor := 1 ;
+			auxF.Valor := 0.8 ;
 
 			write(Factores,auxF);
 
@@ -214,7 +214,7 @@ Type
 
 			auxF.Codigo := 'ro' ;
 			auxF.Descripcion := ' Latente de infección ' ;
-			auxF.Valor := 0.8 ;
+			auxF.Valor := 0.5 ;
 
 			write(Factores,auxF);
 

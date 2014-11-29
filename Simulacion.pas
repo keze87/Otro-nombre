@@ -27,7 +27,7 @@ type
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 	Procedure Pausa(var caracter:char;var Mapatriz:TMatriz);
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
-	Procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer);
+	Procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
 
 implementation
 
@@ -282,6 +282,15 @@ end;
 			totalR : longInt;
 			totalZ : longInt;
 
+			Factores : file of TFactores;
+			auxF : TFactores;
+			alfa : real;
+			beta : real;
+			delta : real;
+			xi : real;
+			pi : real;
+			rho : real;
+
 		begin
 
 			clrscr;
@@ -290,6 +299,28 @@ end;
 
 			i := 1;
 			peri := 1;
+
+			Assign(Factores,'Factores.DAT');
+			reset(Factores);
+
+			repeat
+
+				read(Factores,auxF);
+
+				case auxF.Codigo of
+
+					'al' : alfa := auxF.Valor;
+					'be' : beta := auxF.Valor;
+					'de' : delta := auxF.Valor;
+					'xi' : xi := auxF.Valor;
+					'pi' : pi := auxF.Valor;
+					'ro' : rho := auxF.Valor;
+
+				end;
+
+			until EOF(Factores);
+
+			close(Factores);
 
 			CrearMatriz(Mapatriz);
 
@@ -400,7 +431,7 @@ end;
 			i := i + 1;
 			peri := peri + 1;
 
-			ActualizarMatriz(Mapatriz,topex,topey);
+			ActualizarMatriz(Mapatriz,topex,topey,alfa,beta,delta,xi,pi,rho);
 
 			until i >= dias + 1;
 
@@ -649,42 +680,13 @@ end;
 
 	end;
 
-	procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer);
+	procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
 	var
-
-		Factores : file of TFactores;
-		auxF : TFactores;
-		alfa : real;
-		beta : real;
-		delta : real;
-		xi : real;
-		pi : real;
-		rho : real;
 
 		i : integer;
 		j : integer;
 
 	begin
-
-		Assign(Factores,'Factores.DAT');
-		reset(Factores);
-
-		repeat
-
-			read(Factores,auxF);
-
-			case auxF.Codigo of
-
-				'al' : alfa := auxF.Valor;
-				'be' : beta := auxF.Valor;
-				'de' : delta := auxF.Valor;
-				'xi' : xi := auxF.Valor;
-				'pi' : pi := auxF.Valor;
-				'ro' : rho := auxF.Valor;
-
-			end;
-
-		until EOF(Factores);
 
 		for j := 1 to topey-1 do
 			for i := 1 to topex do
