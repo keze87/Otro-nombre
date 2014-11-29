@@ -107,10 +107,10 @@ implementation
 		writeln;
 		ruta := 'mapamundi.txt';
 		GotoXY(20,1);
-{		EscrDelay(Velocidad,'**** Mundo ****');
+		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
-		readln;}
+		readln;
 		MostrarMapa(SalidaMundo,ruta);
 		writeln;
 		//GotoXY(27,22);
