@@ -184,7 +184,7 @@ implementation
 		GotoXY(1,4);
 		EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
 		readln;
-		MostrarMapa(SalidaMundo,ruta);
+		MostrarMapa(ruta);
 		writeln;
 		//GotoXY(27,22);
 		textcolor(10);
@@ -266,32 +266,18 @@ implementation
 		gotoXY(1,6);
 		//LeerArchivo('mapamundi.txt');
 		writeln;
-		EscrDelay(Velocidad,'1) Posicionar el cursor en el mapa');
-		writeln;
-		EscrDelay(Velocidad,'2) Volver al Menu Principal');
-		writeln;
 
-		repeat
-
-			LeerINT(SalidaPobl);
-
-		until ((SalidaPobl > 0) and (SalidaPobl < 3));
-
-		case SalidaPobl of
-			1 : begin
-					gotoXY(1,3);
-					writeln('Teclas de direccion para ver la descripcion y la cantidad de habitantes');
-					writeln('Para salir de mapa presione ESC');
-					writeln;
-					RecorrerMapa(wherex,wherey);
-					gotoxy(1,50);
-					Menu(SalidaPobl);
-					readkey;
-				end;
-			2 : Menu(SalidaPobl);
-		end;
+		gotoXY(1,3);
+		writeln('Teclas de direccion para ver la descripcion y la cantidad de habitantes');
+		writeln('Para salir de mapa presione "s"');
+		readkey;
+		clrscr;
+		//RecorrerMapa(1,1);
+		MostrarPoblacionesViejo;
+		Menu(SalidaPobl);
 
 	end;
+
 
 	{Procedure MenuTerreno(var SalidaMenuTerr : integer);
 	var

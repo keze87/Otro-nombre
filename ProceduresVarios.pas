@@ -36,16 +36,15 @@ interface
 
 	Function BuscarFactor(codigoFactor:string):real;
 
-	Procedure RecorrerMapa(x:integer;y:integer);
+	//Procedure RecorrerMapa(x:integer;y:integer);
 
-	Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
+	//Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
 
 implementation
 
 Uses
 
-	crt,MenuPcpal,SysUtils;
-
+	crt,MenuPcpal,SysUtils,Simulacion;
 
 Type
 
@@ -932,7 +931,7 @@ end;
 		close(Factores);
 	end;
 
-	Procedure RecorrerMapa(x:integer;y:integer); // Inicia en x=1, y=5
+	{Procedure RecorrerMapa(x:integer;y:integer); // Inicia en x=1, y=5
 	var
 
 		tecla:char;
@@ -945,12 +944,14 @@ end;
 		Xfinal:=73;				// EL mapa consta de un maximo de 73 en x (ancho)
 		Yfinal:=(y-1)+37;		// EL mapa consta de un maximo de 37 en y (alto)
 
+		MostrarMapa('mapamundi.txt');
+
 		repeat
 			repeat
 
 				tecla:=readkey;
 
-			until (tecla='H') or (tecla='P') or (tecla='M') or (tecla='K')or (tecla=chr(27)) ;		// Verif8ica que solo sean las FLECHAS o ESC
+			until (tecla='H') or (tecla='P') or (tecla='M') or (tecla='K')or (tecla=chr(27)) ;
 
 			case tecla of
 			'H': begin	// ARRIBA
@@ -960,7 +961,7 @@ end;
 
 						y:=y-1;
 						gotoxy(x,y);
-						MostraPoblacionPuntoXY(x,y-5);
+						MostraPoblacionPuntoXY(x,y);
 						gotoxy(x,y);
 
 					end
@@ -975,7 +976,7 @@ end;
 
 						y:=y+1;
 						gotoxy(x,y);
-						MostraPoblacionPuntoXY(x,y-5);
+						MostraPoblacionPuntoXY(x,y);
 						gotoxy(x,y);
 
 					end
@@ -990,7 +991,7 @@ end;
 
 						x:=x+1;
 						gotoxy(x,y);
-						MostraPoblacionPuntoXY(x,y-5);
+						MostraPoblacionPuntoXY(x,y);
 						gotoxy(x,y);
 
 					end
@@ -1005,7 +1006,7 @@ end;
 
 						x:=x-1;
 						gotoxy(x,y);
-						MostraPoblacionPuntoXY(x,y-5);
+						MostraPoblacionPuntoXY(x,y);
 						gotoxy(x,y);
 
 					end
@@ -1022,7 +1023,7 @@ end;
 
 		Poblacion : file of TPoblaciones;
 		DatoTemporal : TPoblaciones;
-		i ,k: Integer;
+		i : Integer;
 
 	begin
 
@@ -1060,5 +1061,5 @@ end;
 			Close(Poblacion);
 
 		end;
-	end;
+	end;}
 end.

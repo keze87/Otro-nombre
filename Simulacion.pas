@@ -18,7 +18,7 @@ type
 
 	TMatriz = array[1..100,1..100] of TRegMatriz;
 
-	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
+	Procedure MostrarMapa(ruta:string);
 	Procedure ImprLineasMapa(var lineatexto:string);
 	Procedure ModifSimulacion(dias:integer; periodo:integer; rutaM:string; rutaF:string; rutaP:string);
 	Procedure MostrarPoblaciones(x:integer;y:integer; var Mapatriz:TMatriz);
@@ -61,14 +61,14 @@ implementation
 
 			i:integer;
 			j:integer;
-			rutaP:string;
-			rutaF:string;
+			//rutaP:string;
+			//rutaF:string;
 			ArchPoblaciones:file of TPoblaciones;
 			ArchFactores:file of TFactores;
 			Factores:file of TFactores;
 			RegP:TPoblaciones;
 			RegF:TFactores;
-			rta:char;
+			//rta:char;
 
 		begin
 
@@ -612,7 +612,7 @@ end;
 
 	end;
 
-	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
+	Procedure MostrarMapa(ruta:string);
 	var
 
 		texto:string;
