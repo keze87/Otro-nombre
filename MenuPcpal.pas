@@ -47,115 +47,82 @@ implementation
 	Const
 
 		Velocidad = 15;
-		
+
 	Procedure CargarSimulacion;
+	var
 
+		rutaP:string;
+		rutaF:string;
+		rutaM:string;
+		dias:integer;
+		periodo:integer;
 
+	Begin
 
-        var
-
-                rutaP:string;
-
-                rutaF:string;
-
-                rutaM:string;
-
-                dias:integer;
-
-                periodo:integer;
-
-        Begin
-
-                ClrScr;
-
+		ClrScr;
 		writeln;
-
-
-
 		GotoXY(25,1);
 
 		EscrDelay(Velocidad,'**** Cargar Simulacion ****');
 
-                GotoXY(1,4);
-
-
+		GotoXY(1,4);
 
 		EscrDelay(Velocidad,'Ingrese ruta de archivo de poblaciones'); {poblaciones.DAT o .dat}
+		read(rutaP);
 
-                read(rutaP);
+		{while (not fileexists(rutaP)) do
+			begin
 
-                    {    while (not fileexists(rutaP)) do
+				writeln('Archivo inexistente');
+				read(rutaP);
 
-                                begin
+			end;   }
 
-                                        writeln('Archivo inexistente');
+		writeln;
 
-                                        read(rutaP);
+		write('Ingrese cantidad de dias: ');
 
-                                end;   }
+		LeerINT(dias);
 
-                writeln;
+		writeln;
 
+		EscrDelay(Velocidad,'Ingrese ruta de archivo de escenario');
 
+		read(rutaM);
 
-                write('Ingrese cantidad de dias: ');
+		{while (not fileexists(rutaM)) do
+		begin
 
-                LeerINT(dias);
+			writeln('Archivo inexistente');
+			read(rutaM);
 
-                writeln;
+		end; }
 
-                EscrDelay(Velocidad,'Ingrese ruta de archivo de escenario');
+		writeln;
 
+		write('Ingrese periodo de actualizacion: ');
 
+		LeerINT(periodo);
 
-                read(rutaM);
+		writeln;
 
-                      {  while (not fileexists(rutaM)) do
+		EscrDelay(Velocidad,'Ingrese ruta de archivo de factores');
 
-                                begin
+		read(rutaF);
 
-                                        writeln('Archivo inexistente');
+		{while (not fileexists(rutaF)) do
+			begin
 
-                                        read(rutaM);
+				writeln('Archivo inexistente');
+				read(rutaF);
 
-                                end; }
-
-                writeln;
-
-
-
-                write('Ingrese periodo de actualizacion: ');
-
-                LeerINT(periodo);
-
-
-
-                writeln;
-
-                EscrDelay(Velocidad,'Ingrese ruta de archivo de factores');
-
-                read(rutaF);
-
-                      {  while (not fileexists(rutaF)) do
-
-                                begin
-
-                                        writeln('Archivo inexistente');
-
-                                        read(rutaF);
-
-                                end;    }
-
-
+			end;}
 
 		ModifSimulacion(dias,periodo,rutaM,rutaF,rutaP);
 
-
-
-        end;
+	end;
 
 	Procedure Menu (var SalidaMenu : integer);
-
 	begin
 
 		textcolor(10);
@@ -204,6 +171,7 @@ implementation
 
 	Procedure MenuMundo(var SalidaMundo : integer);
 	var
+
 		ruta : string;
 
 	begin
@@ -240,6 +208,7 @@ implementation
 
 	Procedure MenuFactores(var SalidaFac : integer);
 	var
+
 		Factores : file of TFactores;
 		auxF : TFactores;
 
@@ -287,8 +256,8 @@ implementation
 	end;
 
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
-
 	begin
+
 		ClrScr;
 		writeln;
 		GotoXY(27,1);
@@ -303,7 +272,9 @@ implementation
 		writeln;
 
 		repeat
+
 			LeerINT(SalidaPobl);
+
 		until ((SalidaPobl > 0) and (SalidaPobl < 3));
 
 		case SalidaPobl of
@@ -323,8 +294,8 @@ implementation
 	end;
 
 	Procedure MenuTerreno(var SalidaMenuTerr : integer);
+	var
 
-        var
 		Terrenos : file of TTerrenos;
 		auxT : TTerrenos;
 
@@ -366,7 +337,7 @@ implementation
 
 	end;
 
-	Procedure MenuTerreno2(var SalidaMenuTerr : integer);	
+	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
 	begin
 
 		ClrScr;
@@ -374,10 +345,10 @@ implementation
 
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Menu Terreno ****');
-		LeerArchivo('mapamundi.txt');										
-		MostrarTerrenosDAT;													
-		Writeln;															
-		EscrDelay(Velocidad,'1) Volver al Menu Principal');					
+		LeerArchivo('mapamundi.txt');
+		MostrarTerrenosDAT;
+		Writeln;
+		EscrDelay(Velocidad,'1) Volver al Menu Principal');
 
 		repeat
 			LeerINT(SalidaMenuTerr);
@@ -386,7 +357,7 @@ implementation
 		Menu(SalidaMenuTerr);
 
 	end;
-	
+
 	Procedure MenuSimulacion(var SalidaMenuSim : integer);
 
 	begin

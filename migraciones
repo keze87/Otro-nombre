@@ -1,22 +1,16 @@
 Unit Migraciones;
 
-
-
 Interface
-
-
 
 type
 
+	TRegMatriz = record
 
+		codigo : char;
 
-	TRegMatriz = record			
+		Descripcion : string;
 
-		codigo : char;			
-
-		Descripcion : string;			
-
-		caracter : char;			
+		caracter : char;
 
 		CantSuceptibles : longint;
 
@@ -164,13 +158,13 @@ Begin
 
 	end;
 
-			
+
 
 	for J:=1 to topey do
 
 		begin
 
-		for I:=1 to topex do	
+		for I:=1 to topex do
 
 			if mapatriz[i,j].codigo = '9' then
 
@@ -268,13 +262,13 @@ Begin
 
 				porcentajeS:=(porcentajeZ*mapatriz[i,j].CantSuceptibles)/100;
 
-				
+
 
 				mapatriz[i,j].CantSuceptibles :=  mapatriz[i,j].CantSuceptibles-abs(trunc(porcentajeS));
 
 				case cant of
 
-			
+
 
 					1: begin
 
@@ -316,7 +310,7 @@ Begin
 
         mapatriz[VecPos[3].x,VecPos[3].y].CantSuceptibles := mapatriz[VecPos[3].x,VecPos[3].y].CantSuceptibles+trunc (porcentajeS / 3);
 
-					
+
 
 
 
@@ -344,7 +338,7 @@ Begin
 
         mapatriz[VecPos[4].x,VecPos[4].y].CantSuceptibles := mapatriz[VecPos[4].x,VecPos[4].y].CantSuceptibles+trunc(porcentajeS / 4);
 
-						
+
 
 
 

@@ -17,31 +17,31 @@ interface
 	function Aleatorio(limit:longint):longint;
 
 // AGREGADO:
-	
-	Procedure MostrarTerrenosDAT;								
-																												
-	Procedure LeerArchivo(nombre:string);	
-											
-	Function VisualizarMapaConColores(caracter:char):char;	
-							
-	Procedure LeerArchivoSegunPoblacion(nombre:string);	
-									
-	Function ObtenerPoblacionVivosYZombies(x,y:integer):string;	
-						
-	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;	
-	
-	Procedure VisualizarDescripcionPoblacion();			
-								
-	Procedure PintarFondo(cadena:string; color:byte);	
-											
+
+	Procedure MostrarTerrenosDAT;
+
+	Procedure LeerArchivo(nombre:string);
+
+	Function VisualizarMapaConColores(caracter:char):char;
+
+	Procedure LeerArchivoSegunPoblacion(nombre:string);
+
+	Function ObtenerPoblacionVivosYZombies(x,y:integer):string;
+
+	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
+
+	Procedure VisualizarDescripcionPoblacion();
+
+	Procedure PintarFondo(cadena:string; color:byte);
+
 	Procedure PintarTexto(cadena:string; color:byte);
-									
-	Procedure ActualizarPoblacionMundial();			
-										
-	Function BuscarFactor(codigoFactor:string):real;	
-												
+
+	Procedure ActualizarPoblacionMundial();
+
+	Function BuscarFactor(codigoFactor:string):real;
+
 	Procedure RecorrerMapa(x:integer;y:integer);
-	
+
 	Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
 
 implementation
@@ -561,22 +561,22 @@ Type
 		end;
 
 // AGREGADO!!! Muestra los datos de los terrenos que estan almacenadas por defecto
-Procedure MostrarTerrenosDAT;								 
+Procedure MostrarTerrenosDAT;
 var
 	Terreno : file of TTerrenos;
 	DatoTemporal : TTerrenos;
-	i : Integer;			
+	i : Integer;
 begin
-	Assign(Terreno, 'Terrenos.dat'); 					
-	if not FileExists('Terrenos.dat') then
+	Assign(Terreno, 'Terrenos.DAT');
+	if not FileExists('Terrenos.DAT') then
 	begin
-		Writeln('El archivo Terrenos.dat no existe.');
+		Writeln('El archivo Terrenos.DAT no existe.');
 	end
 	else
 	begin
-		Reset(Terreno); 
-		Writeln('                              LEYENDA ');	
-		Writeln;								
+		Reset(Terreno);
+		Writeln('                              LEYENDA ');
+		Writeln;
 		for i := 1 to FileSize(Terreno) do
 		begin
 			Read(Terreno, DatoTemporal);
@@ -587,371 +587,447 @@ begin
 		Close(Terreno);
 		Writeln('               Otro       Descripcion : Otros terrenos');
 	end;
-	
+
 end;
 
 // AGREGADO!!!. Leemos el archivo 'mapamundi.txt' con algunos colores basicos
-Procedure LeerArchivo(nombre:string);						
+Procedure LeerArchivo(nombre:string);
 var
-	archivoTexto: text;									
-	caracter:char;																
+	archivoTexto: text;
+	caracter:char;
 begin
-	assign(archivoTexto,nombre);	
-	{$I-}					
-	reset(archivoTexto); 
-	{$I+}								
-	if ioresult<>0 then									
+	assign(archivoTexto,nombre);
+	{$I-}
+	reset(archivoTexto);
+	{$I+}
+	if ioresult<>0 then
 		Writeln('El archivo ', nombre, ' no existe.')
 	else
 	begin
-		while not eof(archivoTexto) do 					
+		while not eof(archivoTexto) do
 		begin
 			read(archivoTexto,caracter);
-			write(VisualizarMapaConColores(caracter));	
+			write(VisualizarMapaConColores(caracter));
 		end;
 		writeln;
-		close(archivoTexto);	
+		close(archivoTexto);
 		TextColor(LightGreen);				// Volvemos a colocar el Texto en color Verde claro
-		TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro				
+		TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro
 	end;
 end;
 
 // AGREGADO!!!. Funcion que devuelve un caracter con el color de texto y color de fondo
-Function VisualizarMapaConColores(caracter:char):char;			
-begin;		
+Function VisualizarMapaConColores(caracter:char):char;
+begin;
 	textbackground(LightCyan);
 	case caracter of
-		'0' : textcolor(Yellow); 
+		'0' : textcolor(Yellow);
 		'1' : textcolor(LightRed);
 		'2' : textcolor(LightGreen);
 		'3' : textcolor(Green);
 		'4' : textcolor(LightMagenta);
 		'5' : textcolor(Blue);
-		'6' : textcolor(Magenta);		
+		'6' : textcolor(Magenta);
 		'7' : textcolor(LightRed);
 		'8' : textcolor(LightBlue);
 		'9' : textcolor(white);
 		else  textcolor(black);
-	end;		
+	end;
 	VisualizarMapaConColores:=caracter;	// Devolvemos el caracter con ciertos colores
 end;
 
 // AGREGADO!!!. Leemos el archivo 'mapamundi.txt' segun en enunciado del Trabajo Practico
-Procedure LeerArchivoSegunPoblacion(nombre:string);						
+Procedure LeerArchivoSegunPoblacion(nombre:string);
 var
-	archivoTexto: text;									
-	lineaTexto:string;	
+	archivoTexto: text;
+	lineaTexto:string;
 	i,j:integer;
-	PoblacionVivosYZombies:string;															
+	PoblacionVivosYZombies:string;
 begin
-	assign(archivoTexto,nombre);	
-	{$I-}					
-	reset(archivoTexto); 
-	{$I+}								
-	if ioresult<>0 then									
+	assign(archivoTexto,nombre);
+	{$I-}
+	reset(archivoTexto);
+	{$I+}
+	if ioresult<>0 then
 		Writeln('El archivo ', nombre, ' no existe.')
 	else
 	begin
-		i:=1;	
-		while not eof(archivoTexto) do 					
+		i:=1;
+		while not eof(archivoTexto) do
 		begin
-			
+
 			readln(archivoTexto,lineaTexto);
-			for j := 1 to Length(lineaTexto) do 
+			for j := 1 to Length(lineaTexto) do
 			begin
 				PoblacionVivosYZombies:=ObtenerPoblacionVivosYZombies(j,i);
 				write(VisualizarMapaSegunPoblacion(lineaTexto[j],PoblacionVivosYZombies));
 			end;
-			i:=i+1;	
+			i:=i+1;
 			writeln;
 		end;
 		writeln;
 		close(archivoTexto);
-		VisualizarDescripcionPoblacion();			
+		VisualizarDescripcionPoblacion();
 	end;
 end;
 
-// AGREGADO!!!. Funcion que devuelve una cadena con la cantidad personas vivas y personas zombies
-Function ObtenerPoblacionVivosYZombies(x,y:integer):string;			
-var
-	Poblacion : file of TPoblaciones;
-	DatoTemporal : TPoblaciones;
-	i: Integer;
-	PoblacionVivos,PoblacionZombies : string;
-	
-begin;		
-	Assign(Poblacion, 'Poblaciones.dat'); 					
-	if not FileExists('Poblaciones.dat') then
-	begin
-		Writeln('El archivo Poblaciones.dat no existe.');
-	end
-	else
-	begin
-		Reset(Poblacion); 						
-		for i := 1 to FileSize(Poblacion) do
+// Funcion que devuelve una cadena con la cantidad personas vivas y personas zombies
+	Function ObtenerPoblacionVivosYZombies(x,y:integer):string;
+	var
+
+		Poblacion : file of TPoblaciones;
+		DatoTemporal : TPoblaciones;
+		i: Integer;
+		PoblacionVivos,PoblacionZombies : string;
+
+	begin;
+
+		Assign(Poblacion, 'Poblaciones.DAT');
+		if not FileExists('Poblaciones.DAT') then
 		begin
-			Read(Poblacion, DatoTemporal);
-			if (DatoTemporal.PuntoX=x) and (DatoTemporal.PuntoY=y) then
+			Writeln('El archivo Poblaciones.DAT no existe.');
+		end
+		else
+		begin
+			Reset(Poblacion);
+			for i := 1 to FileSize(Poblacion) do
 			begin
-				PoblacionVivos:=IntToStr(DatoTemporal.CantSuceptibles);
-				PoblacionZombies:=IntToStr(DatoTemporal.CantZombies);
-				break;
-			end;
-		end;
-		Close(Poblacion);
-		ObtenerPoblacionVivosYZombies:=PoblacionVivos+'&'+PoblacionZombies;
-	end;
-end;
 
-// AGREGADO!!!. Funcion que devuelve un caracter pintado con colores de ciertas caracteristicas	
-Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;				 
-var
-	Vivos,Zombies:longInt;
-	error:integer;
-begin
-	textbackground(LightCyan);						
-	//Vivos:=StrToInt(copy(VivosZombies, 1, pos('&',VivosZombies)-1));											
-	//Zombies:=StrToInt(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)));
-		
-	Val(copy(VivosZombies, 1, pos('&',VivosZombies)-1), Vivos, error);												// Obtenemos y almacenamos la cantidad de Personas Vivas en la variable 'Vivos'
-	Val(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)), Zombies, error);	// Obtenemos y almacenamos la cantidad de Personas Zombies en la variable 'Zombies'		
-		
-	if Vivos > 75 then
-		textcolor(LightGreen)
-	else
+				Read(Poblacion, DatoTemporal);
+
+				if (DatoTemporal.PuntoX=x) and (DatoTemporal.PuntoY=y) then
+				begin
+					PoblacionVivos:=IntToStr(DatoTemporal.CantSuceptibles);
+					PoblacionZombies:=IntToStr(DatoTemporal.CantZombies);
+					break;
+				end;
+			end;
+
+		Close(Poblacion);
+
+		ObtenerPoblacionVivosYZombies:=PoblacionVivos+'&'+PoblacionZombies;
+
+		end;
+	end;
+
+// Funcion que devuelve un caracter pintado con colores de ciertas caracteristicas
+	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
+	var
+
+		Vivos,Zombies:longInt;
+		error:integer;
+
+	begin
+
+		textbackground(LightCyan);
+		//Vivos:=StrToInt(copy(VivosZombies, 1, pos('&',VivosZombies)-1));
+		//Zombies:=StrToInt(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)));
+
+		Val(copy(VivosZombies, 1, pos('&',VivosZombies)-1), Vivos, error);												// Obtenemos y almacenamos la cantidad de Personas Vivas en la variable 'Vivos'
+		Val(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)), Zombies, error);	// Obtenemos y almacenamos la cantidad de Personas Zombies en la variable 'Zombies'
+
+		if Vivos > 75 then
+			textcolor(LightGreen)
+
+		else
 		if Vivos > 50 then
 			textcolor(LightBlue)
+
 		else
-			if Vivos > 25 then
-				textcolor(Yellow)
-			else
-				textcolor(Magenta); 
-		
-	if (Vivos=0) and (Zombies<=25) then		
-		textcolor(LightRed);  
+		if Vivos > 25 then
+			textcolor(Yellow)
 
-	VisualizarMapaSegunPoblacion:=caracter;			// Devolvemos el caracter con ciertos colores
-end;
+		else
+			textcolor(Magenta);
 
-Procedure VisualizarDescripcionPoblacion();
-begin
-	TextColor(LightGreen);
-	TextBackground(Black);	
-	Writeln('                            LEYENDA ');	
-	Writeln;	
-	Write('           '); PintarFondo('  ',10); Write('    '); PintarTexto('Area con poblacion de vivos > 75',10);					// LightGreen		
-	Write('           '); PintarFondo('  ',9);  Write('    '); PintarTexto('Area con poblacion de vivos > 50',9);					// LightBlue		
-	Write('           '); PintarFondo('  ',14); Write('    '); PintarTexto('Area con poblacion de vivos > 25',14);					// Yellow	
-	Write('           '); PintarFondo('  ',5);  Write('    '); PintarTexto('Area con poblacion de vivos < = 25',5);					// Magenta	
-	Write('           '); PintarFondo('  ',12); Write('    '); PintarTexto('Area con poblacion de vivos = 0 y zombies <= 25',12);	// LightRed
-	writeln;		
-	TextColor(LightGreen);				// Volvemos a colocar el Texto en color Verde claro
-	TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro	
-end;
+		if (Vivos=0) and (Zombies<=25) then
+			textcolor(LightRed);
 
-Procedure PintarFondo(cadena:string; color:byte);
-begin
-	TextBackground(color);
-	write(cadena);
-	TextBackground(black);
-end;
+		VisualizarMapaSegunPoblacion:=caracter;			// Devolvemos el caracter con ciertos colores
 
-Procedure PintarTexto(cadena:string; color:byte);
-begin
-	TextBackground(black);
-	TextColor(color);
-	writeln(cadena);
-end;
+	end;
 
-Procedure ActualizarPoblacionMundial();
-var
-	PoblacionAnterior : file of TPoblaciones;
-	PoblacionNueva : file of TPoblaciones;
-	DatoTemporalAnterior : TPoblaciones;
-	DatoTemporalNuevo : TPoblaciones;
-	k : Integer;
-	
-	S_ultimo,Z_ultimo,R_ultimo,I_ultimo,S,Z,R,I: longInt;	//	S = Susceptibles, Z = Zombies, R = Removidos. I = Infectados
-	alpha,beta,delta,xi,pi,rho : Real;
-	{	
+	Procedure VisualizarDescripcionPoblacion();
+	begin
+
+		TextColor(LightGreen);
+		TextBackground(Black);
+		Writeln('                            LEYENDA ');
+		Writeln;
+		Write('           '); PintarFondo('  ',10); Write('    '); PintarTexto('Area con poblacion de vivos > 75',10);					// LightGreen
+		Write('           '); PintarFondo('  ',9);  Write('    '); PintarTexto('Area con poblacion de vivos > 50',9);					// LightBlue
+		Write('           '); PintarFondo('  ',14); Write('    '); PintarTexto('Area con poblacion de vivos > 25',14);					// Yellow
+		Write('           '); PintarFondo('  ',5);  Write('    '); PintarTexto('Area con poblacion de vivos < = 25',5);					// Magenta
+		Write('           '); PintarFondo('  ',12); Write('    '); PintarTexto('Area con poblacion de vivos = 0 y zombies <= 25',12);	// LightRed
+		writeln;
+		TextColor(LightGreen);				// Volvemos a colocar el Texto en color Verde claro
+		TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro
+
+	end;
+
+	Procedure PintarFondo(cadena:string; color:byte);
+	begin
+
+		TextBackground(color);
+		write(cadena);
+		TextBackground(black);
+
+	end;
+
+	Procedure PintarTexto(cadena:string; color:byte);
+	begin
+
+		TextBackground(black);
+		TextColor(color);
+		writeln(cadena);
+
+	end;
+
+	Procedure ActualizarPoblacionMundial();
+	var
+
+		PoblacionAnterior : file of TPoblaciones;
+		PoblacionNueva : file of TPoblaciones;
+		DatoTemporalAnterior : TPoblaciones;
+		DatoTemporalNuevo : TPoblaciones;
+		k : Integer;
+
+		S_ultimo,Z_ultimo,R_ultimo,I_ultimo,S,Z,R,I: longInt;
+		//	S = Susceptibles, Z = Zombies, R = Removidos. I = Infectados
+		alpha,beta,delta,xi,pi,rho : Real;
+		{
 		alpha = Factor de salvaciÃ³n ante ataque
 		beta  = Factor de transmisiÃ³n
 		delta = Factor de muerte por causa natural
 		xi    = Factor de ResurrecciÃ³n Zombi
 		pi    = Tasa de natalidad
 		rho   = Factor Latente de infecciÃ³n
-	}			
-begin
-	Assign(PoblacionAnterior, 'Poblaciones.dat');
-	Rename(PoblacionAnterior,'Poblaciones.tmp'); 		
-	
-	Assign(PoblacionNueva,'Poblaciones.dat');
-	rewrite(PoblacionNueva);	
-				
-	if not FileExists('Poblaciones.dat') then
+		}
+
 	begin
-		Writeln('El archivo Poblaciones.dat no existe.');
-	end
-	else
-	begin
-		Reset(PoblacionAnterior); 	
-		Writeln;						
-		for k := 1 to FileSize(PoblacionAnterior) do
+
+		Assign(PoblacionAnterior, 'Poblaciones.DAT');
+		Rename(PoblacionAnterior,'Poblaciones.tmp');
+
+		Assign(PoblacionNueva,'Poblaciones.DAT');
+		rewrite(PoblacionNueva);
+
+		if not FileExists('Poblaciones.DAT') then
 		begin
-			Read(PoblacionAnterior, DatoTemporalAnterior);
-			S:=DatoTemporalAnterior.CantSuceptibles;
-			I:=DatoTemporalAnterior.CantInfectados;
-			Z:=DatoTemporalAnterior.CantZombies;
-						
-			pi:=BuscarFactor('pi');
-			beta:=BuscarFactor('be');
-			delta:=BuscarFactor('de');
-			rho:=BuscarFactor('ro');
-			xi:=BuscarFactor('xi');
-			alpha:=BuscarFactor('al');			
-			
-			S_ultimo:= Trunc((pi * (S + I)) - (beta * S * Z) - (delta * S));		// Trunc elimina la parte decimal
-			I_ultimo:= Trunc((beta * S * Z) - (delta * I) - (rho * I));
 
-			R:=0;															// Si y solo si R = 0
-			R_ultimo:= Trunc((delta * S) + (delta * I) + (alpha * S * Z) - (rho * R));
-			Z_ultimo:= Trunc((rho * I) + (xi * R) - (alpha * S * Z));				// Revisar!!!! porque R siempre sera R = 0, ya que R no se guarda en ningun lado
-		
-			// Actualizamos el valor de las nuevas poblaciones:	
-			DatoTemporalNuevo.PuntoX:=DatoTemporalAnterior.PuntoX;
-			DatoTemporalNuevo.PuntoY:=DatoTemporalAnterior.PuntoY;
-			DatoTemporalNuevo.Descripcion:=DatoTemporalAnterior.Descripcion;
-			
-			DatoTemporalNuevo.CantSuceptibles := S_ultimo;
-			DatoTemporalNuevo.CantInfectados := I_ultimo;
-			DatoTemporalNuevo.CantZombies := Z_ultimo;
+			Writeln('El archivo Poblaciones.DAT no existe.');
 
-			DatoTemporalNuevo.TasaNatalidad:=pi;
-			DatoTemporalNuevo.FactorMovilidad:=DatoTemporalAnterior.FactorMovilidad;
-		
-			write(PoblacionNueva,DatoTemporalNuevo);
-		end;
-		close(PoblacionNueva);
-		close(PoblacionAnterior);
-		erase(PoblacionAnterior);
-	end;
-end;
-	
-Function BuscarFactor(codigoFactor:string):real;
-var
-	Factores : file of TFactores;
-	DatoTemporal : TFactores;
-begin
-	Assign(Factores,'Factores.dat');
-	reset(Factores);
-	if not FileExists('Factores.dat') then
-	begin
-		Writeln('El archivo Factores.dat no existe.');
-	end
-	else
-	while not eof(Factores) do
-	begin
-		read(Factores,DatoTemporal);
-		if (DatoTemporal.Codigo=codigoFactor) then
+		end
+		else
 		begin
-			BuscarFactor:=DatoTemporal.Valor;
-			break;				// Rompemos el ciclo for
-		end;
-	end;
-	close(Factores);
-end;
 
-Procedure RecorrerMapa(x:integer;y:integer); // Inicia en x=1, y=5
-var
-	tecla:char;
-	Xinicial,Yinicial,Xfinal,Yfinal:integer;
-begin
-	Xinicial:=x;
-	Yinicial:=y;
-	Xfinal:=73;				// EL mapa consta de un maximo de 73 en x (ancho)
-	Yfinal:=(y-1)+37;		// EL mapa consta de un maximo de 37 en y (alto)
-	
-	repeat
-		repeat     		
-			tecla:=readkey;
-		until (tecla='H') or (tecla='P') or (tecla='M') or (tecla='K')or (tecla=chr(27)) ;		// Verif8ica que solo sean las FLECHAS o ESC
-		
-		case tecla of   		 			
-		'H': begin	// ARRIBA
-				if (y > Yinicial) then
-				begin
-					y:=y-1;
-					gotoxy(x,y);
-					MostraPoblacionPuntoXY(x,y-5);	
-					gotoxy(x,y);				
-				end
-				else sound (820); 
-			 end;					 
-		'P': begin	// ABAJO
-				if (y < Yfinal) then
-				begin
-					y:=y+1;
-					gotoxy(x,y);
-					MostraPoblacionPuntoXY(x,y-5);
-					gotoxy(x,y);
-				end
-				else sound (820); 
-			 end;
-		'M': begin	// DERECHA
-				if (x < Xfinal) then
-				begin
-					x:=x+1;
-					gotoxy(x,y);
-					MostraPoblacionPuntoXY(x,y-5);
-					gotoxy(x,y);
-				end
-				else sound (820); 
-			 end;
-		'K': begin	// IZQUIERDA
-				if (x > Xinicial) then
-				begin
-					x:=x-1;
-					gotoxy(x,y);
-					MostraPoblacionPuntoXY(x,y-5);
-					gotoxy(x,y);
-				end
-				else sound (820); 
-			 end;
-		end;
-	until tecla=chr(27);				// chr(27) = ESC
-	
-end;
+			Reset(PoblacionAnterior);
+			Writeln;
 
-Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
-var
-	Poblacion : file of TPoblaciones;
-	DatoTemporal : TPoblaciones;
-	i ,k: Integer;
-begin
-	Assign(Poblacion, 'Poblaciones.dat'); 					
-	if not FileExists('Poblaciones.dat') then
-	begin
-		Writeln('El archivo Poblaciones.dat no existe.');
-	end
-	else
-	begin
-		Reset(Poblacion); 	
-		Writeln;						
-		for i := 1 to FileSize(Poblacion) do
-		begin
-			Read(Poblacion, DatoTemporal);
-			if (DatoTemporal.PuntoX=x) and (DatoTemporal.PuntoY=y) then
+			for k := 1 to FileSize(PoblacionAnterior) do
 			begin
-				gotoxy(2,52);
-				delline;								
-				Write(' X = ', DatoTemporal.PuntoX);
-				Write(', Y = ', DatoTemporal.PuntoY);
-				Write(', DESCRIPCION = ', DatoTemporal.Descripcion);
-				Write(', HABITANTES = ', DatoTemporal.CantSuceptibles);
-				break;
+
+				Read(PoblacionAnterior, DatoTemporalAnterior);
+				S:=DatoTemporalAnterior.CantSuceptibles;
+				I:=DatoTemporalAnterior.CantInfectados;
+				Z:=DatoTemporalAnterior.CantZombies;
+
+				pi:=BuscarFactor('pi');
+				beta:=BuscarFactor('be');
+				delta:=BuscarFactor('de');
+				rho:=BuscarFactor('ro');
+				xi:=BuscarFactor('xi');
+				alpha:=BuscarFactor('al');
+
+				S_ultimo:= Trunc((pi * (S + I)) - (beta * S * Z) - (delta * S));		// Trunc elimina la parte decimal
+				I_ultimo:= Trunc((beta * S * Z) - (delta * I) - (rho * I));
+
+				R:=0;															// Si y solo si R = 0
+				R_ultimo:= Trunc((delta * S) + (delta * I) + (alpha * S * Z) - (rho * R));
+				Z_ultimo:= Trunc((rho * I) + (xi * R) - (alpha * S * Z));				// Revisar!!!! porque R siempre sera R = 0, ya que R no se guarda en ningun lado
+
+				// Actualizamos el valor de las nuevas poblaciones:
+				DatoTemporalNuevo.PuntoX:=DatoTemporalAnterior.PuntoX;
+				DatoTemporalNuevo.PuntoY:=DatoTemporalAnterior.PuntoY;
+				DatoTemporalNuevo.Descripcion:=DatoTemporalAnterior.Descripcion;
+
+				DatoTemporalNuevo.CantSuceptibles := S_ultimo;
+				DatoTemporalNuevo.CantInfectados := I_ultimo;
+				DatoTemporalNuevo.CantZombies := Z_ultimo;
+
+				DatoTemporalNuevo.TasaNatalidad:=pi;
+				DatoTemporalNuevo.FactorMovilidad:=DatoTemporalAnterior.FactorMovilidad;
+
+				write(PoblacionNueva,DatoTemporalNuevo);
+
+			end;
+
+			close(PoblacionNueva);
+			close(PoblacionAnterior);
+			erase(PoblacionAnterior);
+
+		end;
+	end;
+
+	Function BuscarFactor(codigoFactor:string):real;
+	var
+
+		Factores : file of TFactores;
+		DatoTemporal : TFactores;
+
+	begin
+
+		Assign(Factores,'Factores.DAT');
+		reset(Factores);
+		if not FileExists('Factores.DAT') then
+		begin
+
+			Writeln('El archivo Factores.DAT no existe.');
+
+		end
+		else
+		while not eof(Factores) do
+		begin
+
+			read(Factores,DatoTemporal);
+			if (DatoTemporal.Codigo=codigoFactor) then
+			begin
+
+				BuscarFactor:=DatoTemporal.Valor;
+				break;				// Rompemos el ciclo for
+
 			end;
 		end;
-		Close(Poblacion);
+
+		close(Factores);
 	end;
-end;
+
+	Procedure RecorrerMapa(x:integer;y:integer); // Inicia en x=1, y=5
+	var
+
+		tecla:char;
+		Xinicial,Yinicial,Xfinal,Yfinal:integer;
+
+	begin
+
+		Xinicial:=x;
+		Yinicial:=y;
+		Xfinal:=73;				// EL mapa consta de un maximo de 73 en x (ancho)
+		Yfinal:=(y-1)+37;		// EL mapa consta de un maximo de 37 en y (alto)
+
+		repeat
+			repeat
+
+				tecla:=readkey;
+
+			until (tecla='H') or (tecla='P') or (tecla='M') or (tecla='K')or (tecla=chr(27)) ;		// Verif8ica que solo sean las FLECHAS o ESC
+
+			case tecla of
+			'H': begin	// ARRIBA
+
+					if (y > Yinicial) then
+					begin
+
+						y:=y-1;
+						gotoxy(x,y);
+						MostraPoblacionPuntoXY(x,y-5);
+						gotoxy(x,y);
+
+					end
+					else sound (820);
+
+				end;
+
+			'P': begin	// ABAJO
+
+					if (y < Yfinal) then
+					begin
+
+						y:=y+1;
+						gotoxy(x,y);
+						MostraPoblacionPuntoXY(x,y-5);
+						gotoxy(x,y);
+
+					end
+					else sound (820);
+
+				end;
+
+			'M': begin	// DERECHA
+
+					if (x < Xfinal) then
+					begin
+
+						x:=x+1;
+						gotoxy(x,y);
+						MostraPoblacionPuntoXY(x,y-5);
+						gotoxy(x,y);
+
+					end
+					else sound (820);
+
+				end;
+
+			'K': begin	// IZQUIERDA
+
+					if (x > Xinicial) then
+					begin
+
+						x:=x-1;
+						gotoxy(x,y);
+						MostraPoblacionPuntoXY(x,y-5);
+						gotoxy(x,y);
+
+					end
+					else sound (820);
+
+				end;
+			end;
+		until tecla=chr(27);				// chr(27) = ESC
+
+	end;
+
+	Procedure MostraPoblacionPuntoXY(x:integer;y:integer);
+	var
+
+		Poblacion : file of TPoblaciones;
+		DatoTemporal : TPoblaciones;
+		i ,k: Integer;
+
+	begin
+
+		Assign(Poblacion, 'Poblaciones.DAT');
+		if not FileExists('Poblaciones.DAT') then
+		begin
+
+			Writeln('El archivo Poblaciones.DAT no existe.');
+
+		end
+		else
+		begin
+
+			Reset(Poblacion);
+			Writeln;
+			for i := 1 to FileSize(Poblacion) do
+			begin
+
+				Read(Poblacion, DatoTemporal);
+
+				if (DatoTemporal.PuntoX=x) and (DatoTemporal.PuntoY=y) then
+				begin
+
+					gotoxy(2,52);
+					delline;
+					Write(' X = ', DatoTemporal.PuntoX);
+					Write(', Y = ', DatoTemporal.PuntoY);
+					Write(', Descripcion = ', DatoTemporal.Descripcion);
+					Write(', Habitantes = ', DatoTemporal.CantSuceptibles);
+					break;
+
+				end;
+			end;
+
+			Close(Poblacion);
+		end;
+	end;
 end.

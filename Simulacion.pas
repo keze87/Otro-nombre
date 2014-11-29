@@ -21,7 +21,6 @@ type
 	Procedure MostrarMapa(var SalidaMapa:integer; var ruta:string);
 	Procedure ImprLineasMapa(var lineatexto:string);
 	Procedure ModifSimulacion(dias:integer; periodo:integer; rutaM:string; rutaF:string; rutaP:string);
-	Procedure ModifSimulacion2(ruta:string; cantDias:integer);			// BY WALTER
 	Procedure MostrarPoblaciones(x:integer;y:integer; var Mapatriz:TMatriz);
 	Procedure MostrarPoblacionesViejo;
 	Procedure CrearMatriz(var MatrizMapa:TMatriz);
@@ -63,13 +62,19 @@ implementation
 
 		Begin
 
-			GotoXY(1,25);
+			GotoXY(1,24);
 
 			write('Ingrese cantidad de infectados: ');
 
 			LeerINT(foco);
 
-			mapatriz[i,j].CantInfectados:=mapatriz[i,j].CantInfectados+foco;
+			mapatriz[i,j].CantInfectados:={mapatriz[i,j].CantInfectados+}foco;
+
+			write('Ingrese cantidad de Zombies: ');
+
+			LeerINT(foco);
+
+			mapatriz[i,j].CantZombies := foco;
 
 			GotoXY(i,j);
 
@@ -404,10 +409,10 @@ end;
 
 				end;
 
-				Delay(1000);
+				Delay(3000);
 
 				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
-				readkey;
+				//readkey;
 
 				peri := 0;
 
@@ -442,40 +447,6 @@ end;
 
 			Menu(Salida);
 
-		end;
-	Procedure ModifSimulacion2(ruta:string; cantDias:integer);			// AGREGADO!!!!
-		var
-			dia,opcion: integer;
-			teclaPresionada : char;
-			salida:integer;
-		begin
-		salida:=1;
-			clrscr;
-			for dia := 1 to cantDias do 
-			begin
-				textcolor(LightGreen);
-				writeln;
-				writeln('Dia : ',dia,' (Pausa (P), Salir (S))');				
-				LeerArchivoSegunPoblacion('mapamundi.txt');
-				writeln('Actualizando poblacion...');	
-				ActualizarPoblacionMundial();	
-				write('Desea guardar la simulacion ?  1 : Si, 2 : No  -->   ');	
-				//MostrarCronometro(5,WhereX+15,WhereY);
-				repeat
-					LeerINT(opcion);
-				until ((opcion > 0) and (opcion < 3));
-			
-				{
-				if keypressed then
-				begin
-					tecla:=readkey;
-					if (teclaPresionada='p') or (teclaPresionada='P') then Pausa(teclaPresionada);	//Pausa(clchar,mapatriz);					
-					if (teclaPresionada='s') or (teclaPresionada='S') then Menu(1);
-				end;
-				* }				
-				Delay(1000);
-			end;
-			Menu(salida);
 		end;
 
 	Procedure ImprLineasMapa(var lineatexto:string);
