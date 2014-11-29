@@ -672,6 +672,11 @@ end;
 		pi : real;
 		rho : real;
 
+		totalS : longInt;
+		totalI : longInt;
+		totalR : longInt;
+		totalZ : longInt;
+
 		i : integer;
 		j : integer;
 
@@ -679,6 +684,11 @@ end;
 
 		Assign(Factores,'Factores.DAT');
 		reset(Factores);
+
+		totalS := 0;
+		totalI := 0;
+		totalR := 0;
+		totalZ := 0;
 
 		repeat
 
@@ -703,7 +713,15 @@ end;
 
 					Calculo(Matriz [i,j].CantSuceptibles,Matriz [i,j].CantZombies,Matriz [i,j].CantRemovidos,Matriz [i,j].CantInfectados,alfa,beta,delta,xi,pi,rho);
 
+					totalS := totalS + Matriz [i,j].CantSuceptibles;
+					totalI := totalI + Matriz [i,j].CantInfectados;
+					totalR := totalR + Matriz [i,j].CantRemovidos;
+					totalZ := totalZ + Matriz [i,j].CantZombies;
+
 				end;
+
+		writeln('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
+		readkey;
 
 	end;
 
