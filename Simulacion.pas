@@ -8,9 +8,10 @@ type
 			codigo : char;
 			Descripcion : string;
 			caracter : char;
-			CantSuceptibles : real;
-			CantInfectados : real;
-			CantZombies : real;
+			CantSuceptibles : longInt;
+			CantInfectados : longInt;
+			CantZombies : longInt;
+			CantRemovidos : longInt;
 			TasaNatalidad : real;
 			FactorMovilidad : real;
 			end;
@@ -26,12 +27,13 @@ type
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 	Procedure Pausa(var caracter:char;var Mapatriz:TMatriz);
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
+	Procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer);
 
 implementation
 
 	Uses
 
-		crt,ProceduresVarios,MenuPcpal;
+		crt,ProceduresVarios,MenuPcpal,AnalisisZombi;
 
 	Type
 
@@ -381,6 +383,8 @@ end;
 
 				end;
 
+				ActualizarMatriz(Mapatriz,topex,topey);
+
 				peri := 0;
 
 				end;
@@ -639,7 +643,7 @@ end;
 					writeln(' PuntoX : ',x,', PuntoY : ',y);
 					write(' Descripcion : ',Mapatriz [x,y].Descripcion);
 					if Mapatriz [x,y].Codigo <> ' ' then
-					write(', Habitantes : ',Mapatriz [x,y].CantSuceptibles:0:0);
+					write(', Habitantes : ',Mapatriz [x,y].CantSuceptibles);
 
 					//readKey;
 					Delay(20);
@@ -650,6 +654,53 @@ end;
 		until 5 < 4;
 
 		window(1,1,80,25);
+
+	end;
+
+	procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer);
+	var
+
+		Factores : file of TFactores;
+		auxF : TFactores;
+		alfa : real;
+		beta : real;
+		delta : real;
+		xi : real;
+		pi : real;
+		rho : real;
+
+		i : integer;
+		j : integer;
+
+	begin
+
+		Assign(Factores,'Factores.DAT');
+		reset(Factores);
+
+		repeat
+
+			read(Factores,auxF);
+
+			case auxF.Codigo of
+
+				'al' : alfa := auxF.Valor;
+				'be' : beta := auxF.Valor;
+				'de' : delta := auxF.Valor;
+				'xi' : xi := auxF.Valor;
+				'pi' : pi := auxF.Valor;
+				'ro' : rho := auxF.Valor;
+
+			end;
+
+		until EOF(Factores);
+
+		for j := 1 to topey-1 do
+			for i := 1 to topex do
+				begin
+
+					Calculo(Matriz [i,j].CantSuceptibles,Matriz [i,j].CantZombies,Matriz [i,j].CantRemovidos,Matriz [i,j].CantInfectados,alfa,beta,delta,xi,pi,rho);
+
+				end;
 
 	end;
 

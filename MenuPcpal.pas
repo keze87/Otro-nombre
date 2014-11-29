@@ -41,10 +41,6 @@ implementation
 			Valor : real;
 			end;
 
-		TMatriz = record
-				Codigo : char;
-				end;
-
 	Const
 
 		Velocidad = 15;
