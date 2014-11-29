@@ -181,35 +181,35 @@ implementation
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
 
 	begin
-
 		ClrScr;
 		writeln;
-
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Poblaciones ****');
-
-		gotoXY(1,4);
-		writeln('Usa las teclas de direccion para controlar el cursor.');
-		writeln('"s" para Salir');
-		writeln ('Presiona una tecla para continuar');
-		readkey;
-
-		MostrarPoblacionesViejo;
-
-		//GotoXY(27,22);
-		//EscrDelay(Velocidad,'1) Volver al Menu Principal');
-		//writeln;
+		writeln;
+		gotoXY(1,6);
+		LeerArchivo('mapamundi.txt');										
+		writeln;
+		EscrDelay(Velocidad,'1) Posicionar el cursor en el mapa');					
+		writeln;
+		EscrDelay(Velocidad,'2) Volver al Menu Principal');					
+		writeln;
 
 		repeat
-
 			LeerINT(SalidaPobl);
-
-		until ((SalidaPobl > 0) and (SalidaPobl < 2));
+		until ((SalidaPobl > 0) and (SalidaPobl < 3));
 
 		case SalidaPobl of
-
-			1 : Menu(SalidaPobl);
-
+			1 : begin
+					gotoXY(1,3);
+					writeln('Teclas de direccion para ver la descripcion y la cantidad de habitantes');
+					writeln('Para salir de mapa presione ESC');	
+					writeln;			
+					RecorrerMapa(wherex,wherey);	
+					gotoxy(1,50);
+					Menu(SalidaPobl);	
+					readkey;	
+				end;
+			2 : Menu(SalidaPobl);
 		end;
 
 	end;
