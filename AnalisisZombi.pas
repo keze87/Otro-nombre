@@ -45,10 +45,25 @@ implementation
 
 		Ra := delta * S + delta * I + alfa * S * Z - rho * R;
 
-		S := trunc(Sa);
-		I := trunc(Ia);
-		Z := trunc(Za);
-		R := trunc(Ra);
+		if Sa > 0 then
+			S := abs(trunc(Sa))
+		else
+			S := 0;
+
+		if Ia > 0 then
+			I := abs(trunc(Ia))
+		else
+			I := 0;
+
+		if Za > 0 then
+			Z := abs(trunc(Za))
+		else
+			Z := 0;
+
+		if Ra > 0 then
+			R := abs(trunc(Ra))
+		else
+			R := 0;
 
 	end;
 

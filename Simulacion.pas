@@ -277,6 +277,11 @@ end;
 			aux : string;
 			Mapa : text;
 
+			totalS : longInt;
+			totalI : longInt;
+			totalR : longInt;
+			totalZ : longInt;
+
 		begin
 
 			clrscr;
@@ -329,41 +334,18 @@ end;
 
 				clrscr;
 
-				write('Dia : ',i,' ((P)ausa,(S)alir,Dentro de Pausa((I)nfo,(F)oco Infeccion))');
+				totalS := 0;
+				totalI := 0;
+				totalR := 0;
+				totalZ := 0;
 
-				//writeln;
+				write('Dia : ',i,' ((P)ausa,(S)alir,Dentro de Pausa((I)nfo,(F)oco Infeccion))');
 
 				for j := 1 to topey-1 do //Experimental
 				begin
 
 					for k := 1 to topex do
 					begin
-
-						{case Mapatriz[k,j].Codigo of
-
-							' ' : begin write(Mapatriz[k,j].Codigo); end;
-
-							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-
-							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
-
-							'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
-
-							'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
-
-							'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-
-							'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
-
-							'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-
-							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-
-							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
-
-							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
-
-						end;}
 
 						if Mapatriz[k,j].CantZombies < 100 then
 							textcolor(lightgray);
@@ -379,14 +361,21 @@ end;
 
 						write(Mapatriz[k,j].Codigo);
 
+						totalS := totalS + Mapatriz [i,j].CantSuceptibles;
+						totalI := totalI + Mapatriz [i,j].CantInfectados;
+						totalR := totalR + Mapatriz [i,j].CantRemovidos;
+						totalZ := totalZ + Mapatriz [i,j].CantZombies;
+
 					end;
 
-					//if j <> topey then
 						writeln;
 
 				end;
 
 				Delay(1000);
+
+				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
+				readkey;
 
 				peri := 0;
 
@@ -672,11 +661,6 @@ end;
 		pi : real;
 		rho : real;
 
-		totalS : longInt;
-		totalI : longInt;
-		totalR : longInt;
-		totalZ : longInt;
-
 		i : integer;
 		j : integer;
 
@@ -684,11 +668,6 @@ end;
 
 		Assign(Factores,'Factores.DAT');
 		reset(Factores);
-
-		totalS := 0;
-		totalI := 0;
-		totalR := 0;
-		totalZ := 0;
 
 		repeat
 
@@ -713,15 +692,7 @@ end;
 
 					Calculo(Matriz [i,j].CantSuceptibles,Matriz [i,j].CantZombies,Matriz [i,j].CantRemovidos,Matriz [i,j].CantInfectados,alfa,beta,delta,xi,pi,rho);
 
-					totalS := totalS + Matriz [i,j].CantSuceptibles;
-					totalI := totalI + Matriz [i,j].CantInfectados;
-					totalR := totalR + Matriz [i,j].CantRemovidos;
-					totalZ := totalZ + Matriz [i,j].CantZombies;
-
 				end;
-
-		writeln('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
-		readkey;
 
 	end;
 
