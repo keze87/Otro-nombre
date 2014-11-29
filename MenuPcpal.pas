@@ -4,8 +4,8 @@ interface
 
 	Procedure Menu (var SalidaMenu : integer);
 	Procedure MenuSimulacion(var SalidaMenuSim : integer);
-	Procedure MenuTerreno(var SalidaMenuTerr : integer);
-	Procedure MenuTerreno2(var SalidaMenuTerr : integer);		// AGREGADO
+	//Procedure MenuTerreno(var SalidaMenuTerr : integer);
+	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
 	Procedure MenuFactores(var SalidaFac : integer);
 	Procedure MenuMundo(var SalidaMundo : integer);
@@ -293,7 +293,7 @@ implementation
 
 	end;
 
-	Procedure MenuTerreno(var SalidaMenuTerr : integer);
+	{Procedure MenuTerreno(var SalidaMenuTerr : integer);
 	var
 
 		Terrenos : file of TTerrenos;
@@ -335,7 +335,7 @@ implementation
 
 		Menu(SalidaMenuTerr);
 
-	end;
+	end;}
 
 	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
 	begin
@@ -345,6 +345,7 @@ implementation
 
 		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Menu Terreno ****');
+		writeln;
 		LeerArchivo('mapamundi.txt');
 		MostrarTerrenosDAT;
 		Writeln;

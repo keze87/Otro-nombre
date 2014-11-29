@@ -577,6 +577,7 @@ Type
 		begin
 
 			Reset(Terreno);
+			textbackground(black);
 			Writeln('                              LEYENDA ');
 			Writeln;
 			for i := 1 to FileSize(Terreno) do
@@ -584,7 +585,7 @@ Type
 
 				Read(Terreno, DatoTemporal);
 				Write('              Codigo : ', DatoTemporal.Codigo);
-				Write('  Descripcion : ', DatoTemporal.Descripcion);
+				Write('  Descripcion : Zona', DatoTemporal.Descripcion);
 				Writeln;
 
 			end;
@@ -625,8 +626,9 @@ end;
 
 			writeln;
 			close(archivoTexto);
-			TextColor(LightGreen);				// Volvemos a colocar el Texto en color Verde claro
-			TextBackground(Black);				// Volvemos a colocar el fondo del texto en color Negro
+			TextColor(LightGreen);
+			TextBackground(Black);
+
 		end;
 	end;
 
@@ -634,20 +636,20 @@ end;
 	Function VisualizarMapaConColores(caracter:char):char;
 	begin;
 
-		textbackground(LightCyan);
+		textbackground(Black);
 
 		case caracter of
-			'0' : textcolor(Yellow);
-			'1' : textcolor(LightRed);
-			'2' : textcolor(LightGreen);
-			'3' : textcolor(Green);
-			'4' : textcolor(LightMagenta);
-			'5' : textcolor(Blue);
-			'6' : textcolor(Magenta);
-			'7' : textcolor(LightRed);
-			'8' : textcolor(LightBlue);
-			'9' : textcolor(white);
-			else  textcolor(black);
+			'0' : begin textbackground(LightCyan); textcolor(Yellow); end;
+			'1' : begin textbackground(LightCyan); textcolor(LightRed); end;
+			'2' : begin textbackground(LightCyan); textcolor(LightGreen); end;
+			'3' : begin textbackground(LightCyan); textcolor(Green); end;
+			'4' : begin textbackground(LightCyan); textcolor(LightMagenta); end;
+			'5' : begin textbackground(LightCyan); textcolor(Blue); end;
+			'6' : begin textbackground(LightCyan); textcolor(Magenta); end;
+			'7' : begin textbackground(LightCyan); textcolor(LightRed); end;
+			'8' : begin textbackground(LightCyan); textcolor(LightBlue); end;
+			'9' : begin textbackground(LightCyan); textcolor(white); end;
+			' ' : textbackground(LightCyan);
 		end;
 
 		VisualizarMapaConColores:=caracter;	// Devolvemos el caracter con ciertos colores
