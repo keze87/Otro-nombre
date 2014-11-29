@@ -265,6 +265,7 @@ end;
 			k : integer;
 			l : integer;
 			m : integer;
+			peri : integer;
 			clchar : char;
 			Salida : integer;
 			Mapatriz : TMatriz;
@@ -280,6 +281,7 @@ end;
 			Salida := 1;
 
 			i := 1;
+			peri := 1;
 
 			CrearMatriz(Mapatriz);
 
@@ -325,7 +327,10 @@ end;
 
 				textcolor(10);
 
-				writeln('Dia : ',i,' (Pausa (P), Salir (S))');
+				if (peri = periodo) or (i = 1) then
+				begin
+
+				write('Dia : ',i,' ((P)ausa,(S)alir,Dentro de Pausa((I)nfo,(F)oco Infeccion))');
 
 				//writeln;
 
@@ -382,6 +387,10 @@ end;
 
 				end;
 
+				peri := 0;
+
+				end;
+
 				if keypressed then
 				begin
 
@@ -401,8 +410,9 @@ end;
 			Delay(1000);
 
 			i := i + 1;
+			peri := peri + 1;
 
-			until i = dias + 1;
+			until i >= dias + 1;
 
 			close(Mapa);
 

@@ -352,7 +352,7 @@ implementation
 
 		ruta:string;
 		dias:integer;
-                periodo:integer;
+		periodo:integer;
 
 	begin
 
@@ -378,11 +378,12 @@ implementation
 
 			1 : begin
 
+				writeln;
 				write('Ingrese cantidad de dias: ');
 				LeerINT(dias);
 				writeln;
 				write('Ingrese periodo de actualizacion: ');
-				read(periodo);
+				LeerINT(periodo);
 
 				ModifSimulacion(dias,periodo,'mapamundi.txt');
 
@@ -390,13 +391,14 @@ implementation
 
 			2 : begin
 
+				writeln;
 				writeln('Ingrese la ruta del archivo de texto');
 				read(ruta);
 				write('Ingrese cantidad de dias: ');
 				LeerINT(dias);
 				writeln;
 				write('Ingrese periodo de actualizacion: ');
-				read(periodo);
+				LeerINT(periodo);
 				ModifSimulacion(dias,periodo,ruta);
 
 				end;
