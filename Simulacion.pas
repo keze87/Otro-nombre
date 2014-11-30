@@ -122,7 +122,7 @@ implementation
 
 				Assign(ArchFactores,'newfactores.DAT');
 
-				Assign(Factores,'factores.DAT');
+				Assign(Factores,'Factores.DAT');
 
 				Reset(Factores);
 
@@ -544,8 +544,8 @@ end;
 					if clchar='p' then
 						Pausa(clchar,mapatriz);
 
-						 if clchar='g' then
-							Guardar(mapatriz,topex,topey);
+					if clchar='g' then
+						Guardar(mapatriz,topex,topey);
 
 					if clchar='s' then
 						Menu(Salida);
