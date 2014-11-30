@@ -223,8 +223,13 @@ implementation
 					NuevoFoco(i,j,mapatriz);
 
 				if key = 'i' then
+				begin
 
+					gotoxy(1,25);
+					write('                                         ');
 					mostrarpoblaciones(i,j-1,mapatriz);
+
+				end;
 
 				if (key = #0) then
 
@@ -374,9 +379,7 @@ end;
 	Procedure MostrarPoblaciones(x:integer; y:integer;var mapatriz:TMatriz);
 		begin
 
-			gotoxy(1,25);    {y donde pueda ser visto segun linux}
-
-			//delline; tendria que haber algo parecido
+			gotoxy(1,25);
 
 			write(x,' ',y,' ',mapatriz[x,y].Descripcion);
 
