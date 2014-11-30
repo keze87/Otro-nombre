@@ -370,7 +370,7 @@ implementation
 
 		case SalidaMenuSim of
 
-			1 : SalidaMenuSim := 5;
+			1 : CargarSimulacion;
 			2 : MenuNuevaSim(SalidaMenuSim);
 			3 : Menu(SalidaMenuSim);
 
