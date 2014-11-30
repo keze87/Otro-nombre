@@ -224,7 +224,7 @@ implementation
 
 				if key = 'i' then
 
-					mostrarpoblaciones(i,j,mapatriz);
+					mostrarpoblaciones(i,j-1,mapatriz);
 
 				if (key = #0) then
 
@@ -376,9 +376,11 @@ end;
 
 			gotoxy(1,25);    {y donde pueda ser visto segun linux}
 
+			//delline; tendria que haber algo parecido
+
 			write(x,' ',y,' ',mapatriz[x,y].Descripcion);
 
-			gotoxy(x,y);
+			gotoxy(x,y+1);
 
 	end;
 
@@ -493,7 +495,7 @@ end;
 				totalR := 0;
 				totalZ := 0;
 
-				write('Dia : ',i,' ((P)ausa,(S)alir,Dentro de Pausa((I)nfo,(F)oco Infeccion))');
+				write('Dia : ',i,' ((P)ausa,(S)alir,(G)uardar,En Pausa((I)nfo,(F)oco Infeccion))');
 
 				for j := 1 to topey-1 do //Experimental
 				begin
@@ -528,7 +530,7 @@ end;
 
 				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
 
-				Delay(3000);
+				Delay(1000);
 
 				//readkey;
 

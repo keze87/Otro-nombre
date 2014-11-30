@@ -194,7 +194,7 @@ Type
 
 			auxF.Codigo := 'al' ;
 			auxF.Descripcion := ' Salvacion ante ataque ' ;
-			auxF.Valor := 0.5 ;
+			auxF.Valor := 0.8 ;
 
 			write(Factores,auxF);
 
