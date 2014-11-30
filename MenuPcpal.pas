@@ -17,7 +17,7 @@ implementation
 
 	Uses
 
-		crt,ProceduresVarios,Simulacion;
+		crt,ProceduresVarios,Simulacion,SysUtils;
 
 	Type
 
@@ -67,36 +67,39 @@ implementation
 
 		GotoXY(1,4);
 
-		EscrDelay(Velocidad,'Ingrese ruta de archivo de poblaciones'); {poblaciones.DAT o .dat}
-		read(rutaP);
+		EscrDelay(Velocidad,'Ingrese el nombre del archivo de poblaciones'); {poblaciones.DAT o .dat}
 
-		{while (not fileexists(rutaP)) do
-			begin
-
-				writeln('Archivo inexistente');
-				read(rutaP);
-
-			end;   }
+		readln(rutaP);
 
 		writeln;
+
+		EscrDelay(Velocidad,'Ingrese el nombre del archivo del mapa');
+
+		readln(rutaM);
+
+		writeln;
+
+		EscrDelay(Velocidad,'Ingrese ruta de archivo de factores');
+
+		readln(rutaF);
+
+		writeln;
+
+		if (not (fileexists(rutaP)) or not (fileexists(rutaM)) or not (fileexists(rutaF))) then
+		begin
+
+			clrscr;
+			writeln('Archivo(s) inexistente(s)');
+			writeln('Presiona Enter para continuar.');
+			delay(100);
+			readln;
+			CargarSimulacion;
+
+		end;
 
 		write('Ingrese cantidad de dias: ');
 
 		LeerINT(dias);
-
-		writeln;
-
-		EscrDelay(Velocidad,'Ingrese ruta de archivo de escenario');
-
-		read(rutaM);
-
-		{while (not fileexists(rutaM)) do
-		begin
-
-			writeln('Archivo inexistente');
-			read(rutaM);
-
-		end; }
 
 		writeln;
 
@@ -105,10 +108,6 @@ implementation
 		LeerINT(periodo);
 
 		writeln;
-
-		EscrDelay(Velocidad,'Ingrese ruta de archivo de factores');
-
-		read(rutaF);
 
 		{while (not fileexists(rutaF)) do
 			begin

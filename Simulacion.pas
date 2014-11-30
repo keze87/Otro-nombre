@@ -23,7 +23,7 @@ type
 	Procedure ModifSimulacion(dias:integer; periodo:integer; rutaM:string; rutaF:string; rutaP:string);
 	Procedure MostrarPoblaciones(x:integer;y:integer; var Mapatriz:TMatriz);
 	Procedure MostrarPoblacionesViejo;
-	Procedure CrearMatriz(var MatrizMapa:TMatriz);
+	Procedure CrearMatriz(Var MatrizMapa : TMatriz; RutaM : string; RutaP : string);
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 	Procedure Pausa(var caracter:char;var Mapatriz:TMatriz);
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
@@ -34,7 +34,7 @@ implementation
 
 	Uses
 
-		crt,ProceduresVarios,MenuPcpal,AnalisisZombi;
+		crt,ProceduresVarios,MenuPcpal,AnalisisZombi,SysUtils;
 
 	Type
 
@@ -313,7 +313,7 @@ implementation
 
 	end;
 
-	Procedure CrearMatriz(Var MatrizMapa : TMatriz);
+	Procedure CrearMatriz(Var MatrizMapa : TMatriz; RutaM : string; RutaP : string);
 		var
 
 			Mapa : text;
@@ -327,9 +327,9 @@ implementation
 
 			j:=1;
 
-			Assign(Mapa,'mapamundi.txt');
+			Assign(Mapa,RutaM);
 
-			Assign(Poblaciones,'Poblaciones.DAT');
+			Assign(Poblaciones,RutaP);
 
 			reset(Mapa);
 
@@ -427,7 +427,16 @@ end;
 			i := 1;
 			peri := 1;
 
-			Assign(Factores,'Factores.DAT');
+			if not fileexists(RutaF) then
+				rutaF := 'Factores.DAT';
+
+			if not fileexists(RutaM) then
+				rutaM := 'mapamundi.txt';
+
+			if not fileexists(RutaP) then
+				rutaP := 'Poblaciones.DAT';
+
+			Assign(Factores,RutaF{'Factores.DAT'});
 			reset(Factores);
 
 			repeat
@@ -449,9 +458,9 @@ end;
 
 			close(Factores);
 
-			CrearMatriz(Mapatriz);
+			CrearMatriz(Mapatriz,RutaM,RutaP);
 
-			Assign(Mapa,'mapamundi.txt');
+			Assign(Mapa,RutaM{'mapamundi.txt'});
 			reset(Mapa);
 
 			topex := -213;
