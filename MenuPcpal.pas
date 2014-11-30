@@ -182,14 +182,13 @@ implementation
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
-		EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
-		readln;
-		MostrarMapa(ruta);
+		//EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
+		//readln;
+		//MostrarMapa(ruta);
+		LeerArchivoSegunPoblacion(ruta);
 		writeln;
-		//GotoXY(27,22);
 		textcolor(10);
-		EscrDelay(Velocidad,'1) Volver al Menu Principal.');
-		writeln;
+		EscrDelay(-Velocidad,'1) Volver al Menu Principal. ');
 
 		repeat
 

@@ -744,16 +744,16 @@ end;
 	var
 
 		Vivos,Zombies:longInt;
-		error:integer;
+		//error:integer;
 
 	begin
 
-		textbackground(LightCyan);
+		textbackground(black);
 		//Vivos:=StrToInt(copy(VivosZombies, 1, pos('&',VivosZombies)-1));
 		//Zombies:=StrToInt(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)));
 
-		Val(copy(VivosZombies, 1, pos('&',VivosZombies)-1), Vivos, error);												// Obtenemos y almacenamos la cantidad de Personas Vivas en la variable 'Vivos'
-		Val(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)), Zombies, error);	// Obtenemos y almacenamos la cantidad de Personas Zombies en la variable 'Zombies'
+		Val(copy(VivosZombies, 1, pos('&',VivosZombies)-1), Vivos{, error});												// Obtenemos y almacenamos la cantidad de Personas Vivas en la variable 'Vivos'
+		Val(copy(VivosZombies, pos('&',VivosZombies)+1, Length(VivosZombies)-pos('&',VivosZombies)), Zombies{, error});	// Obtenemos y almacenamos la cantidad de Personas Zombies en la variable 'Zombies'
 
 		if Vivos > 75 then
 			textcolor(LightGreen)
@@ -883,6 +883,7 @@ end;
 				DatoTemporalNuevo.CantSuceptibles := S_ultimo;
 				DatoTemporalNuevo.CantInfectados := I_ultimo;
 				DatoTemporalNuevo.CantZombies := Z_ultimo;
+				DatoTemporalNuevo.CantRemovidos := R_ultimo;
 
 				DatoTemporalNuevo.TasaNatalidad:=pi;
 				DatoTemporalNuevo.FactorMovilidad:=DatoTemporalAnterior.FactorMovilidad;
