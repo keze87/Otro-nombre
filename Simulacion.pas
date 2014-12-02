@@ -176,8 +176,8 @@ implementation
 				begin
 
 					gotoxy(1,25);
-					write('                                         ');
-					mostrarpoblaciones(i,j-1,mapatriz);
+					write('                                                ');
+					mostrarpoblaciones(i,j,mapatriz);
 
 				end;
 
@@ -331,9 +331,13 @@ end;
 
 			gotoxy(1,25);
 
-			write(x,' ',y,' ',mapatriz[x,y].Descripcion,' ',mapatriz[x,y].CantZombies);
+			textcolor(lightcyan);
 
-			gotoxy(x,y+1);
+			write(x,' ',y,' ',mapatriz[x,y-1].Descripcion,' ',mapatriz[x,y-1].CantZombies);
+
+			textcolor(lightgray);
+
+			gotoxy(x,y);
 
 	end;
 
@@ -665,6 +669,7 @@ end;
 
 			x := 1;
 			y := 1;
+
 			DibujarMatriz(Mapatriz,topex,topey,x,y);
 
 			repeat
