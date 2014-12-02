@@ -57,409 +57,388 @@ implementation
 		end;
 
 	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
-		var
+	var
 
-			i:integer;
-			j:integer;
-			ArchPoblaciones:file of TPoblaciones;
-			ArchFactores:file of TFactores;
-			Factores:file of TFactores;
-			RegP:TPoblaciones;
-			RegF:TFactores;
+		i:integer;
+		j:integer;
+		ArchPoblaciones:file of TPoblaciones;
+		ArchFactores:file of TFactores;
+		Factores:file of TFactores;
+		RegP:TPoblaciones;
+		RegF:TFactores;
 
+	begin
+
+		gotoxy(1,25);
+
+		Assign(ArchPoblaciones,'newpoblaciones.DAT');
+		Assign(ArchFactores,'newfactores.DAT');
+		Assign(Factores,'Factores.DAT');
+
+		Reset(Factores);
+
+		Rewrite(ArchFactores);
+
+		while not eof(Factores) do
 		begin
 
-				gotoxy(1,25);
+			read(Factores,RegF);
 
-				Assign(ArchPoblaciones,'newpoblaciones.DAT');
+			write(ArchFactores,RegF);
 
-				Assign(ArchFactores,'newfactores.DAT');
+		end;
 
-				Assign(Factores,'Factores.DAT');
+		close(Factores);
 
-				Reset(Factores);
+		close(ArchFactores);
 
-				Rewrite(ArchFactores);
+		rewrite(ArchPoblaciones);
 
-				while not eof(Factores) do
+		for j:=1 to topey do
+			for i:=1 to topex do
 				begin
 
-					read(Factores,RegF);
+					RegP.PuntoX := i;
 
-					write(ArchFactores,RegF);
+					RegP.PuntoY := j;
+
+					RegP.Descripcion := mapatriz[i,j].Descripcion;
+
+					RegP.CantSuceptibles := mapatriz[i,j].CantSuceptibles;
+
+					RegP.CantInfectados := mapatriz[i,j].CantInfectados;
+
+					RegP.CantZombies := mapatriz[i,j].CantZombies;
+
+					RegP.TasaNatalidad := mapatriz[i,j].TasaNatalidad;
+
+					RegP.FactorMovilidad := mapatriz[i,j].FactorMovilidad;
+
+					write(ArchPoblaciones,RegP);
 
 				end;
 
-				close(Factores);
+		close(ArchPoblaciones);
 
-				close(ArchFactores);
-
-				rewrite(ArchPoblaciones);
-
-				for j:=1 to topey do
-					for i:=1 to topex do
-					begin
-
-						RegP.PuntoX := i;
-
-						RegP.PuntoY := j;
-
-						RegP.Descripcion := mapatriz[i,j].Descripcion;
-
-						RegP.CantSuceptibles := mapatriz[i,j].CantSuceptibles;
-
-						RegP.CantInfectados := mapatriz[i,j].CantInfectados;
-
-						RegP.CantZombies := mapatriz[i,j].CantZombies;
-
-						RegP.TasaNatalidad := mapatriz[i,j].TasaNatalidad;
-
-						RegP.FactorMovilidad := mapatriz[i,j].FactorMovilidad;
-
-						write(ArchPoblaciones,RegP);
-
-					end;
-
-				close(ArchPoblaciones);
-
-		end;
+	end;
 
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
-		Var
+	var
 
-			foco:integer;
+		foco:integer;
 
-		Begin
+	begin
 
-			GotoXY(1,24);
+		GotoXY(1,24);
 
-			write('Ingrese cantidad de infectados: ');
+		write('Ingrese cantidad de infectados: ');
 
-			LeerINT(foco);
+		LeerINT(foco);
 
-			mapatriz[i,j].CantInfectados := foco;
+		mapatriz[i,j].CantInfectados := foco;
 
-			write('Ingrese cantidad de Zombies: ');
+		write('Ingrese cantidad de Zombies: ');
 
-			LeerINT(foco);
+		LeerINT(foco);
 
-			mapatriz[i,j].CantZombies := foco;
+		mapatriz[i,j].CantZombies := foco;
 
-			GotoXY(i,j);
+		GotoXY(i,j);
 
-		end;
+	end;
 
 	Procedure Pausa(var caracter:char;var mapatriz:TMatriz);
-		var
+	var
 
-			key:char;
-			i:integer;
-			j:integer;
+		key:char;
+		i:integer;
+		j:integer;
 
-		begin
+	begin
 
-			j:=1;
+		j:=1;
 
-			i:=1;
+		i:=1;
 
-			repeat
+		repeat
 
-				//delay(33);
+			key:=readkey;
 
-				key:=readkey;
+			if key = 'f' then
+				NuevoFoco(i,j,mapatriz);
 
-				if key = 'f' then
-
-					NuevoFoco(i,j,mapatriz);
-
-				if key = 'i' then
-				begin
-
-					gotoxy(1,25);
-					write('                                                ');
-					mostrarpoblaciones(i,j,mapatriz);
-
-				end;
-
-				if (key = #0) then
-
-					begin
-
-						key:=readkey;
-
-						case key of
-
-							#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
-
-							#80 : begin j:=j+1; gotoxy(i,j); end;
-
-							#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
-
-							#77 : begin i:=i+1; gotoxy(i,j); end;
-
-							end;
-
-				end;
-
-			until key='p';
-
-		end;
-
-	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
-		var
-
-			k : integer;
-			j : integer;
-
-		begin
-
-			clrscr;
-
-			for j := 1 to topey-1 do
+			if key = 'i' then
 			begin
 
-					for k := 1 to topex do
-					begin
+				gotoxy(1,25);
+				write('                                                ');
+				mostrarpoblaciones(i,j,mapatriz);
 
-						if ((k = x) and (j = y)) then
+			end;
 
-							textbackground(green);
+			if (key = #0) then
+				begin
 
-						if ((k <> x) or (j <> y)) then
+					key:=readkey;
 
-							textbackground(black);
+					case key of
 
-						case Mapatriz[k,j].Codigo of
+						#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
 
-							' ' : begin write(Mapatriz[k,j].Codigo); end;
+						#80 : begin j:=j+1; gotoxy(i,j); end;
 
-							'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+						#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
 
-							'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
-
-							'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
-
-							'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
-
-							'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-
-							'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
-
-							'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
-
-							'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
-
-							'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
-
-							'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
-
-						end;
+						#77 : begin i:=i+1; gotoxy(i,j); end;
 
 					end;
 
-				writeln;
+			end;
+
+		until key='p';
+
+	end;
+
+	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
+	var
+
+		k : integer;
+		j : integer;
+
+	begin
+
+		clrscr;
+
+		for j := 1 to topey-1 do
+		begin
+
+			for k := 1 to topex do
+			begin
+
+				if ((k = x) and (j = y)) then
+					textbackground(green);
+
+				if ((k <> x) or (j <> y)) then
+					textbackground(black);
+
+				case Mapatriz[k,j].Codigo of
+
+					' ' : begin write(Mapatriz[k,j].Codigo); end;
+
+					'0' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+
+					'1' : begin textcolor(green); write(Mapatriz[k,j].Codigo); end;
+
+					'2' : begin textcolor(lightgreen); write(Mapatriz[k,j].Codigo); end;
+
+					'3' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+
+					'4' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+
+					'5' : begin textcolor(7); write(Mapatriz[k,j].Codigo); end;
+
+					'6' : begin textcolor(brown); write(Mapatriz[k,j].Codigo); end;
+
+					'7' : begin textcolor(lightgray); write(Mapatriz[k,j].Codigo); end;
+
+					'8' : begin textcolor(magenta); write(Mapatriz[k,j].Codigo); end;
+
+					'9' : begin textcolor(red); write(Mapatriz[k,j].Codigo); end;
 
 				end;
+
+			end;
+
+			writeln;
+
+		end;
 
 	end;
 
 	Procedure CrearMatriz(Var MatrizMapa : TMatriz; RutaM : string; RutaP : string);
-		var
+	var
 
-			Mapa : text;
-			aux : string;
-			i : integer;
-			j : integer;
-			regPoblacion : TPoblaciones;
-			Poblaciones: file of TPoblaciones;
+		Mapa : text;
+		aux : string;
+		i : integer;
+		j : integer;
+		regPoblacion : TPoblaciones;
+		Poblaciones: file of TPoblaciones;
 
+	begin
+
+		j:=1;
+
+		Assign(Mapa,RutaM);
+		Assign(Poblaciones,RutaP);
+
+		reset(Mapa);
+
+		while not eof(Mapa) do
 		begin
 
-			j:=1;
+			readln(Mapa,aux);
 
-			Assign(Mapa,RutaM);
-
-			Assign(Poblaciones,RutaP);
-
-			reset(Mapa);
-
-			while not eof(Mapa) do
+			for i:=1 to length(aux) do
 			begin
 
-				readln(Mapa,aux);
-
-				for i:=1 to length(aux) do
-				begin
-
-					MatrizMapa[i,j].codigo := aux[i];
-
-				end;
-
-			j:=j+1;
+				MatrizMapa[i,j].codigo := aux[i];
 
 			end;
 
-			close(Mapa);
+		j:=j+1;
 
-			reset(Poblaciones);
+		end;
 
-			while not eof(Poblaciones) do
-			begin
+		close(Mapa);
 
-				read(Poblaciones,regPoblacion);
+		reset(Poblaciones);
 
-				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantSuceptibles:=regPoblacion.CantSuceptibles;
+		while not eof(Poblaciones) do
+		begin
 
-				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantInfectados:=regPoblacion.CantInfectados;
+			read(Poblaciones,regPoblacion);
 
-				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantZombies:=regPoblacion.CantZombies;
+			MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantSuceptibles:=regPoblacion.CantSuceptibles;
 
-				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].TasaNatalidad:=regPoblacion.TasaNatalidad;
+			MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantInfectados:=regPoblacion.CantInfectados;
 
-				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].FactorMovilidad:=regPoblacion.FactorMovilidad;
+			MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].CantZombies:=regPoblacion.CantZombies;
 
-				MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].Descripcion:=regPoblacion.Descripcion;
+			MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].TasaNatalidad:=regPoblacion.TasaNatalidad;
 
-			end;
+			MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].FactorMovilidad:=regPoblacion.FactorMovilidad;
 
-			close(Poblaciones);
+			MatrizMapa[regPoblacion.PuntoX,regPoblacion.PuntoY].Descripcion:=regPoblacion.Descripcion;
 
-end;
+		end;
+
+		close(Poblaciones);
+
+	end;
 
 	Procedure MostrarPoblaciones(x:integer; y:integer;var mapatriz:TMatriz);
-		begin
+	begin
 
-			gotoxy(1,25);
+		gotoxy(1,25);
 
-			textcolor(lightcyan);
+		textcolor(lightcyan);
 
-			write(x,' ',y,' ',mapatriz[x,y-1].Descripcion,' ',mapatriz[x,y-1].CantZombies);
+		write(x,' ',y,' ',mapatriz[x,y-1].Descripcion,' ',mapatriz[x,y-1].CantZombies);
 
-			textcolor(lightgray);
+		textcolor(lightgray);
 
-			gotoxy(x,y);
+		gotoxy(x,y);
 
 	end;
 
 	Procedure ModifSimulacion(dias:integer; periodo:integer; rutaM:string; rutaF:string; rutaP:string);
-		var
+	var
 
-			i : integer;
-			j : integer;
-			k : integer;
-			l : integer;
-			m : integer;
-			peri : integer;
-			clchar : char;
-			Salida : integer;
-			Mapatriz : TMatriz;
-			topex : integer;
-			topey : integer;
-			aux : string;
-			Mapa : text;
+		i : integer;
+		j : integer;
+		k : integer;
+		l : integer;
+		m : integer;
+		peri : integer;
+		clchar : char;
+		Salida : integer;
+		Mapatriz : TMatriz;
+		topex : integer;
+		topey : integer;
+		aux : string;
+		Mapa : text;
 
-			{totalS : longInt;
-			totalI : longInt;
-			totalR : longInt;
-			totalZ : longInt;}
+		Factores : file of TFactores;
+		auxF : TFactores;
+		alfa : real;
+		beta : real;
+		delta : real;
+		xi : real;
+		pi : real;
+		rho : real;
 
-			Factores : file of TFactores;
-			auxF : TFactores;
-			alfa : real;
-			beta : real;
-			delta : real;
-			xi : real;
-			pi : real;
-			rho : real;
+	begin
 
-		begin
+		clrscr;
 
-			clrscr;
+		Salida := 1;
+		i := 1;
+		peri := 1;
 
-			Salida := 1;
+		if not fileexists(RutaF) then
+			rutaF := 'Factores.DAT';
 
-			i := 1;
-			peri := 1;
+		if not fileexists(RutaM) then
+			rutaM := 'mapamundi.txt';
 
-			if not fileexists(RutaF) then
-				rutaF := 'Factores.DAT';
+		if not fileexists(RutaP) then
+			rutaP := 'Poblaciones.DAT';
 
-			if not fileexists(RutaM) then
-				rutaM := 'mapamundi.txt';
+		Assign(Factores,RutaF);
+		reset(Factores);
 
-			if not fileexists(RutaP) then
-				rutaP := 'Poblaciones.DAT';
+		repeat
 
-			Assign(Factores,RutaF);
-			reset(Factores);
+			read(Factores,auxF);
 
-			repeat
+			case auxF.Codigo of
 
-				read(Factores,auxF);
+				'al' : alfa := auxF.Valor;
+				'be' : beta := auxF.Valor;
+				'de' : delta := auxF.Valor;
+				'xi' : xi := auxF.Valor;
+				'pi' : pi := auxF.Valor;
+				'ro' : rho := auxF.Valor;
 
-				case auxF.Codigo of
+			end;
 
-					'al' : alfa := auxF.Valor;
-					'be' : beta := auxF.Valor;
-					'de' : delta := auxF.Valor;
-					'xi' : xi := auxF.Valor;
-					'pi' : pi := auxF.Valor;
-					'ro' : rho := auxF.Valor;
+		until EOF(Factores);
 
-				end;
+		close(Factores);
 
-			until EOF(Factores);
+		CrearMatriz(Mapatriz,RutaM,RutaP);
 
-			close(Factores);
+		Assign(Mapa,RutaM);
+		reset(Mapa);
 
-			CrearMatriz(Mapatriz,RutaM,RutaP);
+		topex := -1;
 
-			Assign(Mapa,RutaM);
-			reset(Mapa);
+		m := 0;
 
-			topex := -1;
+		repeat
 
-			m := 0;
+			readln(Mapa,aux);
 
-			repeat
+			l := 0;
 
-				readln(Mapa,aux);
-
-				l := 0;
-
-				m := m + 1;
-
-				repeat
-
-					l := l + 1;
-
-					Mapatriz [l,m].Codigo := aux[l];
-
-					if l > topex then
-						topex := l;
-
-				until l = length(aux);
-
-			until EOF(Mapa);
-
-			topey := m;
-			//topex := 74;
-
-			writeln;
+			m := m + 1;
 
 			repeat
 
-				textcolor(10);
+				l := l + 1;
 
-				if (peri = periodo) or (i = 1) then
-				begin
+				Mapatriz [l,m].Codigo := aux[l];
+
+				if l > topex then
+					topex := l;
+
+			until l = length(aux);
+
+		until EOF(Mapa);
+
+		topey := m;
+
+		writeln;
+
+		repeat
+
+			textcolor(10);
+
+			if (peri = periodo) or (i = 1) then
+			begin
 
 				clrscr;
-
-				{totalS := 0;
-				totalI := 0;
-				totalR := 0;
-				totalZ := 0;}
 
 				write('Dia : ',i,' ((P)ausa,(S)alir,(G)uardar,En Pausa((I)nfo,(F)oco Infeccion))');
 
@@ -483,18 +462,11 @@ end;
 
 						write(Mapatriz[k,j].Codigo);
 
-						{totalS := totalS + Mapatriz [i,j].CantSuceptibles;
-						totalI := totalI + Mapatriz [i,j].CantInfectados;
-						totalR := totalR + Mapatriz [i,j].CantRemovidos;
-						totalZ := totalZ + Mapatriz [i,j].CantZombies;}
-
 					end;
 
-						writeln;
+					writeln;
 
 				end;
-
-				//write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
 
 				Delay(1000);
 
@@ -523,15 +495,15 @@ end;
 
 			ActualizarMatriz(Mapatriz,topex,topey,alfa,beta,delta,xi,pi,rho);
 
-			until i >= dias + 1;
+		until i >= dias + 1;
 
-			close(Mapa);
+		close(Mapa);
 
-			readkey;
+		readkey;
 
-			Menu(Salida);
+		Menu(Salida);
 
-		end;
+	end;
 
 	Procedure ImprLineasMapa(var lineatexto:string);
 	var
@@ -606,139 +578,139 @@ end;
 	end;
 
 	Procedure MostrarPoblacionesViejo;
-		var
+	var
 
-			x : integer;
-			y : integer;
-			l : integer;
-			m : integer;
-			Mapatriz : array [1..100,1..100] of TRegMatriz;
-			topex : integer;
-			topey : integer;
-			aux : string;
-			Mapa : text;
-			Poblaciones : file of TPoblaciones;
-			auxP : TPoblaciones;
-			clchar : char;
+		x : integer;
+		y : integer;
+		l : integer;
+		m : integer;
+		Mapatriz : array [1..100,1..100] of TRegMatriz;
+		topex : integer;
+		topey : integer;
+		aux : string;
+		Mapa : text;
+		Poblaciones : file of TPoblaciones;
+		auxP : TPoblaciones;
+		clchar : char;
 
-		begin
+	begin
 
-			Assign(Mapa,'mapamundi.txt');
-			reset(Mapa);
+		Assign(Mapa,'mapamundi.txt');
+		reset(Mapa);
 
-			Assign(Poblaciones, 'Poblaciones.DAT');
-			reset(Poblaciones);
+		Assign(Poblaciones, 'Poblaciones.DAT');
+		reset(Poblaciones);
 
-			topex := -213;
+		topex := -1;
 
-			m := 0;
+		m := 0;
+
+		repeat
+
+			readln(Mapa,aux);
+
+			l := 0;
+			m := m + 1;
 
 			repeat
 
-				readln(Mapa,aux);
-
-				l := 0;
-
-				m := m + 1;
+				l := l + 1;
 
 				repeat
 
-					l := l + 1;
+					read(Poblaciones,auxP);
 
-					repeat
+				until ((auxP.PuntoX = l) and (auxP.PuntoY = m));
 
-						read(Poblaciones,auxP);
+				Mapatriz [l,m].Codigo := aux[l];
+				Mapatriz [l,m].Descripcion := auxP.Descripcion;
+				Mapatriz [l,m].CantSuceptibles := auxP.CantSuceptibles;
 
-					until ((auxP.PuntoX = l) and (auxP.PuntoY = m));
+				if l > topex then
+					topex := l;
 
-					Mapatriz [l,m].Codigo := aux[l];
-					Mapatriz [l,m].Descripcion := auxP.Descripcion;
-					Mapatriz [l,m].CantSuceptibles := auxP.CantSuceptibles;
+			until l = length(aux);
 
-					if l > topex then
-						topex := l;
+		until EOF(Mapa);
 
-				until l = length(aux);
+		topey := m;
+		writeln;
 
-			until EOF(Mapa);
+		close(Poblaciones);
 
-			topey := m;
-			writeln;
+		x := 1;
+		y := 1;
 
-			close(Poblaciones);
+		DibujarMatriz(Mapatriz,topex,topey,x,y);
 
-			x := 1;
-			y := 1;
+		repeat
 
-			DibujarMatriz(Mapatriz,topex,topey,x,y);
+			if keypressed then
+			begin
 
-			repeat
+				clchar := readkey;
 
-					if keypressed then
-					begin
+				if (clchar = 's') then
+				begin
 
-						clchar := readkey;
+					Menu(topex);
 
-						if (clchar = 's') then
-						begin
+				end;
 
-							Menu(topex);
+				if ((clchar = Char(77)) and (x < topex-1)) then
+				begin
 
-						end;
-
-						if ((clchar = Char(77)) and (x < topex-1)) then
-						begin
-
-							x := x + 1;
-							clrscr;
-							DibujarMatriz(Mapatriz,topex,topey,x,y);
-							window(1,1,80,250);
-
-						end;
-
-						if ((clchar = Char(80)) and (y < topey-1)) then
-						begin
-
-							y := y + 1;
-							clrscr;
-							DibujarMatriz(Mapatriz,topex,topey,x,y);
-							window(1,1,80,250);
-
-						end;
-
-						if ((clchar = Char(72)) and (y > 1)) then
-						begin
-
-							y := y - 1;
-							clrscr;
-							DibujarMatriz(Mapatriz,topex,topey,x,y);
-							window(1,1,80,250);
-
-						end;
-
-						if ((clchar = Char(75)) and (x > 1)) then
-						begin
-
-							x := x - 1;
-							clrscr;
-							DibujarMatriz(Mapatriz,topex,topey,x,y);
-							window(1,1,80,250);
-
-						end;
-
-					end;
-
+					x := x + 1;
 					clrscr;
 					DibujarMatriz(Mapatriz,topex,topey,x,y);
-					Window(30,20,50,250);
-
-					writeln(' PuntoX : ',x,', PuntoY : ',y);
-					write(' Descripcion : ',Mapatriz [x,y].Descripcion);
-					if Mapatriz [x,y].Codigo <> ' ' then
-					write(', Habitantes : ',Mapatriz [x,y].CantSuceptibles);
-
-					Delay(20);
 					window(1,1,80,250);
+
+				end;
+
+				if ((clchar = Char(80)) and (y < topey-1)) then
+				begin
+
+					y := y + 1;
+					clrscr;
+					DibujarMatriz(Mapatriz,topex,topey,x,y);
+					window(1,1,80,250);
+
+				end;
+
+				if ((clchar = Char(72)) and (y > 1)) then
+				begin
+
+					y := y - 1;
+					clrscr;
+					DibujarMatriz(Mapatriz,topex,topey,x,y);
+					window(1,1,80,250);
+
+				end;
+
+				if ((clchar = Char(75)) and (x > 1)) then
+				begin
+
+					x := x - 1;
+					clrscr;
+					DibujarMatriz(Mapatriz,topex,topey,x,y);
+					window(1,1,80,250);
+
+				end;
+
+			end;
+
+			clrscr;
+			DibujarMatriz(Mapatriz,topex,topey,x,y);
+			Window(30,20,50,250);
+
+			writeln(' PuntoX : ',x,', PuntoY : ',y);
+			write(' Descripcion : ',Mapatriz [x,y].Descripcion);
+
+			if Mapatriz [x,y].Codigo <> ' ' then
+				write(', Habitantes : ',Mapatriz [x,y].CantSuceptibles);
+
+			Delay(20);
+			window(1,1,80,250);
 
 		until clchar = 's';
 
