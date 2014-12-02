@@ -54,6 +54,8 @@ Implementation
 
 		end;
 
+		InViaje := infectadosEnViaje;
+
 	end;
 
 	Procedure MigracionAire(var mapatriz:TMatriz;topex:integer;topey:integer);
@@ -86,6 +88,7 @@ Implementation
 
 					VecRecep[k].x := i;
 					VecRecep[k].y := j;
+					k := k+1;
 
 				end;
 
@@ -98,7 +101,7 @@ Implementation
 
 			for I:=1 to topex do
 
-				if mapatriz[i,j].codigo = '9' then
+				if mapatriz[i,j].codigo = '8' then
 				begin
 
 				pobTotal := Mapatriz[i,j].CantSuceptibles + Mapatriz[i,j].cantInfectados;
@@ -143,32 +146,48 @@ Implementation
 				begin
 
 					if mapatriz[i+1,j].codigo<>' ' then
+					begin
+
 						VecPos[1].x:=i+1;
 
-					VecPos[1].y:=j;
+						VecPos[1].y:=j;
 
-					cant:=cant+1;
+						cant:=cant+1;
+
+					end;
 
 					if mapatriz[i-1,j].codigo<>' ' then
+					begin
+
 						VecPos[2].x:=i-1;
 
-					VecPos[2].y:=j;
+						VecPos[2].y:=j;
 
-					cant:=cant+1;
+						cant:=cant+1;
+
+					end;
 
 					if mapatriz[i,j-1].codigo<>' ' then
+					begin
+
 						VecPos[3].x:=i;
 
-					VecPos[3].y:=j-1;
+						VecPos[3].y:=j-1;
 
-					cant:=cant+1;
+						cant := cant+1;
+
+					end;
 
 					if mapatriz[i,j+1].codigo<>' ' then
+					begin
+
 						VecPos[4].x:=i;
 
-					VecPos[4].y:=j+1;
+						VecPos[4].y:=j+1;
 
-					cant:=cant+1;
+						cant:=cant+1;
+
+					end;
 
 					porcentajeZ:=(mapatriz[i,j].CantInfectados)*100/(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados);
 
@@ -225,12 +244,12 @@ Implementation
 
 							mapatriz[VecPos[4].x,VecPos[4].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS / 4));
 
-					end;
+							end;
+
+				end;
 
 			end;
 
-		end;
-
 	end;
 
-	end.
+end.
