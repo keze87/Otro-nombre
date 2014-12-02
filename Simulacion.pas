@@ -51,7 +51,7 @@ implementation
 		end;
 
 	TFactores = record
-		Codigo{de factor} : string[2];
+		Codigo : string[2];
 		Descripcion : string[30];
 		Valor : real;
 		end;
@@ -61,62 +61,15 @@ implementation
 
 			i:integer;
 			j:integer;
-			//rutaP:string;
-			//rutaF:string;
 			ArchPoblaciones:file of TPoblaciones;
 			ArchFactores:file of TFactores;
 			Factores:file of TFactores;
 			RegP:TPoblaciones;
 			RegF:TFactores;
-			//rta:char;
 
 		begin
 
 				gotoxy(1,25);
-
-				{writeln('Guardar factores como: ');
-				readkey;
-				rutaF:='newfactores.dat';
-				read(rutaF);
-				while fileexists(rutaF) do
-				begin
-
-					writeln('Archivo existente. Sobreescribir?(s/n)');
-					read(rta);
-					case rta of
-						's': Assign(ArchFactores,rutaF);
-						'n': begin
-
-							writeln('Guardar factores como: ');
-							read(rutaF);
-
-							end;
-					end;
-				end;
-				if (not fileexists(rutaF)) then
-					Assign(ArchFactores,rutaF);
-
-				 writeln('Guardar poblaciones como: ');
-				read(rutaP);
-				while fileexists(rutaP) do
-				begin
-
-					writeln('Archivo existente. Sobreescribir?(s/n)');
-					read(rta);
-					case rta of
-						's': Assign(ArchPoblaciones,rutaP);
-						'n': begin
-
-								writeln('Guardar poblaciones como: ');
-								read(rutaP);
-
-							end;
-
-					end;
-
-				end;
-
-				if not fileexists(rutaP) then}
 
 				Assign(ArchPoblaciones,'newpoblaciones.DAT');
 
@@ -184,7 +137,7 @@ implementation
 
 			LeerINT(foco);
 
-			mapatriz[i,j].CantInfectados:={mapatriz[i,j].CantInfectados+}foco;
+			mapatriz[i,j].CantInfectados := foco;
 
 			write('Ingrese cantidad de Zombies: ');
 
@@ -211,10 +164,7 @@ implementation
 
 			repeat
 
-				delay(33);
-
-				{   if keypressed then
-					begin     }
+				//delay(33);
 
 				key:=readkey;
 
@@ -265,7 +215,7 @@ implementation
 
 			clrscr;
 
-			for j := 1 to topey-1 do //Experimental
+			for j := 1 to topey-1 do
 			begin
 
 					for k := 1 to topex do
@@ -381,7 +331,7 @@ end;
 
 			gotoxy(1,25);
 
-			write(x,' ',y,' ',mapatriz[x,y].Descripcion);
+			write(x,' ',y,' ',mapatriz[x,y].Descripcion,' ',mapatriz[x,y].CantZombies);
 
 			gotoxy(x,y+1);
 
@@ -404,10 +354,10 @@ end;
 			aux : string;
 			Mapa : text;
 
-			totalS : longInt;
+			{totalS : longInt;
 			totalI : longInt;
 			totalR : longInt;
-			totalZ : longInt;
+			totalZ : longInt;}
 
 			Factores : file of TFactores;
 			auxF : TFactores;
@@ -436,7 +386,7 @@ end;
 			if not fileexists(RutaP) then
 				rutaP := 'Poblaciones.DAT';
 
-			Assign(Factores,RutaF{'Factores.DAT'});
+			Assign(Factores,RutaF);
 			reset(Factores);
 
 			repeat
@@ -460,10 +410,10 @@ end;
 
 			CrearMatriz(Mapatriz,RutaM,RutaP);
 
-			Assign(Mapa,RutaM{'mapamundi.txt'});
+			Assign(Mapa,RutaM);
 			reset(Mapa);
 
-			topex := -213;
+			topex := -1;
 
 			m := 0;
 
@@ -488,8 +438,8 @@ end;
 
 			until EOF(Mapa);
 
-			topey := 37;
-			topex := 74;  {despues lo arreglo para que lo tome de la medida del archivo}
+			topey := m;
+			//topex := 74;
 
 			writeln;
 
@@ -502,14 +452,14 @@ end;
 
 				clrscr;
 
-				totalS := 0;
+				{totalS := 0;
 				totalI := 0;
 				totalR := 0;
-				totalZ := 0;
+				totalZ := 0;}
 
 				write('Dia : ',i,' ((P)ausa,(S)alir,(G)uardar,En Pausa((I)nfo,(F)oco Infeccion))');
 
-				for j := 1 to topey-1 do //Experimental
+				for j := 1 to topey-1 do
 				begin
 
 					for k := 1 to topex do
@@ -529,10 +479,10 @@ end;
 
 						write(Mapatriz[k,j].Codigo);
 
-						totalS := totalS + Mapatriz [i,j].CantSuceptibles;
+						{totalS := totalS + Mapatriz [i,j].CantSuceptibles;
 						totalI := totalI + Mapatriz [i,j].CantInfectados;
 						totalR := totalR + Mapatriz [i,j].CantRemovidos;
-						totalZ := totalZ + Mapatriz [i,j].CantZombies;
+						totalZ := totalZ + Mapatriz [i,j].CantZombies;}
 
 					end;
 
@@ -540,11 +490,9 @@ end;
 
 				end;
 
-				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
+				//write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
 
 				Delay(1000);
-
-				//readkey;
 
 				peri := 0;
 
@@ -651,18 +599,6 @@ end;
 
 		end;
 
-	//repeat
-
-	//LeerINT(SalidaMapa);
-
-	//until ((SalidaMapa > 0) and (SalidaMapa < 3));
-
-	//case SalidaMapa of
-
-	//1 : Menu(SalidaMapa);   {guardar y volver al menu}
-
-	//end;
-
 	end;
 
 	Procedure MostrarPoblacionesViejo;
@@ -682,8 +618,6 @@ end;
 			clchar : char;
 
 		begin
-
-			//clrscr;
 
 			Assign(Mapa,'mapamundi.txt');
 			reset(Mapa);
@@ -707,8 +641,6 @@ end;
 
 					l := l + 1;
 
-					//reset(Poblaciones); //seguro que esto es lo que dijo la profe en el parcial
-
 					repeat
 
 						read(Poblaciones,auxP);
@@ -718,9 +650,6 @@ end;
 					Mapatriz [l,m].Codigo := aux[l];
 					Mapatriz [l,m].Descripcion := auxP.Descripcion;
 					Mapatriz [l,m].CantSuceptibles := auxP.CantSuceptibles;
-					//writeln(Mapatriz [l,m].CantSuceptibles:0:0);
-
-					//close(Poblaciones);
 
 					if l > topex then
 						topex := l;
@@ -740,14 +669,11 @@ end;
 
 			repeat
 
-				//repeat
-
 					if keypressed then
 					begin
 
 						clchar := readkey;
 
-						//if ((clchar <> Char(75)) and (clchar <> Char(72)) and (clchar <> Char(80)) and (clchar <> Char(77))) then
 						if (clchar = 's') then
 						begin
 
@@ -806,13 +732,10 @@ end;
 					if Mapatriz [x,y].Codigo <> ' ' then
 					write(', Habitantes : ',Mapatriz [x,y].CantSuceptibles);
 
-					//readKey;
 					Delay(20);
 					window(1,1,80,250);
 
-			//until clchar = 's';
-
-		until 5 < 4;
+		until clchar = 's';
 
 		window(1,1,80,25);
 

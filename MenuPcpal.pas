@@ -3,14 +3,13 @@ unit MenuPcpal;
 interface
 
 	Procedure Menu (var SalidaMenu : integer);
-	Procedure MenuSimulacion(var SalidaMenuSim : integer);
-	//Procedure MenuTerreno(var SalidaMenuTerr : integer);
-	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
+	Procedure MenuSimulacion (var SalidaMenuSim : integer);
+	Procedure MenuTerreno (var SalidaMenuTerr : integer);
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
-	Procedure MenuFactores(var SalidaFac : integer);
-	Procedure MenuMundo(var SalidaMundo : integer);
+	Procedure MenuFactores (var SalidaFac : integer);
+	Procedure MenuMundo (var SalidaMundo : integer);
 	Procedure MenuAjustes (var SalidaMenu : integer);
-	Procedure MenuNuevaSim(var SalidaNueva : integer);
+	Procedure MenuNuevaSim (var SalidaNueva : integer);
 	Procedure CargarSimulacion;
 
 implementation
@@ -22,7 +21,7 @@ implementation
 	Type
 
 		TTerrenos = record
-			Codigo{de terreno} : integer; // la guia dice char;
+			Codigo : integer;
 			Descripcion : string[30];
 			end;
 
@@ -39,7 +38,7 @@ implementation
 			end;
 
 		TFactores = record
-			Codigo{de factor} : string[2];
+			Codigo : string[2];
 			Descripcion : string[30];
 			Valor : real;
 			end;
@@ -67,7 +66,7 @@ implementation
 
 		GotoXY(1,4);
 
-		EscrDelay(Velocidad,'Ingrese el nombre del archivo de poblaciones'); {poblaciones.DAT o .dat}
+		EscrDelay(Velocidad,'Ingrese el nombre del archivo de poblaciones');
 
 		readln(rutaP);
 
@@ -109,14 +108,6 @@ implementation
 
 		writeln;
 
-		{while (not fileexists(rutaF)) do
-			begin
-
-				writeln('Archivo inexistente');
-				read(rutaF);
-
-			end;}
-
 		ModifSimulacion(dias,periodo,rutaM,rutaF,rutaP);
 
 	end;
@@ -131,9 +122,9 @@ implementation
 		GotoXY(28,1);
 		EscrDelay(Velocidad,'**** Menu Principal ****');
 		GotoXY(1,4);
-		EscrDelay(Velocidad,'1) Visualizar el terreno.' {(Con su debida descripcion)});
+		EscrDelay(Velocidad,'1) Visualizar el terreno.');
 		writeln;
-		EscrDelay(Velocidad,'2) Visualizar las poblaciones.' {(Con su debida descripcion)});
+		EscrDelay(Velocidad,'2) Visualizar las poblaciones.');
 		writeln;
 		EscrDelay(Velocidad,'3) Visualizar los factores constantes.');
 		writeln;
@@ -156,7 +147,7 @@ implementation
 
 		case SalidaMenu of
 
-			1 : MenuTerreno2(SalidaMenu);		//ANTES: MenuTerreno(SalidaMenu);
+			1 : MenuTerreno(SalidaMenu);
 			2 : MenuPoblaciones(SalidaMenu);
 			3 : MenuFactores(SalidaMenu);
 			4 : MenuMundo(SalidaMenu);
@@ -181,9 +172,6 @@ implementation
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
-		//EscrDelay(Velocidad,'Inserte descripcion de mundo aqui.');
-		//readln;
-		//MostrarMapa(ruta);
 		LeerArchivoSegunPoblacion(ruta);
 		writeln;
 		textcolor(10);
@@ -262,7 +250,6 @@ implementation
 		EscrDelay(Velocidad,'**** Poblaciones ****');
 		writeln;
 		gotoXY(1,6);
-		//LeerArchivo('mapamundi.txt');
 		writeln;
 
 		gotoXY(1,3);
@@ -270,58 +257,12 @@ implementation
 		writeln('Para salir de mapa presione "s"');
 		readkey;
 		clrscr;
-		//RecorrerMapa(1,1);
 		MostrarPoblacionesViejo;
 		Menu(SalidaPobl);
 
 	end;
 
-
-	{Procedure MenuTerreno(var SalidaMenuTerr : integer);
-	var
-
-		Terrenos : file of TTerrenos;
-		auxT : TTerrenos;
-
-	begin
-
-		Assign(Terrenos,'Terrenos.DAT');
-		reset(Terrenos);
-
-		ClrScr;
-		writeln;
-
-		GotoXY(31,1);
-		EscrDelay(Velocidad,'**** Terrenos ****');
-
-		writeln;writeln;
-
-		while not eof(Terrenos) do
-		begin
-
-		read(Terrenos,auxT);
-
-		write (' ');EscrDelay(-Velocidad,'Area'); EscrDelay(-Velocidad,auxT.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxT.Codigo);
-
-		writeln;
-		end;
-		close(Terrenos);
-
-		GotoXY(27,24);
-		EscrDelay(Velocidad,'1) Volver al Menu Principal');
-		writeln;
-
-		repeat
-
-			LeerINT(SalidaMenuTerr);
-
-		until ((SalidaMenuTerr > 0) and (SalidaMenuTerr < 2));
-
-		Menu(SalidaMenuTerr);
-
-	end;}
-
-	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
+	Procedure MenuTerreno(var SalidaMenuTerr : integer);
 	begin
 
 		ClrScr;
@@ -344,7 +285,6 @@ implementation
 	end;
 
 	Procedure MenuSimulacion(var SalidaMenuSim : integer);
-
 	begin
 
 		ClrScr;
@@ -428,7 +368,6 @@ implementation
 	end;
 
 	Procedure MenuNuevaSim(var SalidaNueva : integer);
-
 	var
 
 		ruta:string;
