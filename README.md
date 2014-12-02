@@ -4,9 +4,8 @@ Zombie
 Repositorio para el TP.
 
 
-======
-
 Integrantes
+======
 
 Cesar Ezequiel Herrera, Walter Javier Mamani, Dario Javier Albarracín.
 
