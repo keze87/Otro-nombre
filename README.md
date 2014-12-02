@@ -3,18 +3,12 @@ Zombie
 
 Repositorio para el TP.
 
-Mensajes
+
 ======
 
-X va de 1 a 80.
+Integrantes
 
-Y va de 1 a 25. (El mapa es mas de 25)
-
-Por favor no dudes en corregirme.
-
-Las cosas por hacer estan en: https://github.com/keze87/Zombie/issues
-
-Y no subir nada de archivos compilados. :@
+Cesar Ezequiel Herrera, Walter Javier Mamani, Dario Javier Albarracín.
 
 WWW
 ======
