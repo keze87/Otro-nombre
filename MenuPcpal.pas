@@ -4,6 +4,7 @@ interface
 
 	Procedure Menu (var SalidaMenu : integer);
 	Procedure MenuSimulacion(var SalidaMenuSim : integer);
+	//Procedure MenuTerreno(var SalidaMenuTerr : integer);
 	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
 	Procedure MenuFactores(var SalidaFac : integer);
@@ -253,38 +254,72 @@ implementation
 	end;
 
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
-
-
 	begin
 
 		ClrScr;
-		GotoXY(28,1);
+		writeln;
+		GotoXY(27,1);
 		EscrDelay(Velocidad,'**** Poblaciones ****');
-		GotoXY(1,4);
 		writeln;
-		VisualizarDescripcionPoblacion;
+		gotoXY(1,6);
+		//LeerArchivo('mapamundi.txt');
 		writeln;
-		EscrDelay(-Velocidad,'Use las teclas de direccion para desplazarse entre territorios ');
+
+		gotoXY(1,3);
+		writeln('Teclas de direccion para ver la descripcion y la cantidad de habitantes');
+		writeln('Para salir de mapa presione "s"');
+		readkey;
+		clrscr;
+		//RecorrerMapa(1,1);
+		MostrarPoblacionesViejo;
+		Menu(SalidaPobl);
+
+	end;
+
+
+	{Procedure MenuTerreno(var SalidaMenuTerr : integer);
+	var
+
+		Terrenos : file of TTerrenos;
+		auxT : TTerrenos;
+
+	begin
+
+		Assign(Terrenos,'Terrenos.DAT');
+		reset(Terrenos);
+
+		ClrScr;
 		writeln;
-		EscrDelay(-Velocidad,'Presione "i" para consultar informacion sobre un territorio');
-		textcolor(10);
-                writeln;
-                writeln;
-		EscrDelay(-Velocidad,'1) Volver al Menu Principal. ');
+
+		GotoXY(31,1);
+		EscrDelay(Velocidad,'**** Terrenos ****');
+
+		writeln;writeln;
+
+		while not eof(Terrenos) do
+		begin
+
+		read(Terrenos,auxT);
+
+		write (' ');EscrDelay(-Velocidad,'Area'); EscrDelay(-Velocidad,auxT.Descripcion); EscrDelay(-Velocidad,'= '); writeln(auxT.Codigo);
+
+		writeln;
+		end;
+		close(Terrenos);
+
+		GotoXY(27,24);
+		EscrDelay(Velocidad,'1) Volver al Menu Principal');
+		writeln;
 
 		repeat
 
-			LeerINT(SalidaPobl);
+			LeerINT(SalidaMenuTerr);
 
-		until ((SalidaPobl > 0) and (SalidaPobl < 2));
+		until ((SalidaMenuTerr > 0) and (SalidaMenuTerr < 2));
 
-		case SalidaPobl of
+		Menu(SalidaMenuTerr);
 
-			1 : Menu(SalidaPobl);
-
-		end;
-
-	end;
+	end;}
 
 	Procedure MenuTerreno2(var SalidaMenuTerr : integer);
 	begin
