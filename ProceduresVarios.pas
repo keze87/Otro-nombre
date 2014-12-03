@@ -194,7 +194,7 @@ Type
 
 		auxF.Codigo := 'al' ;
 		auxF.Descripcion := ' Salvacion ante ataque ' ;
-		auxF.Valor := 0.8 ;
+		auxF.Valor := 0 ;
 
 		write(Factores,auxF);
 
@@ -202,7 +202,7 @@ Type
 
 		auxF.Codigo := 'be' ;
 		auxF.Descripcion := ' Transmisión ' ;
-		auxF.Valor := 0.1 ;
+		auxF.Valor := 0.0005 ;
 
 		write(Factores,auxF);
 
@@ -210,7 +210,7 @@ Type
 
 		auxF.Codigo := 'de' ;
 		auxF.Descripcion := ' Muerte por causa natural ' ;
-		auxF.Valor := 0.5 ;
+		auxF.Valor := 0 ;
 
 		write(Factores,auxF);
 
@@ -218,7 +218,7 @@ Type
 
 		auxF.Codigo := 'xi' ;
 		auxF.Descripcion := ' Resurreccion Zombie ' ;
-		auxF.Valor := 0.1 ;
+		auxF.Valor := 0.05 ;
 
 		write(Factores,auxF);
 
@@ -226,7 +226,7 @@ Type
 
 		auxF.Codigo := 'pi' ;
 		auxF.Descripcion := ' Tasa de natalidad ' ;
-		auxF.Valor := 0.8 ;
+		auxF.Valor := 0 ;
 
 		write(Factores,auxF);
 
@@ -234,7 +234,7 @@ Type
 
 		auxF.Codigo := 'ro' ;
 		auxF.Descripcion := ' Latente de infección ' ;
-		auxF.Valor := 0.5 ;
+		auxF.Valor := 0.05 ;
 
 		write(Factores,auxF);
 
@@ -266,12 +266,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona desertica';
-						auxP.CantSuceptibles:= Aleatorio(300);
+						auxP.CantSuceptibles:= Aleatorio(100000);
 						auxP.CantInfectados:= 0;
 						auxP.CantZombies:= 0;
-						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.CantRemovidos:= 0;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -280,12 +280,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona pueblerina';
-						auxP.CantSuceptibles:= Aleatorio(1000);
+						auxP.CantSuceptibles:= Aleatorio(300000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.CantRemovidos:= 0;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -294,12 +294,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona selvatica';
-						auxP.CantSuceptibles:= Aleatorio(600);
+						auxP.CantSuceptibles:= Aleatorio(600000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.CantRemovidos:= 0;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -308,12 +308,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona de montes';
-						auxP.CantSuceptibles:= Aleatorio(2000);
+						auxP.CantSuceptibles:= Aleatorio(200000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.CantRemovidos:= 0;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -322,12 +322,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona mediamente poblada';
-						auxP.CantSuceptibles:= Aleatorio(4000);
+						auxP.CantSuceptibles:= Aleatorio(4000000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.CantRemovidos:= 0;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -336,12 +336,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona poblada';
-						auxP.CantSuceptibles:= Aleatorio(6000);
+						auxP.CantSuceptibles:= Aleatorio(6000000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
-						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.CantRemovidos:= 0;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -350,12 +350,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona de montana';
-						auxP.CantSuceptibles:= Aleatorio(1000);
+						auxP.CantSuceptibles:= Aleatorio(100000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
 						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -364,12 +364,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona rural';
-						auxP.CantSuceptibles:= Aleatorio(1000);
+						auxP.CantSuceptibles:= Aleatorio(100000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
 						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -378,12 +378,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona densamente poblada';
-						auxP.CantSuceptibles:= Aleatorio(10000);
+						auxP.CantSuceptibles:= Aleatorio(10000000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
 						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 
@@ -392,12 +392,12 @@ Type
 						auxP.PuntoX:=i;
 						auxP.PuntoY:=j;
 						auxP.Descripcion:='Zona de recepcion de migracion';
-						auxP.CantSuceptibles:= Aleatorio(50000);
+						auxP.CantSuceptibles:= Aleatorio(5000000);
 						auxP.CantInfectados:=0;
 						auxP.CantZombies:=0;
 						auxP.CantRemovidos:= Aleatorio(300);
-						auxP.TasaNatalidad:= random;
-						auxP.FactorMovilidad:= random;
+						auxP.TasaNatalidad:= 0;
+						auxP.FactorMovilidad:= 1;
 
 						end;
 

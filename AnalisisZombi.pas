@@ -37,13 +37,13 @@ implementation
 
 	begin
 
-		Sa := pi * ( S + I ) - beta * S * Z - delta * S;
+		Sa :=  S + ((pi * ( S + I ))- (beta * S * Z) - (delta * S));
 
-		Ia := beta * S * Z - delta * I - rho * I;
+		Ia := I + ((beta * S * Z)- (delta * I) - (rho * I));
 
-		Za := rho * I + xi * R - alfa * S * Z;
+		Za := Z + ((rho * I) + (xi * R) - (alfa * S * Z));
 
-		Ra := delta * S + delta * I + alfa * S * Z - rho * R;
+		Ra := R + ((delta * S) + (delta * I) + (alfa * S * Z) - (xi * R));
 
 		if Sa > 0 then
 			S := abs(trunc(Sa))
