@@ -470,27 +470,19 @@ implementation
 						if Mapatriz[k,j].CantZombies = 0 then
 							textcolor(lightgray);
 
-						if Mapatriz[k,j].CantZombies > 5 then
+						if Mapatriz[k,j].CantZombies > 1 then
 							textcolor(yellow);
 
-						if Mapatriz[k,j].CantZombies  > 10 then
+						{if Mapatriz[k,j].CantZombies  > 10 then
 							textcolor(magenta);
 
 						if Mapatriz[k,j].CantZombies > 15 then
 							textcolor(red);
 
 						if Mapatriz[k,j].CantZombies > 25 then
-							textcolor(lightgreen);
+							textcolor(lightgreen);}
 
-						writeln(Mapatriz[k,j].Codigo);
-
-						if i > 5 then
-						begin
-
-						writeln(Mapatriz[k,j].CantZombies);
-
-						delay(1000);
-						end;
+						write(Mapatriz[k,j].Codigo);
 
 						totalS := totalS + Mapatriz [i,j].CantSuceptibles;
 						totalI := totalI + Mapatriz [i,j].CantInfectados;
