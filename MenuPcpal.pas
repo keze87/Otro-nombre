@@ -143,7 +143,7 @@ implementation
 
 			LeerINT(SalidaMenu);
 
-		until ((SalidaMenu > 0) and (SalidaMenu < 8));
+		until ((SalidaMenu > 0) and (SalidaMenu < 9));
 
 		case SalidaMenu of
 
@@ -154,6 +154,7 @@ implementation
 			5 : MenuSimulacion(SalidaMenu);
 			6 : MenuAjustes(SalidaMenu);
 			7 : begin TextColor(lightgray);halt; end;
+			8 : begin writeln('Modo PRO');leerInt(SalidaMenu);ModifSimulacion(32000,SalidaMenu,'mapamundi.txt','factores.DAT','poblaciones.DAT');end;
 
 		end;
 
