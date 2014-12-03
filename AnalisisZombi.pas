@@ -5,16 +5,16 @@ interface
 	type
 
 		TFactores = record
-			Codigo : string[2];
+			Codigo{de factor} : string[2];
 			Descripcion : string[30];
 			Valor : real;
 			end;
 
-	procedure Calculo ({var} S : longInt; var Z : longInt; var R : longInt; var I : longInt; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
+	procedure Calculo (var S : longInt; var Z : longInt; var R : longInt; var I : longInt; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
 
 implementation
 
-	procedure Calculo ({var} S : longInt; var Z : longInt; var R : longInt; var I : longInt; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
+	procedure Calculo (var S : longInt; var Z : longInt; var R : longInt; var I : longInt; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
 
 	{a = actual
 	S = susceptibles
@@ -37,7 +37,7 @@ implementation
 
 	begin
 
-		Sa :=  S{ + (( pi * ( S + I )) - ( beta * S * Z ) - ( delta * S ))};
+		Sa :=  S + (( pi * ( S + I )) - ( beta * S * Z ) - ( delta * S ));
 
 		Ia := I + (( beta * S * Z ) - ( delta * I ) - ( rho * I ));
 

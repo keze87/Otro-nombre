@@ -448,20 +448,20 @@ implementation
 		repeat
 
 			textcolor(10);
-
+			
 			if (peri = 7) then
-
+			
 				MigracionAire (Mapatriz,topex,topey);
-
-			totalS := 0;
-			totalI := 0;
-			totalR := 0;
-			totalZ := 0;
 
 			if (peri = periodo) or (i = 1) then
 			begin
 
 				clrscr;
+
+				totalS := 0;
+				totalI := 0;
+				totalR := 0;
+				totalZ := 0;
 
 				write('Dia : ',i,' ((P)ausa,(S)alir,(G)uardar,En Pausa((I)nfo,(F)oco Infeccion))');
 
@@ -474,13 +474,13 @@ implementation
 						if Mapatriz[k,j].CantZombies = 0 then
 							textcolor(lightgray);
 
-						if Mapatriz[k,j].CantZombies > 0 then
+						if Mapatriz[k,j].CantZombies > 1 then
 							textcolor(yellow);
 
-						if Mapatriz[k,j].CantZombies  > 50 then
+						if Mapatriz[k,j].CantZombies  > 10 then
 							textcolor(magenta);
 
-						if Mapatriz[k,j].CantZombies > 100 then
+						if Mapatriz[k,j].CantZombies > 50 then
 							textcolor(red);
 
 						write(Mapatriz[k,j].Codigo);
@@ -504,7 +504,7 @@ implementation
 
 				peri := 0;
 
-			end;
+				end;
 
 				if keypressed then
 				begin
@@ -845,20 +845,16 @@ implementation
 
 				pobTotal := Mapatriz[i,j].CantSuceptibles + Mapatriz[i,j].cantInfectados;
 
-				pobInfectada:= Mapatriz[i,j].cantInfectados;
+				pobInfectada:=Mapatriz[i,j].cantInfectados;
 
-				viajantes:= mapatriz[i,j].CantSuceptibles * 0.00250/600;
+				viajantes:= mapatriz[i,j].CantSuceptibles*0.00250/600;
 
 				for h:=1  to 6 do
 				begin
 
-					mapatriz[VecRecep[h].x,VecRecep[h].y].cantSuceptibles := mapatriz[VecRecep[h].x,VecRecep[h].y].cantSuceptibles + trunc(viajantes);
-
-					Mapatriz[i,j].CantSuceptibles := Mapatriz[i,j].CantSuceptibles - trunc(viajantes);
+					mapatriz[VecRecep[h].x,VecRecep[h].y].cantSuceptibles := mapatriz[VecRecep[h].x,VecRecep[h].y].cantSuceptibles +trunc(viajantes);
 
 					mapatriz[VecRecep[h].x,VecRecep[h].y].cantInfectados := mapatriz[VecRecep[h].x,VecRecep[h].y].cantInfectados + trunc(InViaje(pobTotal,pobInfectada,trunc(viajantes)));
-
-					Mapatriz[i,j].cantInfectados := Mapatriz[i,j].cantInfectados - trunc(InViaje(pobTotal,pobInfectada,trunc(viajantes)));
 
 				end;
 
@@ -937,30 +933,30 @@ implementation
 					end;
 
 					porcentajeZ:=(mapatriz[i,j].CantInfectados)*100;
+					if porcentajeZ = 0 then
+						porcentajeZ := 1;
 
 					aux := mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados;
+					if aux = 0 then
+						aux := 1;
 
 					porcentajeZ := porcentajeZ/(aux);
+					if porcentajeZ < 1 then
+						porcentajeZ := 1;
 
 					porcentajeS:=(porcentajeZ*mapatriz[i,j].CantSuceptibles)/100;
 
-					if ((aux > 0) and (porcentajeZ > 0) and (porcentajeS > 0) and (porcentajeZ > 0)) then
+					mapatriz[i,j].CantSuceptibles :=  mapatriz[i,j].CantSuceptibles-abs(trunc(porcentajeS));
+
 					case cant of
 						1: begin
 
 							mapatriz[VecPos[1].x,VecPos[1].y].CantSuceptibles := mapatriz[VecPos[1].x,VecPos[1].y].CantSuceptibles+abs(trunc(porcentajeS));
 
-							mapatriz[i,j].CantSuceptibles :=  mapatriz[i,j].CantSuceptibles - abs(trunc(porcentajeS));
-
 							mapatriz[VecPos[1].x,VecPos[1].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS));
 
 							if mapatriz[i,j].CantZombies > 1 then
-							begin
-
 								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
-								mapatriz[i,j].CantZombies := mapatriz[i,j].CantZombies - 1;
-
-							end;
 
 							end;
 
@@ -970,18 +966,15 @@ implementation
 
 							mapatriz[VecPos[1].x,VecPos[1].y].CantSuceptibles := mapatriz[VecPos[2].x,VecPos[2].y].CantSuceptibles+trunc(porcentajeS / 2);
 
-							mapatriz[i,j].CantSuceptibles :=  mapatriz[i,j].CantSuceptibles - abs(trunc(porcentajeS));
-
 							mapatriz[VecPos[2].x,VecPos[2].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS / 2));
 
 							mapatriz[VecPos[2].x,VecPos[2].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS / 2));
 
-							if mapatriz[i,j].CantZombies > 2 then
+							if mapatriz[i,j].CantZombies > 1 then
 							begin
 
 								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
 								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 1;
-								mapatriz[i,j].CantZombies := mapatriz[i,j].CantZombies - 2;
 
 							end;
 
@@ -995,8 +988,6 @@ implementation
 
 							mapatriz[VecPos[3].x,VecPos[3].y].CantSuceptibles := mapatriz[VecPos[3].x,VecPos[3].y].CantSuceptibles+trunc (porcentajeS / 3);
 
-							mapatriz[i,j].CantSuceptibles :=  mapatriz[i,j].CantSuceptibles - abs(trunc(porcentajeS));
-
 							mapatriz[VecPos[1].x,VecPos[1].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc (porcentajeS / 3));
 
 							mapatriz[VecPos[2].x,VecPos[2].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc (porcentajeS / 3));
@@ -1004,13 +995,12 @@ implementation
 							mapatriz[VecPos[3].x,VecPos[3].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc (porcentajeS / 3));
 
 
-							if mapatriz[i,j].CantZombies > 3 then
+							if mapatriz[i,j].CantZombies > 1 then
 							begin
 
 								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
 								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 1;
 								mapatriz[VecPos[3].x,VecPos[3].y].CantZombies := mapatriz[VecPos[3].x,VecPos[3].y].CantZombies + 1;
-								mapatriz[i,j].CantZombies := mapatriz[i,j].CantZombies - 3;
 
 							end;
 
@@ -1026,8 +1016,6 @@ implementation
 
 							mapatriz[VecPos[4].x,VecPos[4].y].CantSuceptibles := mapatriz[VecPos[4].x,VecPos[4].y].CantSuceptibles+trunc(porcentajeS / 4);
 
-							mapatriz[i,j].CantSuceptibles :=  mapatriz[i,j].CantSuceptibles - abs(trunc(porcentajeS));
-
 							mapatriz[VecPos[1].x,VecPos[1].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS / 4));
 
 							mapatriz[VecPos[2].x,VecPos[2].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS / 4));
@@ -1036,18 +1024,18 @@ implementation
 
 							mapatriz[VecPos[4].x,VecPos[4].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS / 4));
 
-							if mapatriz[i,j].CantZombies > 4 then
+							if mapatriz[i,j].CantZombies > 1 then
 							begin
 
 								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
 								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 1;
 								mapatriz[VecPos[3].x,VecPos[3].y].CantZombies := mapatriz[VecPos[3].x,VecPos[3].y].CantZombies + 1;
 								mapatriz[VecPos[4].x,VecPos[4].y].CantZombies := mapatriz[VecPos[4].x,VecPos[4].y].CantZombies + 1;
-								mapatriz[i,j].CantZombies := mapatriz[i,j].CantZombies - 4;
 
 							end;
 
-					end;
+							end;
+
 				end;
 			end;
 		end;
