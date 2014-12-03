@@ -448,6 +448,10 @@ implementation
 		repeat
 
 			textcolor(10);
+			
+			if (peri = 7) then
+			
+				MigracionAire (Mapatriz,topex,topey);
 
 			if (peri = periodo) or (i = 1) then
 			begin
@@ -762,7 +766,6 @@ implementation
 
 				end;
 
-		MigracionAire (Matriz,topex,topey);
 		MigracionTierra (Matriz,topex,topey);
 
 	end;
