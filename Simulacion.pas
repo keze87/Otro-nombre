@@ -953,7 +953,7 @@ implementation
 							mapatriz[VecPos[1].x,VecPos[1].y].CantInfectados := InViaje(mapatriz[i,j].CantSuceptibles+mapatriz[i,j].CantInfectados,mapatriz[i,j].CantInfectados,trunc(porcentajeS));
 
 							if mapatriz[i,j].CantZombies > 1 then
-								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := 5;
+								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
 
 							end;
 
@@ -970,8 +970,8 @@ implementation
 							if mapatriz[i,j].CantZombies > 1 then
 							begin
 
-								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 5;
-								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 5;
+								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
+								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 1;
 
 							end;
 
@@ -995,9 +995,9 @@ implementation
 							if mapatriz[i,j].CantZombies > 1 then
 							begin
 
-								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 5;
-								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 5;
-								mapatriz[VecPos[3].x,VecPos[3].y].CantZombies := mapatriz[VecPos[3].x,VecPos[3].y].CantZombies + 5;
+								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
+								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 1;
+								mapatriz[VecPos[3].x,VecPos[3].y].CantZombies := mapatriz[VecPos[3].x,VecPos[3].y].CantZombies + 1;
 
 							end;
 
@@ -1024,10 +1024,10 @@ implementation
 							if mapatriz[i,j].CantZombies > 1 then
 							begin
 
-								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 5;
-								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 5;
-								mapatriz[VecPos[3].x,VecPos[3].y].CantZombies := mapatriz[VecPos[3].x,VecPos[3].y].CantZombies + 5;
-								mapatriz[VecPos[4].x,VecPos[4].y].CantZombies := mapatriz[VecPos[4].x,VecPos[4].y].CantZombies + 5;
+								mapatriz[VecPos[1].x,VecPos[1].y].CantZombies := mapatriz[VecPos[1].x,VecPos[1].y].CantZombies + 1;
+								mapatriz[VecPos[2].x,VecPos[2].y].CantZombies := mapatriz[VecPos[2].x,VecPos[2].y].CantZombies + 1;
+								mapatriz[VecPos[3].x,VecPos[3].y].CantZombies := mapatriz[VecPos[3].x,VecPos[3].y].CantZombies + 1;
+								mapatriz[VecPos[4].x,VecPos[4].y].CantZombies := mapatriz[VecPos[4].x,VecPos[4].y].CantZombies + 1;
 
 							end;
 
