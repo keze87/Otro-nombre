@@ -143,7 +143,7 @@ implementation
 
 			LeerINT(SalidaMenu);
 
-		until ((SalidaMenu > 0) and (SalidaMenu < 8));
+		until ((SalidaMenu > 0) and (SalidaMenu < 8) or (salidaMenu = -1));
 
 		case SalidaMenu of
 
@@ -154,6 +154,15 @@ implementation
 			5 : MenuSimulacion(SalidaMenu);
 			6 : MenuAjustes(SalidaMenu);
 			7 : begin TextColor(lightgray);halt; end;
+			-1 : begin clrscr; GotoXY(20,1);
+
+					EscrDelay(Velocidad,'**** Modo PRO ****');
+					GotoXY(1,4); writeln('Ingrese Periodo:');
+					writeln;
+					leerINT(SalidaMenu);
+					ModifSimulacion(30000,SalidaMenu,'mapamundi.txt','Factores.DAT','Poblaciones.DAT');
+
+				end;
 
 		end;
 
@@ -405,7 +414,7 @@ implementation
 				write('Ingrese periodo de actualizacion: ');
 				LeerINT(periodo);
 
-				ModifSimulacion(dias,periodo,'mapamundi.txt','factores.DAT','poblaciones.DAT');
+				ModifSimulacion(dias,periodo,'mapamundi.txt','Factores.DAT','Poblaciones.DAT');
 
 				end;
 
@@ -419,7 +428,7 @@ implementation
 				writeln;
 				write('Ingrese periodo de actualizacion: ');
 				LeerINT(periodo);
-				ModifSimulacion(dias,periodo,ruta,'factores.DAT','poblaciones.DAT');
+				ModifSimulacion(dias,periodo,ruta,'Factores.DAT','Poblaciones.DAT');
 
 				end;
 

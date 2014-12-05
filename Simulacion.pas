@@ -144,13 +144,13 @@ implementation
 
 		LeerINT(foco);
 
-		mapatriz[i,j].CantInfectados := foco;
+		mapatriz[i,j-1].CantInfectados := foco;
 
 		write('Ingrese cantidad de Zombies: ');
 
 		LeerINT(foco);
 
-		mapatriz[i,j].CantZombies := foco;
+		mapatriz[i,j-1].CantZombies := foco;
 
 		GotoXY(i,j);
 
@@ -350,6 +350,7 @@ implementation
 		l : integer;
 		m : integer;
 		peri : integer;
+		Aire : integer;
 		clchar : char;
 		Salida : integer;
 		Mapatriz : TMatriz;
@@ -379,6 +380,7 @@ implementation
 		Salida := 1;
 		i := 1;
 		peri := 1;
+		Aire := 1;
 
 		if not fileexists(RutaF) then
 			rutaF := 'Factores.DAT';
@@ -448,10 +450,14 @@ implementation
 		repeat
 
 			textcolor(10);
-			
-			if (peri = 7) then
-			
+
+			if (Aire = 7) then
+			begin
+
 				MigracionAire (Mapatriz,topex,topey);
+				Aire := 0;
+
+			end;
 
 			if (peri = periodo) or (i = 1) then
 			begin
@@ -523,6 +529,7 @@ implementation
 				end;
 
 			i := i + 1;
+			Aire := Aire + 1;
 			peri := peri + 1;
 
 			ActualizarMatriz(Mapatriz,topex,topey,alfa,beta,delta,xi,pi,rho);
@@ -766,7 +773,7 @@ implementation
 
 				end;
 
-		MigracionTierra (Matriz,topex,topey);
+		//MigracionTierra (Matriz,topex,topey);
 
 	end;
 
