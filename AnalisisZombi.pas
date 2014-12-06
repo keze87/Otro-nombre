@@ -10,11 +10,11 @@ interface
 			Valor : real;
 			end;
 
-	procedure Calculo (var S : longInt; var Z : longInt; var R : longInt; var I : longInt; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
+	procedure Calculo (var Matrizmapa : TMatriz;i : integer; j : integer ; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
 
 implementation
 
-	procedure Calculo (var S : longInt; var Z : longInt; var R : longInt; var I : longInt; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
+	procedure Calculo (var Matrizmapa : TMatriz;i : integer; j : integer ; alfa : real; beta : real; delta : real; xi : real; pi : real; rho :real);
 
 	{a = actual
 	S = susceptibles
@@ -30,41 +30,61 @@ implementation
 
 	var
 
-		Sa : Real;
-		Za : Real;
-		Ra : Real;
-		Ia : Real;
 
-	begin
+		S : longint;
 
-		Sa :=  S + (( pi * ( S + I )) - ( beta * S * Z ) - ( delta * S ));
+		Z : longint;
 
-		Ia := I + (( beta * S * Z ) - ( delta * I ) - ( rho * I ));
+		R : longint;
 
-		Za := Z + (( rho * I ) + ( xi * R ) - ( alfa * S * Z ));
+		Inf : longint;
 
-		Ra := R + (( delta * S ) + ( delta * I ) + ( alfa * S * Z ) - ( xi * R ));
 
-		if Sa > 0 then
-			S := abs(trunc(Sa))
-		else
-			S := 0;
 
-		if Ia > 0 then
-			I := abs(trunc(Ia))
-		else
-			I := 0;
+		Sa : longint;
 
-		if Za > 0 then
-			Z := abs(trunc(Za))
-		else
-			Z := 0;
+		Za : longint;
 
-		if Ra > 0 then
-			R := abs(trunc(Ra))
-		else
-			R := 0;
+		Ra : longint;
+
+		Ia : longint;	
+begin
+
+
+
+        S := Matrizmapa [i,j].CantSuceptibles;
+
+        Z := Matrizmapa [i,j].CantZombies;
+
+        R := Matrizmapa [i,j].CantRemovidos;
+
+        Inf := Matrizmapa [i,j].CantInfectados;
+
+
+
+
+
+        Sa := trunc( S + (( pi * ( S + Inf )) - ( beta * S * Z ) - ( delta * S )));
+
+        Ia := trunc( Inf + (( beta * S * Z ) - ( delta * Inf ) - ( rho * Inf )));
+
+        Za := trunc( Z + (( rho * Inf ) + ( xi * R ) - ( alfa * S * Z )));
+
+        Ra := trunc( R + (( delta * S ) + ( delta * Inf ) + ( alfa * S * Z ) - ( xi * R )));
+
+
+
+
+        Matrizmapa [i,j].CantSuceptibles := Sa;
+
+        Matrizmapa [i,j].CantZombies := Za;
+
+        Matrizmapa [i,j].CantRemovidos := Ra;
+
+        Matrizmapa [i,j].CantInfectados := Ia;
+
 
 	end;
+
 
 end.
