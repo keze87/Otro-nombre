@@ -2,6 +2,8 @@ Unit AnalisisZombi;
 
 interface
 
+uses Simulacion;
+
 	type
 
 		TFactores = record
