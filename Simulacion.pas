@@ -173,10 +173,10 @@ implementation
 
 			key:=readkey;
 
-			if key = 'f' then
+			if (key = 'f') or (key = 'F') then
 				NuevoFoco(i,j,mapatriz);
 
-			if key = 'i' then
+			if (key = 'i') or (key = 'I') then
 			begin
 
 				gotoxy(1,25+12);
@@ -204,7 +204,7 @@ implementation
 
 			end;
 
-		until key='p';
+		until (key='p') or (key='P');
 
 	end;
 
@@ -333,7 +333,8 @@ implementation
 
 		textcolor(lightcyan);
 
-		write(x,' ',y,' ',mapatriz[x,y-1].Descripcion,' ',mapatriz[x,y-1].CantZombies);
+		writeln(x,' ',y,' ',mapatriz[x,y-1].Descripcion);
+		writeln(mapatriz[x,y-1].CantSuceptibles,' ',mapatriz[x,y-1].CantZombies);
 
 		textcolor(lightgray);
 
@@ -521,13 +522,13 @@ implementation
 
 					clchar:=readkey;
 
-					if clchar='p' then
+					if (clchar='p') or (clchar='P') then
 						Pausa(clchar,mapatriz);
 
-					if clchar='g' then
+					if (clchar='g') or (clchar='G') then
 						Guardar(mapatriz,topex,topey);
 
-					if clchar='s' then
+					if (clchar='s') or (clchar='S') then
 						Menu(Salida);
 
 				end;
@@ -790,7 +791,7 @@ implementation
 
 	begin
 
-		infectadosEnViaje:=0;
+		infectadosEnViaje:=1; //TIENE QUE SER 0
 
 		for i:=1 to cantidadDePasajeros do
 		begin
@@ -851,6 +852,8 @@ implementation
 						begin
 
 							aux := trunc(( Matriz[i,j].CantSuceptibles * 0.0025 / 100 ) / cant) + 1;
+
+							Matriz[i,j].CantSuceptibles := Matriz[i,j].CantSuceptibles - trunc(( Matriz[i,j].CantSuceptibles * 0.0025 / 100 ));
 
 							if aux > 0 then
 								for k := 1 to cant do
