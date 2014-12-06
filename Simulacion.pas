@@ -32,7 +32,7 @@ type
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 	Procedure Pausa(var caracter:char;var Mapatriz:TMatriz);
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
-	Procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
+	procedure ActualizarMatriz (var Matrizmapa : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
 	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 	Function InViaje(poblacionTotal: longint; poblacionInfectada: longint; cantidadDePasajeros: integer): longInt;
@@ -419,28 +419,15 @@ implementation
 		Assign(Mapa,RutaM);
 		reset(Mapa);
 
-		topex := -1;
-
 		m := 0;
 
 		repeat
 
 			readln(Mapa,aux);
 
-			l := 0;
+			topex := length(aux);
 
 			m := m + 1;
-
-			repeat
-
-				l := l + 1;
-
-				Mapatriz [l,m].Codigo := aux[l];
-
-				if l > topex then
-					topex := l;
-
-			until l = length(aux);
 
 		until EOF(Mapa);
 
@@ -762,7 +749,7 @@ implementation
 
 	end;
 
-	procedure ActualizarMatriz (var Matriz : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
+	procedure ActualizarMatriz (var Matrizmapa : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
 	var
 
 		i : integer;
@@ -770,11 +757,11 @@ implementation
 
 	begin
 
-		for j := 1 to topey-1 do
+		for j := 2 to topey do
 			for i := 1 to topex do
 				begin
 
-					Calculo(Matriz [i,j].CantSuceptibles,Matriz [i,j].CantZombies,Matriz [i,j].CantRemovidos,Matriz [i,j].CantInfectados,alfa,beta,delta,xi,pi,rho);
+					Calculo(Matrizmapa,i,j,alfa,beta,delta,xi,pi,rho);
 
 				end;
 
