@@ -226,7 +226,7 @@ Type
 
 		auxF.Codigo := 'pi' ;
 		auxF.Descripcion := ' Tasa de natalidad ' ;
-		auxF.Valor := 0 ;
+		auxF.Valor := 0.05 ;
 
 		write(Factores,auxF);
 
@@ -234,7 +234,7 @@ Type
 
 		auxF.Codigo := 'ro' ;
 		auxF.Descripcion := ' Latente de infección ' ;
-		auxF.Valor := 0.05 ;
+		auxF.Valor := 0.5 ;
 
 		write(Factores,auxF);
 

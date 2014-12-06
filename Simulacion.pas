@@ -489,6 +489,10 @@ implementation
 						if Mapatriz[k,j].CantZombies > 50 then
 							textcolor(red);
 
+						if Mapatriz[k,j].CantZombies < 0 then
+							textcolor(red);
+
+
 						write(Mapatriz[k,j].Codigo);
 
 						textcolor(lightgray);
@@ -889,7 +893,7 @@ implementation
 
 					cant := 0;
 
-					if (Matriz[i,j].Codigo <> ' ') and (Matriz[i,j].CantSuceptibles + Matriz[i,j].CantZombies > 0) then
+					if (Matriz[i,j].Codigo <> ' ') and (Matriz[i,j].CantSuceptibles > 0) and (Matriz[i,j].CantZombies > 0) then
 					begin
 
 						if (i-1 >= 1) and (Matriz[i-1,j].Codigo <> ' ') then
@@ -932,7 +936,7 @@ implementation
 
 						end;
 
-						if (i-1 >= 1) and (j-1 >= 1) and (Matriz[i-1,j].Codigo <> ' ') then
+						if (i-1 >= 1) and (j-1 >= 1) and (Matriz[i-1,j-1].Codigo <> ' ') then
 						begin
 
 							cant := cant + 1;
@@ -942,7 +946,7 @@ implementation
 
 						end;
 
-						if (i-1 >= 1) and (j+1 <= topey) and (Matriz[i-1,j].Codigo <> ' ') then
+						if (i-1 >= 1) and (j+1 <= topey) and (Matriz[i-1,j+1].Codigo <> ' ') then
 						begin
 
 							cant := cant + 1;
@@ -952,7 +956,7 @@ implementation
 
 						end;
 
-						if (i+1 <= topex) and (j-1 >= 1) and (Matriz[i-1,j].Codigo <> ' ') then
+						if (i+1 <= topex) and (j-1 >= 1) and (Matriz[i+1,j-1].Codigo <> ' ') then
 						begin
 
 							cant := cant + 1;
@@ -962,7 +966,7 @@ implementation
 
 						end;
 
-						if (i+1 <= topex) and (j+1 <= topey) and (Matriz[i-1,j].Codigo <> ' ') then
+						if (i+1 <= topex) and (j+1 <= topey) and (Matriz[i+1,j+1].Codigo <> ' ') then
 						begin
 
 							cant := cant + 1;
