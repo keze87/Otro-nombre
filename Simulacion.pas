@@ -65,30 +65,174 @@ implementation
 		Valor : real;
 		end;
 
-	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
+Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
+
 	var
 
+
+
 		i:integer;
+
 		j:integer;
+
 		ArchPoblaciones:file of TPoblaciones;
+
 		ArchFactores:file of TFactores;
+
 		Factores:file of TFactores;
+
+                rutaF:string;
+
+                rutaP:string;
+
 		RegP:TPoblaciones;
+
 		RegF:TFactores;
+
+                rta:char;
+
+
+
+
 
 	begin
 
-		gotoxy(1,25);
 
-		Assign(ArchPoblaciones,'newpoblaciones.DAT');
-		Assign(ArchFactores,'newfactores.DAT');
-		Assign(Factores,'Factores.DAT');
+
+		gotoxy(1,40);
+
+
+
+		write('Guardar poblaciones como: ');
+
+		readln(rutaP);
+
+		if fileexists(rutaP) then
+
+		        while fileexists(rutaP) do
+
+			begin
+
+			        writeln('Archivo ya existente. Sobreescribir? (S/N)');
+
+				readln(rta);
+
+				writeln;
+
+
+
+				case rta of
+
+					's' :
+
+                                        begin
+
+                                                Assign(ArchPoblaciones,rutaP);
+
+                                                break;
+
+                                        end;
+
+					'n':
+
+                                        begin
+
+						write('Guardar poblaciones como: ');
+
+						readln(rutaP);
+
+				        end;
+
+					else
+
+                                        begin
+
+						writeln('Archivo ya existente. Sobreescribir? (S/N)');
+
+						readln(rta);
+
+					end;
+
+			        end;
+
+			end
+
+	        else if not fileexists(rutaP) then
+
+                        Assign(ArchPoblaciones,rutaP);
+
+
+
+                writeln;
+
+
+
+                write('Guardar factores como: ');
+
+		readln(rutaF);
+
+		if fileexists(rutaF) then
+
+		        while fileexists(rutaF) do
+
+			begin
+
+			        writeln('Archivo ya existente. Sobreescribir? (S/N)');
+
+				readln(rta);
+
+				writeln;
+
+
+
+				case rta of
+
+					's' :
+
+                                        begin
+
+                                                Assign(ArchFactores,rutaF);
+
+                                                break;
+
+                                        end;
+
+					'n':
+
+                                        begin
+
+						write('Guardar poblaciones como: ');
+
+						readln(rutaF);
+
+				        end;
+
+					else
+
+                                        begin
+
+						writeln('Archivo ya existente. Sobreescribir? (S/N)');
+
+						readln(rta);
+
+					end;
+
+			        end;
+
+			end
+
+	        else if not fileexists(rutaF) then
+
+                        Assign(ArchFactores,rutaF);
+
+                Assign(Factores,'factores.DAT');
 
 		Reset(Factores);
 
 		Rewrite(ArchFactores);
 
 		while not eof(Factores) do
+		
 		begin
 
 			read(Factores,RegF);
@@ -104,7 +248,9 @@ implementation
 		rewrite(ArchPoblaciones);
 
 		for j:=1 to topey do
+
 			for i:=1 to topex do
+
 				begin
 
 					RegP.PuntoX := i;
