@@ -2,7 +2,7 @@ Unit AnalisisZombi;
 
 interface
 
-uses Simulacion;
+uses Simulacion, ProceduresVarios;
 
 	type
 
@@ -74,16 +74,14 @@ begin
 
         Ra := trunc( R + (( delta * S ) + ( delta * Inf ) + ( alfa * S * Z ) - ( xi * R )));
 
+        
+        Matrizmapa [i,j].CantSuceptibles := VerNegativo(Sa);
 
+        Matrizmapa [i,j].CantZombies := VerNegativo(Za);
 
+        Matrizmapa [i,j].CantRemovidos := VerNegativo(Ra);
 
-        Matrizmapa [i,j].CantSuceptibles := Sa;
-
-        Matrizmapa [i,j].CantZombies := Za;
-
-        Matrizmapa [i,j].CantRemovidos := Ra;
-
-        Matrizmapa [i,j].CantInfectados := Ia;
+        Matrizmapa [i,j].CantInfectados := VerNegativo(Ia);
 
 
 	end;
