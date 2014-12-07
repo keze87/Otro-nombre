@@ -9,6 +9,11 @@ Integrantes
 
 Cesar Ezequiel Herrera, Walter Javier Mamani, Dario Javier Albarracín.
 
+Info util
+======
+
+Para expandir la pantalla de fpc hay que abrir fpc, hacer click derecho en el borde superior, seleccionar "Predeterminados", luego ir a la pestaña "Diseño", sección "Tamaño de la ventana" y ahi modificar alto y ancho de pantalla a gusto. Cerrar fpc y volver a abrir.
+
 WWW
 ======
 
