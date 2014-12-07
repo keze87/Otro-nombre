@@ -27,6 +27,8 @@ interface
 	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
 
 	Procedure VisualizarDescripcionPoblacion();
+	
+	Procedure VisualizarDescripcionSimulacion;
 
 	Procedure PintarFondo(cadena:string; color:byte);
 
@@ -794,6 +796,23 @@ end;
 		TextColor(LightGreen);
 		TextBackground(Black);
 
+	end;
+
+	Procedure VisualizarDescripcionSimulacion;
+	begin
+
+		TextColor(LightGreen);
+		TextBackground(Black);
+		Writeln('                               LEYENDA ');
+		Writeln;
+		Write('              '); PintarFondo('  ',7); Write('    ');  PintarTexto('Area con poblacion de Zombies = 0',7);					// LightGray
+		Write('              '); PintarFondo('  ',14); Write('    '); PintarTexto('Area con poblacion de Zombies > 1',14);					// Yellow
+		Write('              '); PintarFondo('  ',5); Write('    ');  PintarTexto('Area con poblacion de Zombies > 10',5);					// Magenta
+		Write('              '); PintarFondo('  ',4);  Write('    '); PintarTexto('Area con poblacion de Zombies > 50',4);					// Red
+		Write('              '); PintarFondo('  ',3); Write('    '); PintarTexto('Area con poblacion de Zombies < 0',3);					// Cyan
+		writeln;
+		TextColor(LightGreen);
+		TextBackground(Black);
 	end;
 
 	Procedure PintarFondo(cadena:string; color:byte);
