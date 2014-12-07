@@ -74,13 +74,24 @@ begin
 
         Ra := trunc( R + (( delta * S ) + ( delta * Inf ) + ( alfa * S * Z ) - ( xi * R )));
 
-        
-        Matrizmapa [i,j].CantSuceptibles := VerNegativo(Sa);
+        if Matrizmapa [i,j].CantSuceptibles + VerNegativo(Sa) >= 2147483647 then
+        	Matrizmapa [i,j].CantSuceptibles := 2147483646
+        else
+        	Matrizmapa [i,j].CantSuceptibles := VerNegativo(Sa);
 
-        Matrizmapa [i,j].CantZombies := VerNegativo(Za);
+	if Matrizmapa [i,j].CantZombies + VerNegativo(Za) >= 2147483647 then
+		Matrizmapa [i,j].CantZombies := 2147483646
+	else
+        	Matrizmapa [i,j].CantZombies := VerNegativo(Za);
 
-        Matrizmapa [i,j].CantRemovidos := VerNegativo(Ra);
+	if Matrizmapa [i,j].CantRemovidos + VerNegativo(Ra) >= 2147483647 then
+		Matrizmapa [i,j].CantRemovidos := 2147483646
+	else
+        	Matrizmapa [i,j].CantRemovidos := VerNegativo(Ra);
 
+	if Matrizmapa [i,j].CantInfectados + VerNegativo(Ia) >= 2147483647 then
+		Matrizmapa [i,j].CantInfectados := 2147483646
+	else
         Matrizmapa [i,j].CantInfectados := VerNegativo(Ia);
 
 
