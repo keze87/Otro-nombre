@@ -75,7 +75,7 @@ begin
         Ra := trunc( R + (( delta * S ) + ( delta * Inf ) + ( alfa * S * Z ) - ( xi * R )));
 
         if Matrizmapa [i,j].CantSuceptibles + VerNegativo(Sa) >= 2147483647 then
-        	Matrizmapa [i,j].CantSuceptibles := 2147483646
+        	Matrizmapa [i,j].CantSuceptibles := 2147483646 {o cualquier valor menor que 2147483647}
         else
         	Matrizmapa [i,j].CantSuceptibles := VerNegativo(Sa);
 
