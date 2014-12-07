@@ -989,7 +989,7 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 							aux := trunc(( Matriz[i,j].CantSuceptibles * 0.0025 / 100 ) / cant) + 1;
 
-							Matriz[i,j].CantSuceptibles := Matriz[i,j].CantSuceptibles - trunc(( Matriz[i,j].CantSuceptibles * 0.0025 / 100 ));
+							Matriz[i,j].CantSuceptibles := Matriz[i,j].CantSuceptibles - VerNegativo(trunc(( Matriz[i,j].CantSuceptibles * 0.0025 / 100 )));
 
 							if aux > 0 then
 								for k := 1 to cant do
@@ -1124,13 +1124,13 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 							auxS := trunc((aux * Matriz[i,j].CantSuceptibles / 100) / cant);
 
-							Matriz[i,j].CantSuceptibles := Matriz[i,j].CantSuceptibles - (trunc(auxS) * cant);
+							Matriz[i,j].CantSuceptibles := Matriz[i,j].CantSuceptibles - VerNegativo((trunc(auxS) * cant));
 
 							aux := aux * Matriz[i,j].FactorMovilidad;
 
 							auxZ := trunc((aux * Matriz[i,j].CantZombies / 100) / cant);
 
-							Matriz[i,j].CantZombies := Matriz[i,j].CantZombies - (trunc(auxS) * cant);
+							Matriz[i,j].CantZombies := Matriz[i,j].CantZombies - VerNegativo((trunc(auxS) * cant));
 
 							for k := 1 to cant do
 							begin
