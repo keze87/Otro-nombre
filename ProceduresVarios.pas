@@ -37,6 +37,8 @@ interface
 	Procedure ActualizarPoblacionMundial();
 
 	Function BuscarFactor(codigoFactor:string):real;
+	
+	function VerNegativo(nro:integer):integer;
 
 implementation
 
@@ -950,6 +952,14 @@ end;
 		end;
 
 		close(Factores);
+	end;
+	
+	function VerNegativo(nro:integer):integer;
+	begin
+		if (nro < 1) then 
+			VerNegativo:=0
+		else
+			VerNegativo:=nro;
 	end;
 
 end.
