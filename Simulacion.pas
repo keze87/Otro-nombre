@@ -631,10 +631,25 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 						textcolor(lightgray);
 
+					if totalS + Mapatriz [k,j].CantSuceptibles >= 2147483647 then
+						totalS := 2147483646 {o cualquier valor menor que 2147483647}
+        				else
 						totalS := totalS + Mapatriz [k,j].CantSuceptibles;
-						totalI := totalI + Mapatriz [k,j].CantInfectados;
-						totalR := totalR + Mapatriz [k,j].CantRemovidos;
+
+					if totalZ := totalZ + Mapatriz [k,j].CantZombies; >= 2147483647 then
+						totalZ := 2147483646
+					else
 						totalZ := totalZ + Mapatriz [k,j].CantZombies;
+
+					if totalR + Mapatriz [k,j].CantRemovidos; >= 2147483647 then
+						totalR := 2147483646
+					else
+						totalR := totalR + Mapatriz [k,j].CantRemovidos;
+
+					if totalI + Mapatriz [k,j].CantInfectados >= 2147483647 then
+						totalI := 2147483646
+					else
+						totalI := totalI + Mapatriz [k,j].CantInfectados;
 
 					end;
 
