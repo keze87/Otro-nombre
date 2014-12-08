@@ -624,7 +624,7 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 							textcolor(red);
 
 						if Mapatriz[k,j].CantZombies < 0 then
-							textcolor(cyan);
+							textcolor(red);
 
 
 						write(Mapatriz[k,j].Codigo);
@@ -641,11 +641,8 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 					writeln;
 
 				end;
-				writeln;
-				writeln;
-				VisualizarDescripcionSimulacion;
-				writeln;
-				writeln('        TOTAL:   S = ',totalS,'     I = ',totalI,'     R = ',totalR,'     Z = ',totalZ);
+
+				write('S = ',totalS,' I = ',totalI,' R = ',totalR,' Z = ',totalZ);
 
 				Delay(1000);
 
