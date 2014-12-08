@@ -319,10 +319,10 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 			key:=readkey;
 
-			if (key = 'f') or (key = 'F') then
+			if (key = 'f') then
 				NuevoFoco(i,j,mapatriz);
 
-			if (key = 'i') or (key = 'I') then
+			if (key = 'i') then
 			begin
 
 				gotoxy(1,25+12);
@@ -350,7 +350,7 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 			end;
 
-		until (key='p') or (key='P');
+		until key='p';
 
 	end;
 
