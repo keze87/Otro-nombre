@@ -27,7 +27,7 @@ interface
 	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
 
 	Procedure VisualizarDescripcionPoblacion();
-	
+
 	Procedure VisualizarDescripcionSimulacion;
 
 	Procedure PintarFondo(cadena:string; color:byte);
@@ -37,7 +37,7 @@ interface
 	Procedure ActualizarPoblacionMundial();
 
 	Function BuscarFactor(codigoFactor:string):real;
-	
+
 	function VerNegativo(nro:integer):integer;
 
 implementation
@@ -214,7 +214,7 @@ Type
 
 		auxF.Codigo := 'de' ;
 		auxF.Descripcion := ' Muerte por causa natural ' ;
-		auxF.Valor := 0 ;
+		auxF.Valor := 0.00005 ;
 
 		write(Factores,auxF);
 
@@ -222,7 +222,7 @@ Type
 
 		auxF.Codigo := 'xi' ;
 		auxF.Descripcion := ' Resurreccion Zombie ' ;
-		auxF.Valor := 0.05 ;
+		auxF.Valor := 0.06 ;
 
 		write(Factores,auxF);
 
@@ -230,7 +230,7 @@ Type
 
 		auxF.Codigo := 'pi' ;
 		auxF.Descripcion := ' Tasa de natalidad ' ;
-		auxF.Valor := 0.05 ;
+		auxF.Valor := 0 ;
 
 		write(Factores,auxF);
 
@@ -238,7 +238,7 @@ Type
 
 		auxF.Codigo := 'ro' ;
 		auxF.Descripcion := ' Latente de infección ' ;
-		auxF.Valor := 0.5 ;
+		auxF.Valor := 0.0000009 ;
 
 		write(Factores,auxF);
 
@@ -953,10 +953,10 @@ end;
 
 		close(Factores);
 	end;
-	
+
 	function VerNegativo(nro:integer):integer;
 	begin
-		if (nro < 1) then 
+		if (nro < 1) then
 			VerNegativo:=0
 		else
 			VerNegativo:=nro;

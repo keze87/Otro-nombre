@@ -232,7 +232,7 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 		Rewrite(ArchFactores);
 
 		while not eof(Factores) do
-		
+
 		begin
 
 			read(Factores,RegF);
@@ -477,10 +477,10 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 		gotoxy(1,25+12);
 
-		textcolor(lightcyan);
+		textcolor(random(10));
 
-		writeln(x,' ',y,' ',mapatriz[x,y-1].Descripcion);
-		writeln(mapatriz[x,y-1].CantSuceptibles,' ',mapatriz[x,y-1].CantZombies);
+		write(x,' ',y,' ',mapatriz[x,y-1].Descripcion);
+		write(mapatriz[x,y-1].CantSuceptibles,' ',mapatriz[x,y-1].CantZombies);
 
 		textcolor(lightgray);
 
@@ -494,7 +494,7 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 		i : integer;
 		j : integer;
 		k : integer;
-		l : integer;
+		//l : integer;
 		m : integer;
 		peri : integer;
 		Aire : integer;
@@ -636,12 +636,12 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
         				else
 						totalS := totalS + Mapatriz [k,j].CantSuceptibles;
 
-					if totalZ := totalZ + Mapatriz [k,j].CantZombies; >= 2147483647 then
+					if totalZ + Mapatriz [k,j].CantZombies >= 2147483647 then
 						totalZ := 2147483646
 					else
 						totalZ := totalZ + Mapatriz [k,j].CantZombies;
 
-					if totalR + Mapatriz [k,j].CantRemovidos; >= 2147483647 then
+					if totalR + Mapatriz [k,j].CantRemovidos >= 2147483647 then
 						totalR := 2147483646
 					else
 						totalR := totalR + Mapatriz [k,j].CantRemovidos;
@@ -926,7 +926,7 @@ Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 
 				end;
 
-		MigracionTierra (Matriz,topex,topey);
+		MigracionTierra (Matrizmapa,topex,topey);
 
 	end;
 
