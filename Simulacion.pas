@@ -65,190 +65,88 @@ implementation
 		Valor : real;
 		end;
 
-Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
-
+	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
 	var
 
-
-
 		i:integer;
-
 		j:integer;
-
 		ArchPoblaciones:file of TPoblaciones;
-
 		ArchFactores:file of TFactores;
-
 		Factores:file of TFactores;
-
-                rutaF:string;
-
-                rutaP:string;
-
 		RegP:TPoblaciones;
-
 		RegF:TFactores;
 
-                rta:char;
-
-
-
-
+		rta : char;
+		rutaP : string;
+		rutaF : string;
 
 	begin
 
-
-
-		gotoxy(1,40);
-
-
-
+		writeln;
 		write('Guardar poblaciones como: ');
-
 		readln(rutaP);
 
-		if fileexists(rutaP) then
+		while fileexists(rutaP) do
+		begin
 
-		        while fileexists(rutaP) do
+			writeln('Archivo ya existente. Sobreescribir? (S/N)');
+			readln(rta);
+			writeln;
 
-			begin
+			case rta of
 
-			        writeln('Archivo ya existente. Sobreescribir? (S/N)');
+				's' : break;
+				'S' : break;
+				else begin write('Guardar poblaciones como: '); readln(rutaP); end;
 
-				readln(rta);
+			end;
 
-				writeln;
+		end;
 
+		Assign(ArchPoblaciones,rutaP);
+		rewrite (ArchPoblaciones);
 
-
-				case rta of
-
-					's' :
-
-                                        begin
-
-                                                Assign(ArchPoblaciones,rutaP);
-
-                                                break;
-
-                                        end;
-
-					'n':
-
-                                        begin
-
-						write('Guardar poblaciones como: ');
-
-						readln(rutaP);
-
-				        end;
-
-					else
-
-                                        begin
-
-						writeln('Archivo ya existente. Sobreescribir? (S/N)');
-
-						readln(rta);
-
-					end;
-
-			        end;
-
-			end
-
-	        else if not fileexists(rutaP) then
-
-                        Assign(ArchPoblaciones,rutaP);
-
-
-
-                writeln;
-
-
-
-                write('Guardar factores como: ');
+		writeln;
+		write('Guardar factores como: ');
 
 		readln(rutaF);
 
-		if fileexists(rutaF) then
+		while fileexists(rutaF) do
+		begin
 
-		        while fileexists(rutaF) do
+			writeln('Archivo ya existente. Sobreescribir? (S/N)');
+			readln(rta);
 
-			begin
+			writeln;
 
-			        writeln('Archivo ya existente. Sobreescribir? (S/N)');
+			case rta of
 
-				readln(rta);
+				's' : break;
+				'S' : break;
+				else begin write('Guardar poblaciones como: '); readln(rutaF); end;
 
-				writeln;
+			end;
 
+		end;
 
-
-				case rta of
-
-					's' :
-
-                                        begin
-
-                                                Assign(ArchFactores,rutaF);
-
-                                                break;
-
-                                        end;
-
-					'n':
-
-                                        begin
-
-						write('Guardar poblaciones como: ');
-
-						readln(rutaF);
-
-				        end;
-
-					else
-
-                                        begin
-
-						writeln('Archivo ya existente. Sobreescribir? (S/N)');
-
-						readln(rta);
-
-					end;
-
-			        end;
-
-			end
-
-	        else if not fileexists(rutaF) then
-
-                        Assign(ArchFactores,rutaF);
-
-                Assign(Factores,'factores.DAT');
-
-		Reset(Factores);
-
+		Assign(ArchFactores,rutaF);
 		Rewrite(ArchFactores);
 
-		while not eof(Factores) do
+		Assign(Factores,'Factores.DAT'); //Esto no deberia ser asi
+		Reset(Factores);
 
+		while not eof(Factores) do
 		begin
 
 			read(Factores,RegF);
-
 			write(ArchFactores,RegF);
 
 		end;
 
 		close(Factores);
-
 		close(ArchFactores);
 
-		rewrite(ArchPoblaciones);
-
 		for j:=1 to topey do
-
 			for i:=1 to topex do
 
 				begin
