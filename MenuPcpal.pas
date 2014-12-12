@@ -181,7 +181,9 @@ implementation
 		GotoXY(20,1);
 		EscrDelay(Velocidad,'**** Mundo ****');
 		GotoXY(1,4);
+
 		LeerArchivoSegunPoblacion(ruta);
+
 		writeln;
 		textcolor(10);
 		EscrDelay(-Velocidad,'1) Volver al Menu Principal. ');
@@ -421,8 +423,13 @@ implementation
 			2 : begin
 
 				writeln;
-				writeln('Ingrese la ruta del archivo de texto');
-				read(ruta);
+				repeat
+
+					writeln('Ingrese la ruta del archivo de texto');
+					read(ruta);
+
+				until fileexists(ruta);
+
 				write('Ingrese cantidad de dias: ');
 				LeerINT(dias);
 				writeln;

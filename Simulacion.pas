@@ -32,12 +32,11 @@ type
 	Procedure DibujarMatriz (var Mapatriz : TMatriz ; topex : integer ; topey : integer ; x : integer ; y : integer);
 	Procedure Pausa(var caracter:char;var Mapatriz:TMatriz);
 	Procedure NuevoFoco(var i:integer;var j:integer;var Mapatriz:TMatriz);
-	procedure ActualizarMatriz (var Matrizmapa : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
+	Procedure ActualizarMatriz (var Matrizmapa : TMatriz; topex : integer; topey : integer; alfa : real; beta : real; delta : real; xi : real; pi : real; rho : real);
 	Procedure Guardar(var mapatriz:TMatriz;topex:integer;topey:integer);
-
-	Function InViaje(poblacionTotal: longint; poblacionInfectada: longint; cantidadDePasajeros: integer): longInt;
 	Procedure MigracionAire (var Matriz:TMatriz;topex:integer;topey:integer);
 	Procedure MigracionTierra (Var Matriz:TMatriz;topex:integer;topey:integer);
+	Function InViaje(poblacionTotal: longint; poblacionInfectada: longint; cantidadDePasajeros: integer): longInt;
 
 implementation
 
@@ -132,7 +131,7 @@ implementation
 		Assign(ArchFactores,rutaF);
 		Rewrite(ArchFactores);
 
-		Assign(Factores,'Factores.DAT'); //Esto no deberia ser asi
+		Assign(Factores,'Factores.DAT'); //Esto no debería ser así
 		Reset(Factores);
 
 		while not eof(Factores) do
@@ -184,6 +183,8 @@ implementation
 
 		GotoXY(1,37);
 
+		textcolor(cyan);
+
 		write('Ingrese cantidad de infectados: ');
 
 		LeerINT(foco);
@@ -193,6 +194,8 @@ implementation
 		write('Ingrese cantidad de Zombies: ');
 
 		LeerINT(foco);
+
+		textcolor(lightgray);
 
 		mapatriz[i,j-1].CantZombies := foco;
 
@@ -230,21 +233,21 @@ implementation
 			end;
 
 			if (key = #0) then
-				begin
+			begin
 
-					key:=readkey;
+				key:=readkey;
 
-					case key of
+				case key of
 
-						#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
+					#72 : if j>1 then begin j:=j-1; gotoxy(i,j); end;
 
-						#80 : begin j:=j+1; gotoxy(i,j); end;
+					#80 : begin j:=j+1; gotoxy(i,j); end;
 
-						#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
+					#75 : if i>1 then begin i:=i-1; gotoxy(i,j); end;
 
-						#77 : begin i:=i+1; gotoxy(i,j); end;
+					#77 : begin i:=i+1; gotoxy(i,j); end;
 
-					end;
+				end;
 
 			end;
 
@@ -373,11 +376,11 @@ implementation
 	Procedure MostrarPoblaciones(x:integer; y:integer;var mapatriz:TMatriz);
 	begin
 
-		gotoxy(1,25+12);
+		gotoxy(1,37);
 
-		textcolor(random(10));
+		textcolor(cyan);
 
-		write(x,' ',y,' ',mapatriz[x,y-1].Descripcion);
+		write(x,' ',y,' ',mapatriz[x,y-1].Descripcion,' ');
 		write(mapatriz[x,y-1].CantSuceptibles,' ',mapatriz[x,y-1].CantZombies);
 
 		textcolor(lightgray);
@@ -392,7 +395,6 @@ implementation
 		i : integer;
 		j : integer;
 		k : integer;
-		//l : integer;
 		m : integer;
 		peri : integer;
 		Aire : integer;
@@ -530,8 +532,8 @@ implementation
 						textcolor(lightgray);
 
 					if totalS + Mapatriz [k,j].CantSuceptibles >= 2147483647 then
-						totalS := 2147483646 {o cualquier valor menor que 2147483647}
-        				else
+						totalS := 2147483646
+					else
 						totalS := totalS + Mapatriz [k,j].CantSuceptibles;
 
 					if totalZ + Mapatriz [k,j].CantZombies >= 2147483647 then
@@ -568,7 +570,7 @@ implementation
 
 					clchar:=readkey;
 
-					if (clchar='p') or (clchar='P') then
+					if (clchar='p') {or (clchar='P')} then
 						Pausa(clchar,mapatriz);
 
 					if (clchar='g') or (clchar='G') then
@@ -650,14 +652,14 @@ implementation
 
 		ClrScr;
 
-		Assign(mundi, ruta);
+		Assign(mundi,ruta);
 
 		Reset(mundi);
 
 		while not eof(mundi) do
 		begin
 
-			readln(mundi, texto);
+			readln(mundi,texto);
 
 			ImprLineasMapa(texto);
 
@@ -837,7 +839,7 @@ implementation
 
 	begin
 
-		infectadosEnViaje:=1; //TIENE QUE SER 0
+		infectadosEnViaje := 0;
 
 		for i:=1 to cantidadDePasajeros do
 		begin

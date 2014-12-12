@@ -26,7 +26,7 @@ interface
 
 	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
 
-	Procedure VisualizarDescripcionPoblacion();
+	Procedure VisualizarDescripcionPoblacion;
 
 	Procedure VisualizarDescripcionSimulacion;
 
@@ -34,7 +34,7 @@ interface
 
 	Procedure PintarTexto(cadena:string; color:byte);
 
-	Procedure ActualizarPoblacionMundial();
+	Procedure ActualizarPoblacionMundial;
 
 	Function BuscarFactor(codigoFactor:string):real;
 
@@ -485,7 +485,7 @@ Type
 
 		Randomize;
 
-		Aleatorio := abs(random(limit));//abs(temp mod limit);
+		Aleatorio := abs(random(limit));
 
 	end;
 
@@ -500,6 +500,7 @@ Type
 		Factores : file of TFactores;
 		auxF : TFactores;
 		auxFV : TFactores;
+		i : integer;
 
 	begin
 
@@ -515,35 +516,16 @@ Type
 
 		read(FactoresViejos,auxFV);
 
-		write (' '); EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
+		for i := 1 to 5 do
+		begin
 
-		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
+			write (' '); EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
 
-		read(FactoresViejos,auxFV);
+			auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
 
-		write (' '); EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
+			read(FactoresViejos,auxFV);
 
-		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
-
-		read(FactoresViejos,auxFV);
-
-		write (' '); EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
-
-		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
-
-		read(FactoresViejos,auxFV);
-
-		write (' '); EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
-
-		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
-
-		read(FactoresViejos,auxFV);
-
-		write (' '); EscrDelay(-Velocidad,'Factor de'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
-
-		auxF.Codigo := auxFV.Codigo; auxF.Descripcion := auxFV.Descripcion; write(Factores,auxF);
-
-		read(FactoresViejos,auxFV);
+		end;
 
 		write (' '); EscrDelay(-Velocidad,'Factor'); EscrDelay(-Velocidad,auxFV.Descripcion); EscrDelay(-Velocidad,'('); write(auxFV.Valor:0:2); EscrDelay(-Velocidad,')= '); LeerReal(auxF.Valor);
 
@@ -612,7 +594,7 @@ end;
 
 		{$I-}
 
-		reset(archivoTexto);
+			reset(archivoTexto);
 
 		{$I+}
 
@@ -675,7 +657,7 @@ end;
 
 		{$I-}
 
-		reset(archivoTexto);
+			reset(archivoTexto);
 
 		{$I+}
 
@@ -782,7 +764,7 @@ end;
 
 	end;
 
-	Procedure VisualizarDescripcionPoblacion();
+	Procedure VisualizarDescripcionPoblacion;
 	begin
 
 		TextColor(LightGreen);
@@ -835,7 +817,7 @@ end;
 
 	end;
 
-	Procedure ActualizarPoblacionMundial();
+	Procedure ActualizarPoblacionMundial;
 	var
 
 		PoblacionAnterior : file of TPoblaciones;
@@ -882,6 +864,7 @@ end;
 				S:=DatoTemporalAnterior.CantSuceptibles;
 				I:=DatoTemporalAnterior.CantInfectados;
 				Z:=DatoTemporalAnterior.CantZombies;
+				R:=DatoTemporalAnterior.CantRemovidos;
 
 				pi:=BuscarFactor('pi');
 				beta:=BuscarFactor('be');
@@ -893,9 +876,8 @@ end;
 				S_ultimo:= Trunc((pi * (S + I)) - (beta * S * Z) - (delta * S));
 				I_ultimo:= Trunc((beta * S * Z) - (delta * I) - (rho * I));
 
-				R:=0;															// Si y solo si R = 0
 				R_ultimo:= Trunc((delta * S) + (delta * I) + (alpha * S * Z) - (rho * R));
-				Z_ultimo:= Trunc((rho * I) + (xi * R) - (alpha * S * Z));				// Revisar!!!! porque R siempre sera R = 0, ya que R no se guarda en ningun lado
+				Z_ultimo:= Trunc((rho * I) + (xi * R) - (alpha * S * Z));
 
 				// Actualizo el valor de las nuevas poblaciones:
 				DatoTemporalNuevo.PuntoX:=DatoTemporalAnterior.PuntoX;
@@ -946,7 +928,7 @@ end;
 			begin
 
 				BuscarFactor:=DatoTemporal.Valor;
-				break;				// Rompe el ciclo for
+				break; // Rompe el ciclo for
 
 			end;
 		end;

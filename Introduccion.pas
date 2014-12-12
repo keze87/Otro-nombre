@@ -16,29 +16,29 @@ implementation
 	var
 
 		contIntro : Integer;
-		A : text;
+		Archivo : text;
 		aux : string;
-		mundocruel : boolean;
+		finalizar : boolean;
 
 	begin
 
 		cursoroff;
 
 		aux :='q';
-		Assign(A,'Introduccion');
+		Assign(Archivo,'Introduccion');
 
 		{$I-}
 
-			reset(A);
+			reset(Archivo);
 
 		{$I+}
 
 		if not(IOResult<>0) then
 		begin
 
-			readln(A,aux);
+			readln(Archivo,aux);
 
-			close(A);
+			close(Archivo);
 
 		end;
 
@@ -46,25 +46,27 @@ implementation
 		begin
 
 			contIntro := 0;
-			mundocruel := false;
+			finalizar := false;
+
+			if keypressed then
+				finalizar := true;
 
 			repeat
 
 				contIntro := contIntro + 1;
 
 				if keypressed then
-				mundocruel := true;
+					finalizar := true;
 
-				if not(mundocruel) then
+				if not(finalizar) then
 					Intro(1);
 
 			until contIntro = 2;
 
-			if mundocruel then
-				Delay(1000);
-
-			if not(mundocruel) then
-				Intro(7)
+			if finalizar then
+				Delay(1000)
+			else
+				Intro(2);
 
 		end;
 
@@ -83,8 +85,6 @@ implementation
 		k : integer;
 
 	begin
-
-		cursoroff;
 
 		Delay (Velocidad);
 		ClrScr;
@@ -252,7 +252,7 @@ implementation
 		write('      +????MMM????????????      ');TextColor(Green);writeln('                        ????8????????????');TextColor(White);
 		write('           +???????+            ');TextColor(Green);writeln('                            ????????????');TextColor(White);
 
-		if i = 7 then
+		if i = 2 then
 		begin
 
 			conti := 0;
@@ -260,7 +260,7 @@ implementation
 
 			repeat
 
-				conti := conti +1;
+				conti := conti + 1;
 
 				Delay (Velocidad - k);
 				ClrScr;
@@ -465,12 +465,12 @@ implementation
 
 				Delay(1000);
 
-				if conti <> 5 then
+				if conti <> 4 then
 					ClrScr;
 
 				Delay(900);
 
-			until conti = 5;
+			until conti = 4;
 
 			TextColor(White);
 			writeln;
@@ -479,7 +479,7 @@ implementation
 
 			readkey;
 
-			TextColor(White);
+			TextColor(lightgray);
 
 		end;
 
