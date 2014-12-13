@@ -423,12 +423,22 @@ implementation
 			2 : begin
 
 				writeln;
-				repeat
 
-					writeln('Ingrese la ruta del archivo de texto');
-					read(ruta);
+				writeln('Ingrese la ruta del archivo de texto');
+				read(ruta);
 
-				until fileexists(ruta);
+				if not(fileexists(ruta)) then
+				begin
+
+					clrscr;
+					writeln('Archivo inexistente.');
+					writeln('Presiona ENTER para continuar.');
+					delay(100);
+					readkey;
+					readln;
+					MenuNuevaSim(SalidaNueva);
+
+				end;
 
 				write('Ingrese cantidad de dias: ');
 				LeerINT(dias);
