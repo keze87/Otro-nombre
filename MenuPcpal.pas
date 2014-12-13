@@ -3,13 +3,21 @@ unit MenuPcpal;
 interface
 
 	Procedure Menu (var SalidaMenu : integer);
+
 	Procedure MenuSimulacion (var SalidaMenuSim : integer);
+
 	Procedure MenuTerreno (var SalidaMenuTerr : integer);
+
 	Procedure MenuPoblaciones(var SalidaPobl : integer);
+
 	Procedure MenuFactores (var SalidaFac : integer);
+
 	Procedure MenuMundo (var SalidaMundo : integer);
+
 	Procedure MenuAjustes (var SalidaMenu : integer);
+
 	Procedure MenuNuevaSim (var SalidaNueva : integer);
+
 	Procedure CargarSimulacion;
 
 implementation

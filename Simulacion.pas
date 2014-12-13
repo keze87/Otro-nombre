@@ -226,7 +226,7 @@ implementation
 			if (key = 'i') then
 			begin
 
-				gotoxy(1,25+12);
+				gotoxy(1,37);
 				write('                                                ');
 				mostrarpoblaciones(i,j,mapatriz);
 
@@ -420,6 +420,8 @@ implementation
 		pi : real;
 		rho : real;
 
+		auxZ : longInt;
+
 	begin
 
 		clrscr;
@@ -514,18 +516,18 @@ implementation
 						if Mapatriz[k,j].CantZombies = 0 then
 							textcolor(lightgray);
 
-						if Mapatriz[k,j].CantZombies > 1 then
-							textcolor(yellow);
+						if Mapatriz[k,j].CantZombies + Mapatriz[k,j].CantSuceptibles <> 0 then
+						begin
 
-						if Mapatriz[k,j].CantZombies  > 10 then
-							textcolor(magenta);
+							auxZ := round(Mapatriz[k,j].CantSuceptibles * 100 / (Mapatriz[k,j].CantZombies + Mapatriz[k,j].CantSuceptibles));
 
-						if Mapatriz[k,j].CantZombies > 50 then
-							textcolor(red);
+							if auxZ < 100 then textcolor(yellow);
 
-						if Mapatriz[k,j].CantZombies < 0 then
-							textcolor(red);
+							if auxZ < 66 then textcolor(magenta);
 
+							if auxZ < 33 then textcolor(red);
+
+						end;
 
 						write(Mapatriz[k,j].Codigo);
 
@@ -570,14 +572,20 @@ implementation
 
 					clchar:=readkey;
 
-					if (clchar='p') {or (clchar='P')} then
+					if (clchar='p') then
 						Pausa(clchar,mapatriz);
 
 					if (clchar='g') or (clchar='G') then
 						Guardar(mapatriz,topex,topey);
 
 					if (clchar='s') or (clchar='S') then
+					begin
+
+						close(Mapa);
+
 						Menu(Salida);
+
+					end;
 
 				end;
 
@@ -818,7 +826,7 @@ implementation
 
 	begin
 
-		for j := 2 to topey do
+		for j := 1 to topey do
 			for i := 1 to topex do
 				begin
 
@@ -844,7 +852,7 @@ implementation
 		for i:=1 to cantidadDePasajeros do
 		begin
 
-			if(random(poblacionTotal) <= poblacionInfectada) then
+			if(Aleatorio(poblacionTotal) <= poblacionInfectada) then
 			begin
 
 				infectadosEnViaje := infectadosEnViaje + 1;

@@ -58,7 +58,7 @@ implementation
 				if keypressed then
 					finalizar := true;
 
-				if not(finalizar) then
+				if not(contIntro = 2) then
 					Intro(1);
 
 			until contIntro = 2;
@@ -465,12 +465,12 @@ implementation
 
 				Delay(1000);
 
-				if conti <> 4 then
+				if conti <> 3 then
 					ClrScr;
 
 				Delay(900);
 
-			until conti = 4;
+			until conti = 3;
 
 			TextColor(White);
 			writeln;

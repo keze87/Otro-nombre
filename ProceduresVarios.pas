@@ -12,19 +12,11 @@ interface
 
 	Procedure EditarFactores(var Salida : integer);
 
-	Function Aleatorio(limit:longint):longint;
-
 	Procedure MostrarTerrenosDAT;
 
 	Procedure LeerArchivo(nombre:string);
 
-	Function VisualizarMapaConColores(caracter:char):char;
-
 	Procedure LeerArchivoSegunPoblacion(nombre:string);
-
-	Function ObtenerPoblacionVivosYZombies(x,y:integer):string;
-
-	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
 
 	Procedure VisualizarDescripcionPoblacion;
 
@@ -38,7 +30,15 @@ interface
 
 	Function BuscarFactor(codigoFactor:string):real;
 
-	function VerNegativo(nro:integer):integer;
+	Function VerNegativo(nro:integer):integer;
+
+	Function Aleatorio(limit:longint):longint;
+
+	Function VisualizarMapaConColores(caracter:char):char;
+
+	Function ObtenerPoblacionVivosYZombies(x,y:integer):string;
+
+	Function VisualizarMapaSegunPoblacion(caracter:char; VivosZombies:string):char;
 
 implementation
 
@@ -520,7 +520,7 @@ Type
 		if aux = 2 then
 		begin
 
-			EscrDelay(Velocidad,'Ingrese la ruta de los archivos.');
+			EscrDelay(Velocidad,'Ingrese el nombre de los archivos.');
 			EscrDelay(Velocidad,'(Para usar el archivo por defecto, presione ENTER)');
 
 			writeln;
@@ -616,7 +616,6 @@ Type
 			writeln;
 			EscrDelay(-Velocidad,'Archivo Factores: ');
 			readln(ruta);
-
 
 			if not(length(ruta) = 0) then
 			begin
