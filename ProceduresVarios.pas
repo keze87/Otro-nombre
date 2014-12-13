@@ -126,14 +126,18 @@ Type
 		end;
 
 	Procedure CrearArchivos;
+	const
+
+		Velocidad = 15;
+
 	var
 
 		Mapa : Text;
-		MapaB: text;
-		texto:string;
-		i:integer;
-		j:integer;
-		longitud:integer;
+		MapaB: Text;
+		texto : string;
+		i : integer;
+		j : integer;
+		longitud : integer;
 
 		Terrenos : file of TTerrenos;
 		auxT : TTerrenos;
@@ -142,7 +146,18 @@ Type
 		Factores : file of TFactores;
 		auxF : TFactores;
 
+		aux : integer;
+		ruta : string;
+
+		MapaNuevo : Text;
+		PoblacionesNuevo : file of TPoblaciones;
+		FactoresNuevo : file of TFactores;
+
 	begin
+
+		clrscr;
+
+		textcolor(10);
 
 		{*** Mapa ***}
 
@@ -477,6 +492,174 @@ Type
 		write(Terrenos,auxT);
 
 		close(Terrenos);
+
+		//separador
+
+		GotoXY(25,1);
+
+		EscrDelay(Velocidad,'**** Archivos a procesar ****');
+
+		GotoXY(1,4);
+
+		EscrDelay(Velocidad,'1) Por Defecto.');
+
+		writeln;
+
+		EscrDelay(Velocidad,'2) Elegir Archivos.');
+
+		writeln;
+
+		repeat
+
+			leerInt(aux);
+
+		until (aux = 1) or (aux = 2);
+
+		writeln;
+
+		if aux = 2 then
+		begin
+
+			EscrDelay(Velocidad,'Ingrese la ruta de los archivos.');
+			EscrDelay(Velocidad,'(Para usar el archivo por defecto, presione ENTER)');
+
+			writeln;
+			EscrDelay(-Velocidad,'Archivo Mapa: ');
+			readln(ruta);
+
+			if not(length(ruta) = 0) then
+			begin
+
+				if fileexists(ruta) then
+				begin
+
+					rewrite(Mapa);
+
+					assign(MapaNuevo,ruta);
+
+					reset(MapaNuevo);
+
+					readln(MapaNuevo,texto);
+
+					repeat
+
+						writeln(Mapa,texto);
+
+						readln(MapaNuevo,texto);
+
+					until EOF(MapaNuevo);
+
+					close(Mapa);
+					close(MapaNuevo);
+
+				end
+
+				else
+				begin
+
+					clrscr;
+					writeln('Archivo inexistente');
+					writeln('Presiona Enter para continuar.');
+					delay(100);
+					readln;
+					CrearArchivos;
+
+				end;
+
+			end;
+
+			writeln;
+			EscrDelay(-Velocidad,'Archivo Poblaciones: ');
+			readln(ruta);
+
+			if not(length(ruta) = 0) then
+			begin
+
+				if fileexists(ruta) then
+				begin
+
+					rewrite(Poblaciones);
+
+					assign(PoblacionesNuevo,ruta);
+
+					reset(PoblacionesNuevo);
+
+					read(PoblacionesNuevo,auxP);
+
+					repeat
+
+						write(Poblaciones,auxP);
+
+						read(PoblacionesNuevo,auxP);
+
+					until EOF(PoblacionesNuevo);
+
+					close(Poblaciones);
+					close(PoblacionesNuevo);
+
+				end
+
+				else
+				begin
+
+					clrscr;
+					writeln('Archivo inexistente');
+					writeln('Presiona Enter para continuar.');
+					delay(100);
+					readln;
+					CrearArchivos;
+
+				end;
+
+			end;
+
+			writeln;
+			EscrDelay(-Velocidad,'Archivo Factores: ');
+			readln(ruta);
+
+
+			if not(length(ruta) = 0) then
+			begin
+
+				if fileexists(ruta) then
+				begin
+
+					rewrite(Factores);
+
+					assign(FactoresNuevo,ruta);
+
+					reset(FactoresNuevo);
+
+					read(FactoresNuevo,auxF);
+
+					repeat
+
+						write(Factores,auxF);
+
+						read(FactoresNuevo,auxF);
+
+					until EOF(FactoresNuevo);
+
+					close(Factores);
+					close(FactoresNuevo);
+
+				end
+
+				else
+				begin
+
+					clrscr;
+					writeln('Archivo inexistente');
+					writeln('Presiona Enter para continuar.');
+					delay(100);
+					readln;
+					CrearArchivos;
+
+				end;
+
+			end;
+
+		end;
 
 	end;
 
