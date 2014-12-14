@@ -420,7 +420,7 @@ implementation
 		pi : real;
 		rho : real;
 
-		auxZ : longInt;
+		auxZ : real;
 
 	begin
 
@@ -519,13 +519,13 @@ implementation
 						if Mapatriz[k,j].CantZombies + Mapatriz[k,j].CantSuceptibles <> 0 then
 						begin
 
-							auxZ := round(Mapatriz[k,j].CantSuceptibles * 100 / (Mapatriz[k,j].CantZombies + Mapatriz[k,j].CantSuceptibles));
+							auxZ := (Mapatriz[k,j].CantSuceptibles * 100 / (Mapatriz[k,j].CantZombies + Mapatriz[k,j].CantSuceptibles));
 
 							if auxZ < 100 then textcolor(yellow);
 
-							if auxZ < 66 then textcolor(magenta);
+							if auxZ < 200/3 then textcolor(magenta);
 
-							if auxZ < 33 then textcolor(red);
+							if auxZ < 100/3 then textcolor(red);
 
 						end;
 

@@ -775,7 +775,7 @@ end;
 
 		assign(archivoTexto,nombre);
 
-		cont := 1;
+		cont := 0;
 
 		{$I-}
 
@@ -788,23 +788,20 @@ end;
 		else
 		begin
 
-			writeln;
-			write('   ');
-
 			while not eof(archivoTexto) do
 			begin
 
 				cont := cont + 1;
-
-				read(archivoTexto,caracter);
-
-				write(VisualizarMapaConColores(caracter));
 
 				if eoln(archivoTexto) then
 					cont := 0;
 
 				if cont = 1 then
 					write('   ');
+
+				read(archivoTexto,caracter);
+
+				write(VisualizarMapaConColores(caracter));
 
 			end;
 
