@@ -767,12 +767,15 @@ end;
 	Procedure LeerArchivo(nombre:string);
 	var
 
-		archivoTexto: text;
-		caracter:char;
+		archivoTexto : text;
+		caracter : char;
+		cont : integer;
 
 	begin
 
 		assign(archivoTexto,nombre);
+
+		cont := 1;
 
 		{$I-}
 
@@ -781,20 +784,33 @@ end;
 		{$I+}
 
 		if ioresult<>0 then
-			Writeln('El archivo ', nombre, ' no existe.')
+			Writeln('El archivo ',nombre, ' no existe.')
 		else
 		begin
+
+			writeln;
+			write('   ');
+
 			while not eof(archivoTexto) do
 			begin
 
+				cont := cont + 1;
+
 				read(archivoTexto,caracter);
+
 				write(VisualizarMapaConColores(caracter));
+
+				if eoln(archivoTexto) then
+					cont := 0;
+
+				if cont = 1 then
+					write('   ');
 
 			end;
 
 			writeln;
 			close(archivoTexto);
-			TextColor(LightGreen);
+			TextColor(10);
 			TextBackground(Black);
 
 		end;

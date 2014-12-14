@@ -292,8 +292,8 @@ implementation
 		writeln;
 		LeerArchivo('mapamundi.txt');
 		MostrarTerrenosDAT;
-		Writeln;
-		EscrDelay(Velocidad,'1) Volver al Menu Principal');
+		writeln;
+		EscrDelay(Velocidad,'1) Volver al Menu Principal ');
 
 		repeat
 			LeerINT(SalidaMenuTerr);
