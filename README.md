@@ -1,29 +1,7 @@
-Zombie-Wars
+Info
 ======
 
-Repositorio para el TP.
-
-
-Integrantes
-======
-
-Cesar Ezequiel Herrera, Walter Javier Mamani, Dario Javier Albarracín.
-
-Info util
-======
-
-Para expandir la pantalla de fpc hay que abrir fpc, hacer click derecho en el borde superior, seleccionar "Predeterminados", luego ir a la pestaña "Diseño", sección "Tamaño de la ventana" y ahi modificar alto y ancho de pantalla a gusto. Cerrar fpc y volver a abrir.
-
-WWW
-======
-
-http://youtu.be/X5Wkp1gsNik
-
-http://www.freepascal.org/docs-html/rtl/crt/window.html
-
-http://www.freepascal.org/docs-html/rtl/crt/keypressed.html
-
-http://goo.gl/U1WIbl
+http://keze87.github.io/Zombie-Wars/
 
 Licencia
 ======
