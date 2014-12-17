@@ -527,7 +527,7 @@ Type
 			EscrDelay(-Velocidad,'Archivo Mapa: ');
 			readln(ruta);
 
-			if not(length(ruta) = 0) then
+			if (not(length(ruta) = 0)) and (not(ruta = 'mapamundi.txt')) then
 			begin
 
 				if fileexists(ruta) then
@@ -572,7 +572,7 @@ Type
 			EscrDelay(-Velocidad,'Archivo Poblaciones: ');
 			readln(ruta);
 
-			if not(length(ruta) = 0) then
+			if (not(length(ruta) = 0)) and (not(ruta = 'Poblaciones.DAT')) then
 			begin
 
 				if fileexists(ruta) then
@@ -617,7 +617,7 @@ Type
 			EscrDelay(-Velocidad,'Archivo Factores: ');
 			readln(ruta);
 
-			if not(length(ruta) = 0) then
+			if (not(length(ruta) = 0)) and (not(ruta = 'Factores.DAT')) then
 			begin
 
 				if fileexists(ruta) then

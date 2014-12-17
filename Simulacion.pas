@@ -678,6 +678,7 @@ implementation
 	end;
 
 	Procedure MostrarPoblacionesViejo;
+	//No funciona (bien?) en Windows.
 	var
 
 		x : integer;
